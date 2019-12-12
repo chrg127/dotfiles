@@ -3,14 +3,29 @@ nnoremap <Down>    :resize +2<CR>
 nnoremap <Up>  :resize -2<CR>
 nnoremap <Left>  :vertical resize +2<CR>
 nnoremap <Right> :vertical resize -2<CR>
-" tabs
-nmap <C-Tab> :tabnext
-nmap <C-S-Tab> :tabprevious<CR>
-map <C-Tab> :tabnext<CR>
-map <C-S-Tab> :tabprevious<CR>
-imap <C-Tab> <ESC>:tabnext<CR>
-imap <C-S-Tab> <ESC>:tabprevious<CR>
-noremap <F7> :set expandtab!<CR>
+no <S-Down> ddp
+no <S-Up> ddkP
 
-" NERDtree
+" CTRL-Tab is next tab
+noremap <C-Tab> :<C-U>tabnext<CR>
+inoremap <C-Tab> <C-\><C-N>:tabnext<CR>
+cnoremap <C-Tab> <C-C>:tabnext<CR>
+" CTRL-SHIFT-Tab is previous tab
+noremap <C-S-Tab> :<C-U>tabprevious<CR>
+inoremap <C-S-Tab> <C-\><C-N>:tabprevious<CR>
+cnoremap <C-S-Tab> <C-C>:tabprevious<CR>
+
+" NERDtree shortcut
 map <C-n> :NERDTreeToggle<CR>
+
+" tagbar shortcut
+nmap <F8> :TagbarToggle<CR>
+
+" autoclosing brackets
+inoremap (<CR> (<CR>)<Esc>O
+inoremap {<CR> {<CR>}<Esc>O
+inoremap {; {<CR>};<Esc>O
+inoremap {, {<CR>},<Esc>O
+inoremap [<CR> [<CR>]<Esc>O
+inoremap [; [<CR>];<Esc>O
+inoremap [, [<CR>],<Esc>O
