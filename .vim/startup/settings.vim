@@ -24,7 +24,9 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 set hlsearch
-set termguicolors
+if (has("termguicolors"))
+    set termguicolors
+endif
 set ttimeoutlen=5
 set enc=utf-8
 set fillchars=vert:¦
@@ -32,7 +34,7 @@ set history=1000
 set laststatus=2
 set ffs=unix,dos
 set vb
-set undofile
+" set undofile
 
 set cursorline
 hi cursorline cterm=none term=none

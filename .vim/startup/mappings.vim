@@ -4,7 +4,7 @@ nnoremap <Up>  :resize -2<CR>
 nnoremap <Left>  :vertical resize +2<CR>
 nnoremap <Right> :vertical resize -2<CR>
 no <S-Down> ddp
-no <S-Up> ddkP
+no <S-Up> ddkkp
 
 " CTRL-Tab is next tab
 noremap <C-Tab> :<C-U>tabnext<CR>
