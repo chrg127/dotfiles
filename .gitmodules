@@ -1,15 +1,12 @@
-[submodule ".vim/bundle/nerdtree.git"]
-	path = .vim/bundle/nerdtree.git
+[submodule "vim/bundle/nerdtree"]
+	path = vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree
-[submodule ".vim/bundle/tagbar.git"]
-	path = .vim/bundle/tagbar.git
-	url = https://github.com/majutsushi/tagbar
-[submodule ".vim/bundle/snes-syntax-vim.git"]
-	path = .vim/bundle/snes-syntax-vim.git
+[submodule "vim/bundle/snes-syntax-vim"]
+	path = vim/bundle/snes-syntax-vim
 	url = https://github.com/ARM9/snes-syntax-vim
-[submodule ".vim/bundle/vim-airline.git"]
-	path = .vim/bundle/vim-airline.git
+[submodule "vim/bundle/tagbar"]
+	path = vim/bundle/tagbar
+	url = https://github.com/majutsushi/tagbar
+[submodule "vim/bundle/vim-airline"]
+	path = vim/bundle/vim-airline
 	url = https://github.com/vim-airline/vim-airline
-[submodule ".vim/bundle/vim-airline-themes.git"]
-	path = .vim/bundle/vim-airline-themes.git
-	url = https://github.com/vim-airline/vim-airline-themes

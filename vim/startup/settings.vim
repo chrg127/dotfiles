@@ -33,8 +33,9 @@ set fillchars=vert:¦
 set history=1000
 set laststatus=2
 set ffs=unix,dos
-set vb
+" set vb
 " set undofile
+
 
 set cursorline
 hi cursorline cterm=none term=none
