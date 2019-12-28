@@ -35,15 +35,22 @@ set laststatus=2
 set ffs=unix,dos
 " set vb
 " set undofile
-
-
 set cursorline
-hi cursorline cterm=none term=none
+set exrc
+set secure
+set encoding=UTF-8
+
+" cursorline settings
 autocmd WinEnter * setlocal cursorline
 autocmd WinLeave * setlocal nocursorline
 
 " Airline settings
 let g:airline_powerline_fonts = 1  "use powerline fonts
+let g:airline_skip_empty_sections = 0
+let g:airline#parts#ffenc#skip_expected_string='utf-8 - unix'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#whitespace#enabled = 0
 
 " for SNES ASM syntax
 au BufNewFile,BufRead *.asm,*.inc set filetype=snes

@@ -12,3 +12,9 @@ let NERDTreeDirArrows=1
 source ~/.vim/startup/mappings.vim
 source ~/.vim/startup/settings.vim
 source ~/.vim/startup/colors.vim
+
+" C stuff, will later be put into another file
+let c_gnu = 1
+let c_ansi_typedefs = 1
+let c_syntax_for_h = 1
+
