@@ -39,6 +39,8 @@ set cursorline
 set exrc
 set secure
 set encoding=UTF-8
+set grepprg=grep\ --color=always\ -n\ $*\ /dev/null
+set makeprg=make\ EXTRA_CFLAGS=fdiagnostics-color=always
 
 " cursorline settings
 autocmd WinEnter * setlocal cursorline
