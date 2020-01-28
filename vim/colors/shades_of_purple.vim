@@ -35,7 +35,8 @@ hi LineNr guifg=#A599C9 ctermfg=140 guibg=#1E1E3F ctermbg=235 gui=NONE cterm=NON
 hi CursorLineNr guifg=#FFCC80 ctermfg=195 guibg=#1E1E3F ctermbg=235 gui=NONE cterm=NONE
 hi MatchParen guifg=#FAEFA5 ctermfg=236 guibg=#A599C9 ctermbg=229 gui=NONE cterm=NONE
 hi NonText guifg=#A599E9 ctermfg=140 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi Normal guifg=#E1EFFF ctermfg=195 guibg=#2D2B55 ctermbg=236 gui=NONE cterm=NONE
+" guifc = 2D2B55 OR 393152 guifg = E1EFFF OR F7F7BD
+hi Normal guifg=#F7F7BD ctermfg=195 guibg=#2D2B55 ctermbg=236 gui=NONE cterm=NONE
 hi PMenu guifg=#A599E9 ctermfg=140 guibg=#1F1F41 ctermbg=235 gui=NONE cterm=NONE
 hi PMenuSel guifg=#9EFFFF ctermfg=159 guibg=#2D2B55 ctermbg=236 gui=NONE cterm=NONE
 hi Search guifg=NONE ctermfg=NONE guibg=#7d44b2 ctermbg=97 gui=NONE cterm=NONE
