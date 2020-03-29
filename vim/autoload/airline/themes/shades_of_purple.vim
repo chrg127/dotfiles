@@ -10,9 +10,9 @@ let g:airline#themes#shades_of_purple#palette.normal_modified = {
       \ }
 
 " Insert mode
-let s:insert1 = [ "#1E1E3F", "#82FF82", 159, 234 ]
-let s:insert2 = [ "#1E1E3F", "#63C790", 234, 140 ]
-let s:insert3 = [ "#9EFFFF", "#243D1D", 159, 234 ]
+let s:insert1 = [ "#1E1E3F", "#80FFBB", 159, 234 ]
+let s:insert2 = [ "#1E1E3F", "#49B3A3", 234, 140 ]
+let s:insert3 = [ "#9EFFFF", "#1E1E3F", 159, 234 ]
 let g:airline#themes#shades_of_purple#palette.insert = airline#themes#generate_color_map(s:insert1, s:insert2, s:insert3)
 let g:airline#themes#shades_of_purple#palette.insert_modified = {
       \ 'airline_c': [ '#9EFFFF' , '#5f005f' , 255     , 53      , ''     ] ,
@@ -31,9 +31,9 @@ let s:visual3 = [ "#9EFFFF", "#2B1C1E", 140, 234 ]
 let g:airline#themes#shades_of_purple#palette.visual = airline#themes#generate_color_map(s:visual1, s:visual2, s:visual3)
 
 " Inactive (is in other windows)
-let s:airline_a_inactive = [ '#4e4e4e' , '#1c1c1c' , 239 , 234 , '' ]
-let s:airline_b_inactive = [ '#4e4e4e' , '#262626' , 239 , 235 , '' ]
-let s:airline_c_inactive = [ '#4e4e4e' , '#303030' , 239 , 236 , '' ]
+let s:airline_a_inactive = [ '#1E1E3F' , '#A599E9' , 239 , 234 , '' ]
+let s:airline_b_inactive = [ '#9EFFFF' , '#1E1E3F' , 239 , 235 , '' ]
+let s:airline_c_inactive = [ '#9EFFFF' , '#1E1E3F' , 239 , 236 , '' ]
 let g:airline#themes#shades_of_purple#palette.inactive = airline#themes#generate_color_map(s:airline_a_inactive, s:airline_b_inactive, s:airline_c_inactive)
 let g:airline#themes#shades_of_purple#palette.inactive_modified = {
       \ 'airline_c': [ '#875faf' , '' , 97 , '' , '' ] ,

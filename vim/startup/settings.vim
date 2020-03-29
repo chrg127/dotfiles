@@ -33,8 +33,6 @@ set fillchars=vert:¦
 set history=1000
 set laststatus=2
 set ffs=unix,dos
-" set vb
-" set undofile
 set cursorline
 set exrc
 set secure
@@ -56,3 +54,9 @@ let g:airline#extensions#whitespace#enabled = 0
 
 " for SNES ASM syntax
 au BufNewFile,BufRead *.asm,*.inc set filetype=snes
+
+" Folding
+set foldmethod=indent
+set foldnestmax=10
+set nofoldenable
+set foldlevel=2

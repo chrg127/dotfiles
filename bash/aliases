@@ -38,5 +38,6 @@ alias gits="git status"
 alias lunarmagic="wine /home/chri/SMWHacking/lunar-magic/Lunar\ Magic.exe"
 alias bsnes="/home/chri/Compilati/bsnes/out/bsnes"
 
-#gdb
+#gcc and gdb
 alias gdb="gdb -q"
+alias gcc-asm="gcc -S -masm=intel -fno-asynchronous-unwind-tables -fno-exceptions -fno-rtti -fverbose-asm -Wall -Wextra -O2"

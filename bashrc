@@ -105,4 +105,6 @@ fi
 
 export PATH="$PATH:/home/chri/bin:/home/chri/.local/bin:/home/chri/bin/platform-tools:/home/chri/bin/cava"
 
+date
 fortune -e fortunes | cowsay
+

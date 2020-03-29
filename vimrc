@@ -16,5 +16,5 @@ source ~/.vim/startup/colors.vim
 " C stuff, will later be put into another file
 let c_gnu = 1
 let c_ansi_typedefs = 1
-let c_syntax_for_h = 1
+" let c_syntax_for_h = 1
 
