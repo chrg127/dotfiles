@@ -31,6 +31,6 @@ inoremap [; [<CR>];<Esc>O
 inoremap [, [<CR>],<Esc>O
 
 " copy to system clipboard
-"xnoremap <C-c> "+y
-"nnoremap <silent> cp "+y
-"nnoremap <silent> cpp "+yy
+xnoremap <C-c> "+y
+" nnoremap <silent> cp "+y
+" nnoremap <silent> cpp "+yy

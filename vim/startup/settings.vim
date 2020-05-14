@@ -60,3 +60,10 @@ set foldmethod=indent
 set foldnestmax=10
 set nofoldenable
 set foldlevel=2
+
+" Custom .vimrc
+set exrc
+
+" Language specific settings
+" C
+" let c_syntax_for_h = 1
