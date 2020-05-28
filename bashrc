@@ -108,3 +108,5 @@ export PATH="$PATH:/home/chri/bin:/home/chri/.local/bin:/home/chri/bin/platform-
 date
 fortune -e fortunes | cowsay
 
+# Disable C-s
+stty -ixon
