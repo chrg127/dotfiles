@@ -1,0 +1,203 @@
+pacman -Syu
+pacman -S base-devel gcc vim
+ls
+gcc
+make
+vim
+ls
+ls
+ls -a
+cd ..
+ls
+ls
+cd chri/
+ls
+cd /
+ls
+cd ..
+gdb
+gcc
+gdb
+cd /c
+ls
+cd ..
+cd ~
+vim .bashrc
+gcc
+make
+l
+ls
+cd c++/
+ls
+cd spritegfxtool/
+qmake
+pacman -Ss qt
+pacman -Ss qt | less
+valgrind
+pacman -Ss valgrind
+wget
+pacman -Ss 
+autorebase.bat  InstallationLog.txt  maintenancetool.ini  mingw64.ini      proc
+bin             installer.dat        mingw32              msys2.exe        tmp
+components.xml  installerResources   mingw32.exe          msys2.ico        usr
+dev             magic.py             mingw32.ini          msys2.ini        var
+etc             maintenancetool.dat  mingw64              msys2_shell.cmd
+ls
+
+autorebase.bat  InstallationLog.txt  maintenancetool.ini  mingw64.ini      proc
+bin             installer.dat        mingw32              msys2.exe        tmp
+components.xml  installerResources   mingw32.exe          msys2.ico        usr
+dev             magic.py             mingw32.ini          msys2.ini        var
+etc             maintenancetool.dat  mingw64              msys2_shell.cmd
+pacman -Ss mingw-w64-x86_64-toolchain
+cd ..
+cd ..
+ls
+vim main.c
+gcc main.c 
+ls
+./a.exe 
+pacman -S mingw-w64-x86_64-qt5
+pacman -S mingw-w64-x86_64-qt5
+pacman -S mingw-w64-x86_64-gcc
+ls
+rm a.exe 
+gcc main.c 
+ls
+./a.exe 
+which gcc
+cd
+gcc
+ls
+gcc main.c 
+ls
+vim main.c 
+ls
+gcc main.c 
+rm a.exe 
+rm main.c 
+cd c-prog/
+ls
+cd palutils/
+ls
+make clean
+make debug
+make
+make debug_makepal 
+cd ...
+cd ..
+cd ..
+cd ..
+ls
+cd msys2/
+ls
+cd /
+ls
+cd ~
+ls
+vim bashrc .bashrc 
+ls
+vim bashrc .bashrc 
+bash
+ls
+vim bashrc .bashrc 
+rm bashrc 
+ls
+bash
+mkdir bash
+bash
+ls
+vim bash/aliases 
+ls -C
+l
+vim bash/aliases 
+h
+cd ~
+cd bash/
+h
+vim aliases 
+..
+cd ..
+vim .bashrc 
+ll
+bash
+cd ~
+ls -l
+ll
+vim bash/aliases 
+py
+vim bash/aliases 
+h
+bash
+h
+vim vimrc 
+s
+vim vimrc 
+mv vimrc .vimrc
+vim
+vim .vimrc 
+mkdir .vim
+cd .vim/
+mkdir startup
+..
+vim vim/startup/mappings.vim 
+vim .vimrc
+vim .vimrc 
+vim
+vim vim/startup/mappings.vim 
+vim .vimrc 
+vim vim/startup/settings.vim 
+vim .vimrc 
+ls .vim
+cd .vim/startup/
+mv setting.vim settings.vim
+...
+vim .vimrc 
+vim .vim/startup/settings.vim 
+vim .vimrc 
+vim vim/startup/colors.vim 
+vim .vimrc
+cd c++/
+cd spritegfxtool/
+vim tool.h 
+vim tool.cpp 
+make
+qmake
+make debug
+./debug/tool.exe 
+..
+cd spritegfxtool/
+./debug/tool.exe 
+vim main.cpp 
+git status
+vim
+cd py
+cd python/
+vim el2test.py
+py
+vim el2test.py 
+vim
+vim c-prog/stringops.c 
+...
+cd Downloads/
+cd dwm-6.2.tar/dwm-6.2/
+make
+...
+..
+cd Principale/programming/python/
+vim el2test.py 
+python3
+./el2test.py 
+vim  el2test.py 
+py
+./el2test.py 
+bc
+dc
+vim el2test.py 
+py
+vim el2test.py 
+py
+vim el2test.py 
+:q
+vim dataset1.txt 
+vim
