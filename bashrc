@@ -110,3 +110,26 @@ fortune -e fortunes | cowsay
 
 # Disable C-s
 stty -ixon
+
+
+# These will be the default colors for each terminal, i'm putting them
+# here so I'll be able to find them later when I'll switch
+#
+# foreground: E1EFFF
+# background: 2D2B55/141C21/292D3E
+# 
+# black: 000000 7F7F7F
+# 
+# red: CD0000 FD000D
+#
+# green: 00CD00 00FF00
+#
+# yellow: CDCD00 FFEE80
+#
+# blue: CD5252 B362FF
+#
+# magenta: CD00CD FB64FF
+#
+# cyan: 00CDCD 43FFFF
+#
+# white: E5E5E5 FFFFFF

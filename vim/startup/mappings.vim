@@ -3,8 +3,10 @@ nnoremap <Down>    :resize +2<CR>
 nnoremap <Up>  :resize -2<CR>
 nnoremap <Left>  :vertical resize +2<CR>
 nnoremap <Right> :vertical resize -2<CR>
+
+" Moves a line up/down
 no <S-Down> ddp
-no <S-Up> ddkkp
+no <S-Up> ddkP
 
 " CTRL-Tab is next tab
 noremap <C-Tab> :<C-U>tabnext<CR>
