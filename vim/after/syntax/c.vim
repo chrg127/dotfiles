@@ -48,16 +48,6 @@ if get(g:, 'cpp_simple_highlight', 0)
     hi link cLabel        Statement
 endif
 
-
-" Operators
-syn match cOperator "\(<<\|>>\|[-+*/%&^|<>!=]\)="
-syn match cOperator "<<\|>>\|&&\|||\|++\|--\|->"
-syn match cOperator "[.!~*&%<>^|=,+-]"
-syn match cOperator "/[^/*=]"me=e-1
-syn match cOperator "/$"
-syn match cOperator "&&\|||"
-syn match cOperator "[][]"
-
 " Preprocessor
 syn keyword cDefined defined contained containedin=cDefine
 hi def link cDefined cDefine
@@ -68,4 +58,16 @@ hi def link cDelimiter Delimiter
 " foldmethod=syntax fix, courtesy of Ivan Freitas
 syn match cBraces display "[{}]"
 hi def link cBraces Delimiter
+
+" Operators
+syn match cOperator "\(<<\|>>\|[-+*/%&^|<>!=]\)="
+syn match cOperator "<<\|>>\|&&\|||\|++\|--\|->"
+syn match cOperator "[.!~*&%<>^|=,+-]"
+syn match cOperator "/[^/*=]"me=e-1
+syn match cOperator "/$"
+syn match cOperator "&&\|||"
+syn match cOperator "[][]"
+syn match cOperator "?"
+syn match cOperator ":"
+hi def link cOperator Operator
 
