@@ -36,8 +36,11 @@ alias gits="git status"
 
 # smw hacking aliases
 alias lunarmagic="wine /home/chri/SMWHacking/lunar-magic/Lunar\ Magic.exe"
-alias bsnes="/home/chri/Compilati/bsnes/out/bsnes"
+#alias bsnes="/home/chri/Compilati/bsnes-plus/bsnes/out/bsnes"
 
 #gcc and gdb
 alias gdb="gdb -q"
 alias gcc-asm="gcc -S -masm=intel -fno-asynchronous-unwind-tables -fno-exceptions -fno-rtti -fverbose-asm -Wall -Wextra -O2"
+
+#temp
+#alias insspr="cd ~/cnd/Hacks/Nonsense && wine cmd < insertspr.bat > logfile"

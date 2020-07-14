@@ -85,6 +85,10 @@ if [ -f ~/.bash/aliases ]; then
     . ~/.bash/aliases
 fi
 
+if [ -f ~/.bash/functions ]; then
+    . ~/.bash/functions
+fi
+
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
@@ -105,7 +109,8 @@ fi
 
 export PATH="$PATH:/home/chri/bin:/home/chri/.local/bin:/home/chri/bin/platform-tools:/home/chri/bin/cava"
 
-date
+#printf "\nData e ora: "
+#date
 fortune -e fortunes | cowsay
 
 # Disable C-s

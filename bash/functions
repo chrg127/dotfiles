@@ -1,0 +1,6 @@
+function insspr {
+    pushd . > /dev/null
+    cd ~/cnd/Hacks/Nonsense
+    wine cmd < insertspr.bat
+    popd > /dev/null
+}
