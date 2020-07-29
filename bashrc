@@ -40,41 +40,29 @@ case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
 esac
 
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-#force_color_prompt=yes
-
-#if [ -n "$force_color_prompt" ]; then
-#    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-        # We have color support; assume it's compliant with Ecma-48
-        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-        # a case would tend to support setf rather than setaf.)
-#        color_prompt=yes
-#    else
-#        color_prompt=
-#    fi
-#fi
-
-#if [ "$color_prompt" = yes ]; then
-#    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-#else
-#    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-#fi
-#unset color_prompt force_color_prompt
 
 #PS1 (prompt)
-#PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\] $ '
-PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h \[\033[01;34m\]\w \[\033[00m\]$ '
+PROMPT_DIRTRIM=2
+PS1='${debian_chroot:+($debian_chroot)}'    # chroot stuff
+PS1+='\[\033[01;32m\]\u@\h '                # user@host
+PS1+='\[\033[01;34m\]\w '                   # directory
+PS1+='\[\033[01;35m\]'
+PS1+="\$(ps1_ssh)"
+# PS1+='\[\033[1;33m\]'
+PS1+="\$(ps1_git)"
+PS1+='\[\033[1;31m\]'
+PS1+="\$(ps1_read_only)"
+#PS1+='\[\033[00m\]$ '                       # $
+PS1+='\[\033[00m\]\n$ '                      # $ with newline
 
 # If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
+# case "$TERM" in
+# xterm*|rxvt*)
+#     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+#     ;;
+# *)
+#     ;;
+# esac
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -103,9 +91,12 @@ if ! shopt -oq posix; then
   fi
 fi
 
-if [ "$TERM" != "linux" ]; then
-    source ~/.bash/pureline ~/.bash/pureline.conf
-fi
+stty susp undef
+bind '"\C-z":"fg\015"'
+
+#if [ "$TERM" != "linux" ]; then
+#    source ~/.bash/pureline ~/.bash/pureline.conf
+#fi
 
 export PATH="$PATH:/home/chri/bin:/home/chri/.local/bin:/home/chri/bin/platform-tools:/home/chri/bin/cava"
 
@@ -114,7 +105,7 @@ export PATH="$PATH:/home/chri/bin:/home/chri/.local/bin:/home/chri/bin/platform-
 fortune -e fortunes | cowsay
 
 # Disable C-s
-stty -ixon
+#stty -ixon
 
 
 # These will be the default colors for each terminal, i'm putting them
@@ -138,3 +129,17 @@ stty -ixon
 # cyan: 00CDCD 43FFFF
 #
 # white: E5E5E5 FFFFFF
+
+# palenight:
+#           normal light  dark
+# red:      FF5370 FF869A BE5046
+# green:    C3E88D
+# yellow    FFCB6B F78C6C
+# blue      82B1FF
+# purple    C792EA
+# purblue   939EDE
+# cyan      89DDFF
+# white     BFC7D5
+# black     292D3E
+# grey      3E4452
+

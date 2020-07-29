@@ -1,43 +1,243 @@
 " Load pathogen
 execute pathogen#infect()
 
-" let g:shades_of_purple_bold = 1
+
+
+"colors
+set background=dark
+set termguicolors
+colorscheme palenight
+let g:airline_theme="palenight"
+
+" for statusline colors
+hi User1 guifg=#ff5370 guibg=#3E4453 " read only
+hi User2 guifg=#c3e88d guibg=#3e4453 " modified
+hi User3 guifg=#89ddff guibg=#3e4453 " filename
+
+
+
+" settings
+" Jump to the last position when reopening a file
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+filetype plugin indent on
+syntax on           " Will make sure the syntax is always on
+syntax enable       
+
+set showcmd 		" Show (partial) command in status line.
+set noshowmode      " Already have it in statusline
+set ruler           " Show line and column number
+set relativenumber  " left column displays relative numbers lines
+set number          " now with current line number instead of 0
+set laststatus=2    " Always display the status line
+
+set autoread        " Read open files when changed in the background
+set autowrite		" Automatically save before commands like :next and :make
+
+set ignorecase		" Do case insensitive matching
+set smartcase       " Unless we type a capital
+
+set listchars=""    " Empty listchars
+set listchars=tab:>. " A tab will be displayed as >...
+" set listchars+=trail;.
+set fillchars=vert:¦
+
+set smartcase		" Do smart case matching
+set incsearch		" Incremental search
+set hlsearch        " Highlight searches
+
+set tabstop=4       " Tab = 4 spaces
+set shiftwidth=4
+set expandtab       " Insert spaces instead of tabs
+
+"set nobackup        " Don't create backups and swap files
+"set noswapfile
+
+"set splitright      " Splits
+"set splitbelow
+
+set foldmethod=indent   " Folding
+set foldnestmax=10
+set nofoldenable
+set foldlevel=2
+
+set cursorline      " Adds different background color to line on which cursor is on
+autocmd WinEnter * setlocal cursorline
+autocmd WinLeave * setlocal nocursorline
+
+set wildmenu        " Enhanced command completion
+set hidden		    " Hide buffers when they are abandoned
+set showmatch		" Show matching bracket
+set mouse=a		    " Enable mouse usage (all modes)
+set history=200     " Keep 200 lines of command history
+set ttimeoutlen=5   " Time to wait for a key sequence to complete. Keep low.
+set ffs=unix,dos
+set encoding=UTF-8
+set exrc
+set secure
+"set grepprg=grep\ --color=always\ -n\ $*\ /dev/null
+"set makeprg=make\ EXTRA_CFLAGS=fdiagnostics-color=always
+
+" Airline settings
+" let g:airline_powerline_fonts = 1  "use powerline fonts
+" let g:airline_skip_empty_sections = 0
+" let g:airline#parts#ffenc#skip_expected_string='utf-8 - unix'
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#buffer_nr_show = 1
+" let g:airline#extensions#whitespace#enabled = 0
 
 " NERDtree settings
 " close NERDTree if it's the last window opened
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-" let NERDTreeMinimalUI=1
 let NERDTreeDirArrows=1
 
-source ~/.vim/startup/mappings.vim
-source ~/.vim/startup/settings.vim
-source ~/.vim/startup/colors.vim
+" filetypes
+au BufNewFile,BufRead *.asm,*.inc set filetype=snes
+autocmd BufNewFile,BufRead *.qbs setfiletype qbs
+autocmd BufNewFile,BufRead *.pro,*.pri set filetype=qmake
+autocmd BufNewFile,BufRead *.qml setfiletype qml
+autocmd BufNewFile,BufRead *.qrc setfiletype xml
+autocmd BufNewFile,BufRead *.ts setfiletype xml
+autocmd BufNewFile,BufRead *.ui setfiletype xml
 
-" Startup messages
-fun! Start()
-    if argc() || line2byte('$') != -1 || v:progname !~? '^[-gmnq]\=vim\=x\=\%[\.exe]$' || &insertmode
-        return
-    endif
+" Language specific settings
+" C
+let c_gnu = 1
+let c_space_errors = 1
+let c_curly_error = 1
+let c_ansi_typedefs = 1
+let c_ansi_constants = 1
 
-    enew
-    setlocal
-        \ bufhidden=wipe
-        \ buftype=nofile
-        \ nobuflisted
-        \ nocursorcolumn
-        \ nocursorline
-        \ nolist
-        \ nonumber
-        \ noswapfile
-        \ norelativenumber
-    call append('$', "")
-    for line in split(system('fortune -a'), '\n')
-        call append('$', '        ' . l:line)
+" after :make, have the quick fix list open
+autocmd QuickFixCmdPost * copen
+
+" custom statusline
+"function! Status(winnum)
+"    let stat=''
+"    if active
+"        let stat .= "active"
+"    else
+"        let stat .= "inactive"
+"    endif
+"    return stat
+"endfunction
+
+function! s:RefreshStatus()
+    " for each window
+    for nr in range(1, winnr('$'))
+        " set statusline to whatever Status() returns
+        call setwinvar(nr, '&statusline', '%!Status(' . nr . ')')
     endfor
-    setlocal nomodifiable nomodified
-    nnoremap <buffer><silent> e :enew<CR>
-    nnoremap <buffer><silent> i :enew <bar> startinsert<CR>
-    nnoremap <buffer><silent> o :enew <bar> startinsert<CR>
-endfun
-"autocmd VimEnter * call Start()
+endfunction
+
+"command! RefreshStatus :call <SID>RefreshStatus()
+
+"augroup status
+"    autocmd!
+"    autocmd VimEnter,VimLeave,WinEnter,WinLeave,BufWinEnter,BufWinLeave * :RefreshStatus
+"augroup END
+
+let g:currentmode={
+    \ 'n'       : 'Normale'        ,
+    \ 'no'      : 'N·Attesa'       ,
+    \ 'v'       : 'Visuale'        ,
+    \ 'V'       : 'V·Riga'         ,
+    \ '\<c-v>'  : 'V·Blocco'       ,
+    \ 's'       : 'Selezione'      ,
+    \ 'S'       : 'S·Riga'         ,
+    \ '^S'      : 'S·Blocco'       ,
+    \ 'i'       : 'Inserisci'      ,
+    \ 'R'       : 'Sostituisci'    ,
+    \ 'Rv'      : 'V·Sostituisci'   ,
+    \ 'c'       : 'Comando'        ,
+    \ 'cv'      : 'Vim Ex'         ,
+    \ 'ce'      : 'Ex'             ,
+    \ 'r'       : 'Prompt'         ,
+    \ 'rm'      : 'Di piu'          ,
+    \ 'r?'      : 'Conferma'       ,
+    \ '!'       : 'Shell'          ,
+    \ 't'       : 'Terminale'      ,
+    \}
+" let g:currentmode_colors={
+"     \ 'n'   : "%#PMenuSel#"      ,
+"     \ 'i'   : "%#DiffAdd#"       ,
+"     \ 'v'   : "%#DiffChange#"    ,
+"     \}
+
+function! ReadOnly() abort
+  if &readonly || !&modifiable
+    return ''
+  else
+    return ''
+endfunction
+
+set statusline=
+set statusline+=%#PMenuSel#             " blue
+set statusline+=\ --%{toupper(g:currentmode[mode()])}-- " set mode string
+set statusline+=\ 
+set statusline+=%#StatusLine#           " normal
+set statusline+=\ %h                    " help
+set statusline+=\ %n:                   " buf no
+set statusline+=%3*
+set statusline+=\ %f                    " filename
+set statusline+=%2*
+set statusline+=%{&modified?'\ [+]':''}   " modified flag, no space if not present
+set statusline+=%#StatusLine#
+set statusline+=%1*
+set statusline+=\ %{ReadOnly()}         " read only
+set statusline+=%#StatusLine#
+set statusline+=\ %w                    " preview
+set statusline+=%<                      " separator
+set statusline+=%=
+set statusline+=\ %{&ft==''?'normal\ text':&ft}
+set statusline+=\ %#PMenuSel#           " blue
+"set statusline+=\ %{&ff}\ ::           " file newline
+set statusline+=\ %l,\ %v\ ::           " row, column
+set statusline+=\ %L                    " no of lines
+set statusline+=\                       " space at the end
+
+
+
+" mappings
+" Set <Leader>
+let mapleader = ","
+
+" Disable arrow movement, resize splits instead.
+nnoremap <Down>  :resize +2<CR>
+nnoremap <Up>    :resize -2<CR>
+nnoremap <Left>  :vertical resize +2<CR>
+nnoremap <Right> :vertical resize -2<CR>
+
+" Moves a line up/down
+no <S-Down> ddp
+no <S-Up> ddkP
+
+" CTRL-Tab is next tab
+" noremap <C-Tab> :<C-U>tabnext<CR>
+" inoremap <C-Tab> <C-\><C-N>:tabnext<CR>
+" cnoremap <C-Tab> <C-C>:tabnext<CR>
+" CTRL-SHIFT-Tab is previous tab
+" noremap <C-S-Tab> :<C-U>tabprevious<CR>
+" inoremap <C-S-Tab> <C-\><C-N>:tabprevious<CR>
+" cnoremap <C-S-Tab> <C-C>:tabprevious<CR>
+
+" NERDtree shortcut
+nnoremap <C-n> :NERDTreeToggle<CR>
+
+" tagbar shortcut
+nnoremap <F8> :TagbarToggle<CR>
+
+" autoclosing brackets
+inoremap (<CR> (<CR>)<Esc>O
+inoremap {<CR> {<CR>}<Esc>O
+inoremap {; {<CR>};<Esc>O
+inoremap {, {<CR>},<Esc>O
+inoremap [<CR> [<CR>]<Esc>O
+inoremap [; [<CR>];<Esc>O
+inoremap [, [<CR>],<Esc>O
+
+" copy to system clipboard using ,c
+xnoremap <leader>c "+y
+
+" switch buffers using ,b
+nnoremap <leader>b :b <C-d>
 

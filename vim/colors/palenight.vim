@@ -1,21 +1,13 @@
-" vim:fdm=marker
 " Vim Color File
 " Name:       palenight.vim
 " Maintainer: https://github.com/drewtempelmeyer/palenight.vim
 " License:    The MIT License (MIT)
 " Based On:   https://github.com/joshdick/onedark.vim
 
-" Initialization {{{
-
-highlight clear
-
-if exists("syntax_on")
-  syntax reset
-endif
-
 set t_Co=256
 
 let g:colors_name="palenight"
+let s:overrides = get(g:, "palenight_color_overrides", {})
 
 " Set to "256" for 256-color terminals, or
 " set to "16" to use your terminal emulator's native colors
@@ -59,20 +51,36 @@ function! s:h(group, style)
     \ "cterm="   (has_key(a:style, "cterm") ? a:style.cterm    : "NONE")
 endfunction
 
-" public {{{
-
 function! palenight#set_highlight(group, style)
   call s:h(a:group, a:style)
 endfunction
 
-" }}}
-
-" }}}
-
-" Color Variables {{{
-
-let s:colors = palenight#GetColors()
-
+" Color Variables
+let s:colors = {
+      \ "red": get(s:overrides, "red", { "gui": "#ff5370", "cterm": "204", "cterm16": "1" }),
+      \ "light_red": get(s:overrides, "light_red", { "gui": "#ff869a", "cterm": "204", "cterm16": "1" }),
+      \ "dark_red": get(s:overrides, "dark_red", { "gui": "#BE5046", "cterm": "196", "cterm16": "9" }),
+      \ "green": get(s:overrides, "green", { "gui": "#C3E88D", "cterm": "114", "cterm16": "2" }),
+      \ "yellow": get(s:overrides, "yellow", { "gui": "#ffcb6b", "cterm": "180", "cterm16": "3" }),
+      \ "dark_yellow": get(s:overrides, "dark_yellow", { "gui": "#F78C6C", "cterm": "173", "cterm16": "11" }),
+      \ "blue": get(s:overrides, "blue", { "gui": "#82b1ff", "cterm": "39", "cterm16": "4" }),
+      \ "purple": get(s:overrides, "purple", { "gui": "#c792ea", "cterm": "170", "cterm16": "5" }),
+      \ "blue_purple": get(s:overrides, "blue_purple", { "gui": "#939ede", "cterm": "39", "cterm16": "4"}),
+      \ "cyan": get(s:overrides, "cyan", { "gui": "#89DDFF", "cterm": "38", "cterm16": "6" }),
+      \ "white": get(s:overrides, "white", { "gui": "#bfc7d5", "cterm": "145", "cterm16": "7" }),
+      \ "black": get(s:overrides, "black", { "gui": "#292D3E", "cterm": "235", "cterm16": "0" }),
+      \ "visual_black": get(s:overrides, "visual_black", { "gui": "NONE", "cterm": "NONE", "cterm16": "0" }),
+      \ "comment_grey": get(s:overrides, "comment_grey", { "gui": "#7078A1", "cterm": "59", "cterm16": "15" }),
+      \ "gutter_fg_grey": get(s:overrides, "gutter_fg_grey", { "gui": "#4B5263", "cterm": "238", "cterm16": "15" }),
+      \ "cursor_grey": get(s:overrides, "cursor_grey", { "gui": "#3E4452", "cterm": "236", "cterm16": "8" }),
+      \ "visual_grey": get(s:overrides, "visual_grey", { "gui": "#3E4452", "cterm": "237", "cterm16": "15" }),
+      \ "menu_grey": get(s:overrides, "menu_grey", { "gui": "#3E4452", "cterm": "237", "cterm16": "8" }),
+      \ "special_grey": get(s:overrides, "special_grey", { "gui": "#3E4452", "cterm": "238", "cterm16": "15" }),
+      \ "vertsplit": get(s:overrides, "vertsplit", { "gui": "#ffcb6b", "cterm": "59", "cterm16": "15" }),
+      \ "white_mask_1": get(s:overrides, "white_mask_1", { "gui": "#333747", "cterm": "237", "cterm16": "15" }),
+      \ "white_mask_3": get(s:overrides, "white_mask_3", { "gui": "#474b59", "cterm": "238", "cterm16": "15" }),
+      \ "white_mask_11": get(s:overrides, "white_mask_11", { "gui": "#989aa2", "cterm": "238", "cterm16": "15" })
+      \}
 let s:red = s:colors.red
 let s:light_red = s:colors.light_red
 let s:dark_red = s:colors.dark_red
@@ -161,11 +169,11 @@ call s:h("CursorLineNr", {}) " Like LineNr when 'cursorline' or 'relativenumber'
 call s:h("MatchParen", { "fg": s:yellow, "bg": s:blue, "gui": "underline" }) " The character under the cursor or just before it, if it is a paired bracket, and its match.
 call s:h("ModeMsg", {}) " 'showmode' message (e.g., "-- INSERT --")
 call s:h("MoreMsg", {}) " more-prompt
-call s:h("NonText", { "fg": s:special_grey }) " '~' and '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line).
+call s:h("NonText", { "fg": s:cursor_grey }) " '~' and '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line).
 call s:h("Normal", { "fg": s:white, "bg": s:black }) " normal text
 call s:h("Pmenu", { "bg": s:menu_grey }) " Popup menu: normal item.
 call s:h("PmenuSel", { "fg": s:black, "bg": s:blue }) " Popup menu: selected item.
-call s:h("PmenuSbar", { "bg": s:special_grey}) " Popup menu: scrollbar.
+call s:h("PmenuSbar", { "bg": s:visual_grey }) " Popup menu: scrollbar.
 call s:h("PmenuThumb", { "bg": s:white }) " Popup menu: Thumb of the scrollbar.
 call s:h("Question", { "fg": s:purple }) " hit-enter prompt and yes/no questions
 call s:h("Search", { "fg": s:black, "bg": s:yellow }) " Last search pattern highlighting (see 'hlsearch'). Also used for highlighting the current line in the quickfix window and similar items that need to stand out.
@@ -175,13 +183,13 @@ call s:h("SpellCap", { "fg": s:dark_yellow }) " Word that should start with a ca
 call s:h("SpellLocal", { "fg": s:dark_yellow }) " Word that is recognized by the spellchecker as one that is used in another region. This will be combined with the highlighting used otherwise.
 call s:h("SpellRare", { "fg": s:dark_yellow }) " Word that is recognized by the spellchecker as one that is hardly ever used. spell This will be combined with the highlighting used otherwise.
 call s:h("StatusLine", { "fg": s:white, "bg": s:cursor_grey }) " status line of current window
-call s:h("StatusLineNC", { "fg": s:comment_grey }) " status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
+call s:h("StatusLineNC", { "fg": s:comment_grey }) " status lines of not-current windows. NOTE: if this is equal to \"StatusLine\" Vim will use \"^^^\" in the status line of the current window.
 call s:h("TabLine", { "fg": s:comment_grey }) " tab pages line, not active tab page label
 call s:h("TabLineFill", {}) " tab pages line, where there are no labels
 call s:h("TabLineSel", { "fg": s:white }) " tab pages line, active tab page label
 call s:h("Title", { "fg": s:green }) " titles for output from ":set all", ":autocmd" etc.
 call s:h("Visual", { "fg": s:visual_black, "bg": s:visual_grey }) " Visual mode selection
-call s:h("VisualNOS", { "bg": s:visual_grey }) " Visual mode selection when vim is "Not Owning the Selection". Only X11 Gui's gui-x11 and xterm-clipboard supports this.
+call s:h("VisualNOS", { "bg": s:visual_grey }) " Visual mode selection when vim is \"Not Owning the Selection\". Only X11 Gui's gui-x11 and xterm-clipboard supports this.
 call s:h("WarningMsg", { "fg": s:yellow }) " warning messages
 call s:h("WildMenu", { "fg": s:black, "bg": s:blue }) " current match in 'wildmenu' completion
 
