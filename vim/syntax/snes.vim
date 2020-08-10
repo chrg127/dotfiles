@@ -27,11 +27,13 @@ syn region snesString start="'"   skip=+\\'+ end="'\|$"
 syn match asarMacro "![A-Za-z0-9_]*"
 syn match asarMacro "%[A-Za-z0-9_\(\)]*"
 
-syn keyword asarCmd autoclean freecode freedata org if else endif read1 read3 sa1rom lorom print
+syn keyword asarCmd macro endmacro autoclean freecode freedata org if else endif read1 read3 sa1rom lorom print
 
 syn keyword asm65Reg x y a s pc db
 
 syn keyword asm65816Ops adc and asl bcc bcs beq bit bmi bne bpl bra brk brl bvc bvs clc cld cli clv cmp cop cpx cpy dea dec dex dey eor ina inc inx iny jml jmp jsl jsr lda ldx ldy lsr mvn mvp nop ora pea pei per pha phb phd phk php phx phy pla plb pld plp plx ply rep rol ror rti rtl rts sbc sec sed sei sep sta stp stx sty stz swa tad tas tax tay tcd tcs tda tdc trb tsa tsb tsc tsx txa txs txy tya tyx wai wdm xba xce
+
+syn keyword asm65816asarOps lda.b lda.w
 
 syn keyword asmSpc700Ops adc addw and and1 asl bbc bbs bcc bcs beq bmi bne bpl bvc bvs bra brk call cbne clr1 clrc clrp clrv cmp cmpw daa das dbnz dec decw di div ei eor eor1 inc incw jmp lsr mov mov1 movw mul nop not1 notc or or1 pcall pop push ret reti rol ror sbc set1 setc setp sleep stop subw tcall tclr1 tset1 xcn
 
@@ -64,6 +66,7 @@ hi def link asarCmd             Macro
 
 hi def link asm65Reg            Type
 hi def link asm65816Ops         Function
+hi def link asm65816asarOps     Function
 
 hi def link asmSpc700Reg        Type
 hi def link asmSpc700Ops        Function

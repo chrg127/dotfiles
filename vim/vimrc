@@ -141,7 +141,7 @@ let g:currentmode={
     \ 'no'      : 'N·Attesa'       ,
     \ 'v'       : 'Visuale'        ,
     \ 'V'       : 'V·Riga'         ,
-    \ '\<c-v>'  : 'V·Blocco'       ,
+    \ "\<c-v>"  : 'V·Blocco'       ,
     \ 's'       : 'Selezione'      ,
     \ 'S'       : 'S·Riga'         ,
     \ '^S'      : 'S·Blocco'       ,
