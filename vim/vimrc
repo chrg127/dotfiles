@@ -52,7 +52,7 @@ set expandtab       " Insert spaces instead of tabs
 "set nobackup        " Don't create backups and swap files
 "set noswapfile
 
-"set splitright      " Splits
+set splitright      " Splits
 "set splitbelow
 
 set foldmethod=indent   " Folding
@@ -74,7 +74,7 @@ set ffs=unix,dos
 set encoding=UTF-8
 set exrc
 set secure
-"set grepprg=grep\ --color=always\ -n\ $*\ /dev/null
+set grepprg=grep\ --color=always\ -n\ $*\ /dev/null
 "set makeprg=make\ EXTRA_CFLAGS=fdiagnostics-color=always
 
 " Airline settings
@@ -170,10 +170,10 @@ function! ReadOnly() abort
     return ''
 endfunction
 
-set statusline=
+set statusline=                         " reset
 set statusline+=%#PMenuSel#             " blue
-set statusline+=\ --%{toupper(g:currentmode[mode()])}-- " set mode string
-set statusline+=\ 
+set statusline+=\ \ %{toupper(g:currentmode[mode()])} " set mode string
+set statusline+=\ \ 
 set statusline+=%#StatusLine#           " normal
 set statusline+=\ %h                    " help
 set statusline+=\ %n:                   " buf no
@@ -187,7 +187,7 @@ set statusline+=\ %{ReadOnly()}         " read only
 set statusline+=%#StatusLine#
 set statusline+=\ %w                    " preview
 set statusline+=%<                      " separator
-set statusline+=%=
+set statusline+=%=                      " right items now
 set statusline+=\ %{&ft==''?'normal\ text':&ft}
 set statusline+=\ %#PMenuSel#           " blue
 "set statusline+=\ %{&ff}\ ::           " file newline
@@ -195,7 +195,8 @@ set statusline+=\ %l,\ %v\ ::           " row, column
 set statusline+=\ %L                    " no of lines
 set statusline+=\                       " space at the end
 
-
+" For quickfix
+"autocmd Filetype qf 
 
 " mappings
 " Set <Leader>

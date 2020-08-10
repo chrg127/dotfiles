@@ -4,7 +4,7 @@
 " License:    The MIT License (MIT)
 " Based On:   https://github.com/joshdick/onedark.vim
 
-set t_Co=256
+"set t_Co=256
 
 let g:colors_name="palenight"
 let s:overrides = get(g:, "palenight_color_overrides", {})
@@ -163,19 +163,23 @@ call s:h("VertSplit", { "fg": s:vertsplit }) " the column separating vertically 
 call s:h("Folded", { "bg": s:cursor_grey, "fg": s:comment_grey }) " line used for closed folds
 call s:h("FoldColumn", {}) " 'foldcolumn'
 call s:h("SignColumn", {}) " column where signs are displayed
-call s:h("IncSearch", { "fg": s:yellow, "bg": s:comment_grey }) " 'incsearch' highlighting; also used for the text replaced with ":s///c"
-call s:h("LineNr", { "fg": s:gutter_fg_grey }) " Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
+" 'incsearch' highlighting; also used for the text replaced with ":s///c"
+call s:h("IncSearch", { "fg": s:yellow, "bg": s:comment_grey }) 
+" Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
+call s:h("LineNr", { "fg": s:comment_grey }) 
 call s:h("CursorLineNr", {}) " Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
 call s:h("MatchParen", { "fg": s:yellow, "bg": s:blue, "gui": "underline" }) " The character under the cursor or just before it, if it is a paired bracket, and its match.
 call s:h("ModeMsg", {}) " 'showmode' message (e.g., "-- INSERT --")
 call s:h("MoreMsg", {}) " more-prompt
-call s:h("NonText", { "fg": s:cursor_grey }) " '~' and '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line).
+" '~' and '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line).
+call s:h("NonText", { "fg": s:cursor_grey }) 
 call s:h("Normal", { "fg": s:white, "bg": s:black }) " normal text
 call s:h("Pmenu", { "bg": s:menu_grey }) " Popup menu: normal item.
 call s:h("PmenuSel", { "fg": s:black, "bg": s:blue }) " Popup menu: selected item.
 call s:h("PmenuSbar", { "bg": s:visual_grey }) " Popup menu: scrollbar.
 call s:h("PmenuThumb", { "bg": s:white }) " Popup menu: Thumb of the scrollbar.
 call s:h("Question", { "fg": s:purple }) " hit-enter prompt and yes/no questions
+call s:h("QuickFixLine", { "fg": s:yellow, "gui": "bold", "cterm": "bold" })
 call s:h("Search", { "fg": s:black, "bg": s:yellow }) " Last search pattern highlighting (see 'hlsearch'). Also used for highlighting the current line in the quickfix window and similar items that need to stand out.
 call s:h("SpecialKey", { "fg": s:blue}) " Meta and special keys listed with ":map", also for text used to show unprintable characters in the text, 'listchars'. Generally: text that is displayed differently from what it really is.
 call s:h("SpellBad", { "fg": s:red, "gui": "underline", "cterm": "underline" }) " Word that is not recognized by the spellchecker. This will be combined with the highlighting used otherwise.
