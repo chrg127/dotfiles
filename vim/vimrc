@@ -13,8 +13,7 @@ let g:airline_theme="palenight"
 hi User1 guifg=#ff5370 guibg=#3E4453 " read only
 hi User2 guifg=#c3e88d guibg=#3e4453 " modified
 hi User3 guifg=#89ddff guibg=#3e4453 " filename
-
-
+hi User4 guifg=#3e4453 guibg=#989aa2 " inactive
 
 " settings
 " Jump to the last position when reopening a file
@@ -110,38 +109,12 @@ let c_ansi_constants = 1
 " after :make, have the quick fix list open
 autocmd QuickFixCmdPost * copen
 
-" custom statusline
-"function! Status(winnum)
-"    let stat=''
-"    if active
-"        let stat .= "active"
-"    else
-"        let stat .= "inactive"
-"    endif
-"    return stat
-"endfunction
-
-function! s:RefreshStatus()
-    " for each window
-    for nr in range(1, winnr('$'))
-        " set statusline to whatever Status() returns
-        call setwinvar(nr, '&statusline', '%!Status(' . nr . ')')
-    endfor
-endfunction
-
-"command! RefreshStatus :call <SID>RefreshStatus()
-
-"augroup status
-"    autocmd!
-"    autocmd VimEnter,VimLeave,WinEnter,WinLeave,BufWinEnter,BufWinLeave * :RefreshStatus
-"augroup END
-
 let g:currentmode={
     \ 'n'       : 'Normale'        ,
     \ 'no'      : 'N·Attesa'       ,
     \ 'v'       : 'Visuale'        ,
     \ 'V'       : 'V·Riga'         ,
-    \ "\<c-v>"  : 'V·Blocco'       ,
+    \ '\<c-v>'  : 'V·Blocco'       ,
     \ 's'       : 'Selezione'      ,
     \ 'S'       : 'S·Riga'         ,
     \ '^S'      : 'S·Blocco'       ,
@@ -157,46 +130,89 @@ let g:currentmode={
     \ '!'       : 'Shell'          ,
     \ 't'       : 'Terminale'      ,
     \}
-" let g:currentmode_colors={
-"     \ 'n'   : "%#PMenuSel#"      ,
-"     \ 'i'   : "%#DiffAdd#"       ,
-"     \ 'v'   : "%#DiffChange#"    ,
-"     \}
 
-function! ReadOnly() abort
-  if &readonly || !&modifiable
-    return ''
-  else
-    return ''
+let g:mode_colors={
+    \ 'n'       : 'PMenuSel'    ,
+    \ 'no'      : 'PMenuSel'    ,
+    \ 'v'       : 'DiffChange'  ,
+    \ 'V'       : 'DiffChange'  ,
+    \ '\<c-v>'  : 'DiffChange'  ,
+    \ 's'       : 'DiffDelete'  ,
+    \ 'S'       : 'DiffDelete'  ,
+    \ '^S'      : 'DiffDelete'  ,
+    \ 'i'       : 'DiffAdd'     ,
+    \ 'R'       : 'DiffDelete'  ,
+    \ 'Rv'      : 'DiffDelete'  ,
+    \ 'c'       : 'PMenuSel'    ,
+    \ 'cv'      : 'PMenuSel'    ,
+    \ 'ce'      : 'PMenuSel'    ,
+    \ 'r'       : 'PMenuSel'    ,
+    \ 'rm'      : 'PMenuSel'    ,
+    \ 'r?'      : 'PMenuSel'    ,
+    \ '!'       : 'PMenuSel'    ,
+    \ 't'       : 'PMenuSel'    ,
+    \}
+
+" custom statusline
+function! Status(winnum)
+    let stat=''
+    let active = a:winnum == winnr()
+    if active
+        let stat.='%#' . g:mode_colors[mode()] . '#'
+        "let stat.='%#PMenuSel#'
+        let stat.='  %{toupper(g:currentmode[mode()])}  '
+    else
+        let stat.='%4* INATTIVO  '
+    endif
+    let stat.='%#StatusLine#'
+    let stat.=' %h %n: '
+    if active
+        let stat.='%3*'
+    endif
+    let stat.='%f%#StatusLine#'
+    let stat.=&modified ? '%2* [+] %#StatusLine#' : ''
+    let stat.=&readonly ? '%1*  %#StatusLine#'   : ''
+    let stat.='%w'
+    let stat.='%<%='
+    if active
+        let stat.='%#PMenuSel#'
+    else
+        let stat.='%4*'
+    endif
+    let stat.=' %l, %v :: %L '
+    return stat
 endfunction
 
-set statusline=                         " reset
-set statusline+=%#PMenuSel#             " blue
-set statusline+=\ \ %{toupper(g:currentmode[mode()])} " set mode string
-set statusline+=\ \ 
-set statusline+=%#StatusLine#           " normal
-set statusline+=\ %h                    " help
-set statusline+=\ %n:                   " buf no
-set statusline+=%3*
-set statusline+=\ %f                    " filename
-set statusline+=%2*
-set statusline+=%{&modified?'\ [+]':''}   " modified flag, no space if not present
-set statusline+=%#StatusLine#
-set statusline+=%1*
-set statusline+=\ %{ReadOnly()}         " read only
-set statusline+=%#StatusLine#
-set statusline+=\ %w                    " preview
-set statusline+=%<                      " separator
-set statusline+=%=                      " right items now
-set statusline+=\ %{&ft==''?'normal\ text':&ft}
-set statusline+=\ %#PMenuSel#           " blue
-"set statusline+=\ %{&ff}\ ::           " file newline
-set statusline+=\ %l,\ %v\ ::           " row, column
-set statusline+=\ %L                    " no of lines
-set statusline+=\                       " space at the end
+function! s:RefreshStatus()
+    " for each window
+    for nr in range(1, winnr('$'))
+        " set statusline to whatever Status() returns
+        call setwinvar(nr, '&statusline', '%!Status(' . nr . ')')
+    endfor
+endfunction
 
-" For quickfix
-"autocmd Filetype qf 
+command! RefreshStatus :call <SID>RefreshStatus()
+
+augroup status
+    autocmd!
+    autocmd VimEnter,VimLeave,WinEnter,WinLeave,BufWinEnter,BufWinLeave * :RefreshStatus
+augroup END
+
+" set statusline=     " reset
+" set statusline+=%{&modified?'\ [+]':''}   " modified flag, no space if not present
+" set statusline+=%#StatusLine#
+" set statusline+=%1*
+" set statusline+=\ %{ReadOnly()}         " read only
+" set statusline+=%#StatusLine#
+" set statusline+=\ %w                    " preview
+" set statusline+=%<                      " separator
+" set statusline+=%=                      " right items now
+" set statusline+=\ %{&ft==''?'normal\ text':&ft}
+" set statusline+=\ %#PMenuSel#           " blue
+" "set statusline+=\ %{&ff}\ ::           " file newline
+" set statusline+=\ %l,\ %v\ ::           " row, column
+" set statusline+=\ %L                    " no of lines
+" set statusline+=\                       " space at the end
 
 " mappings
 " Set <Leader>
