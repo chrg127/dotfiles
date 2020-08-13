@@ -4,7 +4,12 @@
 " License:    The MIT License (MIT)
 " Based On:   https://github.com/joshdick/onedark.vim
 
-"set t_Co=256
+hi clear
+if exists("syntax on")
+    syntax reset
+endif
+
+set t_Co=256
 
 let g:colors_name="palenight"
 let s:overrides = get(g:, "palenight_color_overrides", {})
@@ -571,7 +576,11 @@ endif
 
 " }}}
 
+hi User1 guifg=#ff5370 guibg=#3E4453 " read only
+hi User2 guifg=#c3e88d guibg=#3e4453 " modified
+hi User3 guifg=#89ddff guibg=#3e4453 " filename
+hi User4 guifg=#3e4453 guibg=#989aa2 " inactive
+
 " Must appear at the end of the file to work around this oddity:
 " https://groups.google.com/forum/#!msg/vim_dev/afPqwAFNdrU/nqh6tOM87QUJ
 set background=dark
-

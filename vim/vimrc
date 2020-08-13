@@ -10,10 +10,6 @@ colorscheme palenight
 let g:airline_theme="palenight"
 
 " for statusline colors
-hi User1 guifg=#ff5370 guibg=#3E4453 " read only
-hi User2 guifg=#c3e88d guibg=#3e4453 " modified
-hi User3 guifg=#89ddff guibg=#3e4453 " filename
-hi User4 guifg=#3e4453 guibg=#989aa2 " inactive
 
 " settings
 " Jump to the last position when reopening a file
@@ -35,8 +31,8 @@ set autowrite		" Automatically save before commands like :next and :make
 set ignorecase		" Do case insensitive matching
 set smartcase       " Unless we type a capital
 
-set listchars=""    " Empty listchars
-set listchars=tab:>. " A tab will be displayed as >...
+"set listchars=""    " Empty listchars
+"set listchars=tab:>. " A tab will be displayed as >...
 " set listchars+=trail;.
 set fillchars=vert:¦
 
