@@ -3,7 +3,7 @@
 # for inserting sprite to "nonsense" hack
 function insspr {
     pushd . > /dev/null
-    cd ~/cnd/Hacks/nonsense
+    cd ~/cnd/hacks/nonsense
     wine cmd < insertspr.bat
     popd > /dev/null
 }

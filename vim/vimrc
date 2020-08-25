@@ -69,7 +69,7 @@ set ffs=unix,dos
 set encoding=UTF-8
 set exrc
 set secure
-set grepprg=grep\ --color=always\ -n\ $*\ /dev/null
+"set grepprg=grep\ --color=always\ -n\ $*\
 "set makeprg=make\ EXTRA_CFLAGS=fdiagnostics-color=always
 
 " Airline settings
@@ -153,28 +153,61 @@ let g:mode_colors={
 function! Status(winnum)
     let stat=''
     let active = a:winnum == winnr()
+    
+    let bufnum = winbufnr(a:winnum)
+    let type = getbufvar(bufnum, '&buftype')
+    let ismodified = getbufvar(bufnum, '&modified')
+    let ismodifiable = getbufvar(bufnum, '&modifiable')
+    let filetype = getbufvar(bufnum, '&ft')
+    let readonly = getbufvar(bufnum, '&readonly')
+
+    " create custom statusline for quickfix buffer and help buffer
+    if type ==# 'quickfix'
+        " if getwininfo(win_getid())[0]['loclist'] == 1
+        "     let stat.=' Lista Posizioni '
+        " else
+        "     let stat.=' Lista Quickfix '
+        " endif
+        let stat.= active ? '%#PMenuSel#' : '%4*'
+        let stat.=' %q %#StatusLine#'
+        let stat.= exists('w:quickfix_title') ? ' ' . w:quickfix_title : ''
+        let stat.='%<%='
+        let stat.= active ? '%#PMenuSel#' : '%4*'
+        let stat.=' %l/%L '
+        return stat
+    elseif type ==# 'help'
+        let stat.= active ? '%#PMenuSel#' : '%4*'
+        let stat.= ' Aiuto %#StatusLine#'
+        let stat.= active ? '%3*' : ''
+        let stat.=' %f%#StatusLine#'
+        let stat.='%<%='
+        let stat.=filetype . ' '
+        let stat.= active ? '%#PMenuSel#' : '%4*'
+        let stat.=' %l, %v :: %L '
+        return stat
+    endif
+    
     if active
         let stat.='%#' . g:mode_colors[mode()] . '#'
-        "let stat.='%#PMenuSel#'
         let stat.='  %{toupper(g:currentmode[mode()])}  '
     else
-        let stat.='%4* INATTIVO  '
+        let stat.='%4*  Inattivo  '
     endif
     let stat.='%#StatusLine#'
-    let stat.=' %h %n: '
-    if active
-        let stat.='%3*'
-    endif
+    let stat.=' %n: '
+    let stat.=active ? '%3*' : ''
     let stat.='%f%#StatusLine#'
-    let stat.=&modified ? '%2* [+] %#StatusLine#' : ''
-    let stat.=&readonly ? '%1*  %#StatusLine#'   : ''
+    let stat.=ismodified ? '%2* [+] %#StatusLine#' : ''
+    let stat.=readonly || !ismodifiable ? '%1*  %#StatusLine#'   : ''
     let stat.='%w'
     let stat.='%<%='
-    if active
-        let stat.='%#PMenuSel#'
+    if filetype ==# ''
+        let stat.='normal text '
     else
-        let stat.='%4*'
+        let stat.=filetype . ' '
     endif
+    let stat.= WebDevIconsGetFileTypeSymbol(bufname(bufnum)) . '  '
+    let stat.= active ? '%#PMenuSel#' : '%4*'
     let stat.=' %l, %v :: %L '
     return stat
 endfunction
@@ -194,22 +227,6 @@ augroup status
     autocmd VimEnter,VimLeave,WinEnter,WinLeave,BufWinEnter,BufWinLeave * :RefreshStatus
 augroup END
 
-" set statusline=     " reset
-" set statusline+=%{&modified?'\ [+]':''}   " modified flag, no space if not present
-" set statusline+=%#StatusLine#
-" set statusline+=%1*
-" set statusline+=\ %{ReadOnly()}         " read only
-" set statusline+=%#StatusLine#
-" set statusline+=\ %w                    " preview
-" set statusline+=%<                      " separator
-" set statusline+=%=                      " right items now
-" set statusline+=\ %{&ft==''?'normal\ text':&ft}
-" set statusline+=\ %#PMenuSel#           " blue
-" "set statusline+=\ %{&ff}\ ::           " file newline
-" set statusline+=\ %l,\ %v\ ::           " row, column
-" set statusline+=\ %L                    " no of lines
-" set statusline+=\                       " space at the end
-
 " mappings
 " Set <Leader>
 let mapleader = ","
@@ -223,15 +240,6 @@ nnoremap <Right> :vertical resize -2<CR>
 " Moves a line up/down
 no <S-Down> ddp
 no <S-Up> ddkP
-
-" CTRL-Tab is next tab
-" noremap <C-Tab> :<C-U>tabnext<CR>
-" inoremap <C-Tab> <C-\><C-N>:tabnext<CR>
-" cnoremap <C-Tab> <C-C>:tabnext<CR>
-" CTRL-SHIFT-Tab is previous tab
-" noremap <C-S-Tab> :<C-U>tabprevious<CR>
-" inoremap <C-S-Tab> <C-\><C-N>:tabprevious<CR>
-" cnoremap <C-S-Tab> <C-C>:tabprevious<CR>
 
 " NERDtree shortcut
 nnoremap <C-n> :NERDTreeToggle<CR>
@@ -253,4 +261,3 @@ xnoremap <leader>c "+y
 
 " switch buffers using ,b
 nnoremap <leader>b :b <C-d>
-

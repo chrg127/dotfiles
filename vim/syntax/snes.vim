@@ -25,7 +25,7 @@ syn region snesString start="\""  skip=+\\"+ end="\"\|$"
 syn region snesString start="'"   skip=+\\'+ end="'\|$"
 
 syn match asarMacro "![A-Za-z0-9_]*"
-syn match asarMacro "%[A-Za-z0-9_\(\)]*"
+syn match asarMacro "%[A-Za-z_\(\)]*"
 
 syn keyword asarCmd macro endmacro autoclean freecode freedata org if else endif read1 read3 sa1rom lorom print
 
