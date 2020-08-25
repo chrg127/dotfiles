@@ -102,9 +102,6 @@ let c_curly_error = 1
 let c_ansi_typedefs = 1
 let c_ansi_constants = 1
 
-" after :make, have the quick fix list open
-autocmd QuickFixCmdPost * copen
-
 let g:currentmode={
     \ 'n'       : 'Normale'        ,
     \ 'no'      : 'N·Attesa'       ,
@@ -211,6 +208,9 @@ function! Status(winnum)
     let stat.=' %l, %v :: %L '
     return stat
 endfunction
+
+" after :make, have the quick fix list open
+autocmd QuickFixCmdPost * copen | RefreshStatus
 
 function! s:RefreshStatus()
     " for each window
