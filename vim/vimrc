@@ -85,6 +85,37 @@ set secure
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let NERDTreeDirArrows=1
 
+" Gutentags settings
+let g:gutentags_add_default_project_roots = 0
+let g:gutentags_project_root = ['.git', '.hg', '.svn', 'Makefile']
+let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/') 
+command! -nargs=0 GutentagsClearCache call system('rm ' . g:gutentags_cache_dir . '/*')
+let g:gutentags_generate_on_new = 1
+let g:gutentags_generate_on_missing = 1
+let g:gutentags_generate_on_write = 1
+let g:gutentags_generate_on_empty_buffer = 0 
+let g:gutentags_ctags_extra_args=[ '--tag-relative=yes', '--fields=+ailmnS', ]
+let g:gutentags_ctags_exclude=[
+            \ '.git', '.svg', '.hg',
+            \ '/tests/', 'build', 'dist', 'bin', 'cache', 'debug', 'release',
+            \ 'compiled',
+            \ 'docs',
+            \ 'example',
+            \ 'bundle',
+            \ 'vendor',
+            \ '-lock.json',
+            \ '.lock',
+            \ '.md', '.rc', '.json', '.min.', '.map', '.bak', '.zip', '.pyc',
+            \ '.class', '.sln', '.Master', '.csproj', '.tmp', '.csproj.user',
+            \ '.cache', '.pdb', 'tags', 'cscope.', '.css', '.less', '.scss',
+            \ '.exe', '.dll',
+            \ '.mp3', '.ogg', '.flac',
+            \ '.swp', '.swo',
+            \ '.bmp', '.gif', '.ico', '.jpg', '.png',
+            \ '.rar', '.zip', '.tar', '.tar.gz', '.tar.xz', '.tar.bz2',
+            \ '.pdf', '.doc', '.docx', '.ppt', '.pptx',
+            \ ]
+
 " filetypes
 au BufNewFile,BufRead *.asm,*.inc set filetype=snes
 autocmd BufNewFile,BufRead *.qbs setfiletype qbs
@@ -182,6 +213,10 @@ function! Status(winnum)
         let stat.= active ? '%#PMenuSel#' : '%4*'
         let stat.=' %l, %v :: %L '
         return stat
+    elseif type ==# 'nofile'
+        let stat.= active ? '%#PMenuSel#' : '%4*'
+        let stat.= ' NERDTree %#StatusLine#'
+        return stat
     endif
     
     if active
@@ -198,6 +233,9 @@ function! Status(winnum)
     let stat.=readonly || !ismodifiable ? '%1*  %#StatusLine#'   : ''
     let stat.='%w'
     let stat.='%<%='
+    if active
+        let stat.= gutentags#statusline('[', ']') . ' '
+    endif
     if filetype ==# ''
         let stat.='normal text '
     else
@@ -258,6 +296,8 @@ inoremap [, [<CR>],<Esc>O
 
 " copy to system clipboard using ,c
 xnoremap <leader>c "+y
+no <leader>s :sp 
+no <leader>v :vsp 
 
 " switch buffers using ,b
 nnoremap <leader>b :b <C-d>
