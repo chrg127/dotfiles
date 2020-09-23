@@ -170,7 +170,7 @@ call s:h("SignColumn", {}) " column where signs are displayed
 call s:h("IncSearch", { "fg": s:yellow, "bg": s:comment_grey }) 
 " Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
 call s:h("LineNr", { "fg": s:comment_grey }) 
-call s:h("CursorLineNr", { "fg": s:yellow }) " Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
+call s:h("CursorLineNr", {}) " Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
 call s:h("MatchParen", { "fg": s:yellow, "bg": s:blue, "gui": "underline" }) " The character under the cursor or just before it, if it is a paired bracket, and its match.
 " 'showmode' message (e.g., "-- INSERT --")
 call s:h("ModeMsg", {})

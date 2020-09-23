@@ -1,20 +1,41 @@
+#if [ -x /usr/bin/dircolors ]; then
+#test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+#fi
+
 # add colors to ls and grep
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto --group-directories-first'
-    alias dir='dir --color=auto'
-    alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
-
-# some more ls aliases
+alias ls='ls -h --color=auto --group-directories-first'
 alias ll='ls -alF --group-directories-first'
 alias la='ls -A'
 alias l='ls -CF'
 
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
+
+# grep alias
+alias grep='grep -n -I --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+#better cp, df
+alias cp='cp -i'
+alias df='df -h'
+
+# change and list directory
+cdl() {
+    cd "$1" && ls
+}
+
+# make directory and change into it
+mkcdir() {
+    mkdir "$@";
+    if [ "$1" = "-p" ]; then
+        cd "$2";
+    else
+        cd "$1";
+    fi
+}
+
+# some more ls aliases
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -45,5 +66,6 @@ alias g++-asm="g++ -S -masm=intel -fno-asynchronous-unwind-tables -fno-exception
 
 alias open="xdg-open"
 
+alias unixtime="date +%s"
 #temp
 #alias insspr="cd ~/cnd/Hacks/Nonsense && wine cmd < insertspr.bat > logfile"

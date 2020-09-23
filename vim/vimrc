@@ -1,15 +1,11 @@
 " Load pathogen
 execute pathogen#infect()
 
-
-
 "colors
 set background=dark
 set termguicolors
 colorscheme palenight
 let g:airline_theme="palenight"
-
-" for statusline colors
 
 " settings
 " Jump to the last position when reopening a file
@@ -44,6 +40,8 @@ set tabstop=4       " Tab = 4 spaces
 set shiftwidth=4
 set expandtab       " Insert spaces instead of tabs
 
+let &t_ut=''        " some shit to make vim behave in kitty
+
 "set nobackup        " Don't create backups and swap files
 "set noswapfile
 
@@ -71,6 +69,8 @@ set exrc
 set secure
 "set grepprg=grep\ --color=always\ -n\ $*\
 "set makeprg=make\ EXTRA_CFLAGS=fdiagnostics-color=always
+
+" set modeline
 
 " Airline settings
 " let g:airline_powerline_fonts = 1  "use powerline fonts
@@ -138,7 +138,7 @@ let g:currentmode={
     \ 'no'      : 'N·Attesa'       ,
     \ 'v'       : 'Visuale'        ,
     \ 'V'       : 'V·Riga'         ,
-    \ '\<c-v>'  : 'V·Blocco'       ,
+    \ "\<c-v>"  : 'V·Blocco'       ,
     \ 's'       : 'Selezione'      ,
     \ 'S'       : 'S·Riga'         ,
     \ '^S'      : 'S·Blocco'       ,
@@ -160,7 +160,7 @@ let g:mode_colors={
     \ 'no'      : 'PMenuSel'    ,
     \ 'v'       : 'DiffChange'  ,
     \ 'V'       : 'DiffChange'  ,
-    \ '\<c-v>'  : 'DiffChange'  ,
+    \ "\<c-v>"  : 'DiffChange'  ,
     \ 's'       : 'DiffDelete'  ,
     \ 'S'       : 'DiffDelete'  ,
     \ '^S'      : 'DiffDelete'  ,
