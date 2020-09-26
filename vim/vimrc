@@ -191,11 +191,6 @@ function! Status(winnum)
 
     " create custom statusline for quickfix buffer and help buffer
     if type ==# 'quickfix'
-        " if getwininfo(win_getid())[0]['loclist'] == 1
-        "     let stat.=' Lista Posizioni '
-        " else
-        "     let stat.=' Lista Quickfix '
-        " endif
         let stat.= active ? '%#PMenuSel#' : '%4*'
         let stat.=' %q %#StatusLine#'
         let stat.= exists('w:quickfix_title') ? ' ' . w:quickfix_title : ''
@@ -218,12 +213,13 @@ function! Status(winnum)
         let stat.= ' NERDTree %#StatusLine#'
         return stat
     endif
-    
+
     if active
         let stat.='%#' . g:mode_colors[mode()] . '#'
         let stat.='  %{toupper(g:currentmode[mode()])}  '
     else
-        let stat.='%4*  Inattivo  '
+        let stat.='%#PMenuSel#  Inattivo  '
+        "let stat.='%4*  Inattivo  '
     endif
     let stat.='%#StatusLine#'
     let stat.=' %n: '
