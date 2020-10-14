@@ -67,5 +67,5 @@ alias g++-asm="g++ -S -masm=intel -fno-asynchronous-unwind-tables -fno-exception
 alias open="xdg-open"
 
 alias unixtime="date +%s"
-#temp
-#alias insspr="cd ~/cnd/Hacks/Nonsense && wine cmd < insertspr.bat > logfile"
+
+alias bc="bc -q"

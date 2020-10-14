@@ -1,4 +1,5 @@
 ThemeFile=dracula
 CursorType=block
 FontHeight=11
-Font=Consolas NF
+Term=mintty
+Font=Consolas

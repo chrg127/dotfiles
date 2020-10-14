@@ -32,10 +32,9 @@ function draw_prompt {
     local ERRCODE="$?"
     PS1=""
 
-    PS1='${debian_chroot:+($debian_chroot)}'    # chroot stuff
-    PS1+='\[\033[01;92m\]\u@\h '                # user@host
-    PS1+='\[\033[01;94m\]\w '                   # directory
-    PS1+='\[\033[01;95m\]'                      # ssh
+    PS1+='\[\033[01;92m\]\u@\h ' # user@host
+    PS1+='\[\033[01;94m\]\w '    # directory
+    PS1+='\[\033[01;95m\]'       # ssh
     PS1+="\$(ps1_ssh)"
     PS1+="\$(ps1_git)"
     PS1+='\[\033[1;91m\]'
@@ -96,3 +95,32 @@ ex ()
     echo "'$1' is not a valid file"
   fi
 }
+
+dec2bin() {
+    for i in $@
+    do
+        echo "obase=2; $i" | bc
+    done
+}
+
+dec2hex() {
+    for i in $@
+    do
+        echo "obase=16; $i" | bc
+    done
+}
+
+hex2dec() {
+    for i in $@
+    do
+        echo "ibase=16; $i" | bc
+    done
+}
+
+bin2dec() {
+    for i in $@
+    do
+        echo "ibase=2; $i" | bc
+    done
+}
+

@@ -1,0 +1,12 @@
+# colors...
+# name          light  dark
+# foreground    E1EFFF
+# background    292D3E
+# black         7F7F7F 000000
+# red           FF5370 BE5046
+# green         C3E88D 92B65D
+# yellow        FFCB6B E8AF46
+# blue          A5B1FB 6473C7
+# magenta       C792EA 8750AB
+# cyan          89DDFF 5FACCB
+# white         ffffff A9A9A9
