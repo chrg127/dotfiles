@@ -1,71 +1,48 @@
-#if [ -x /usr/bin/dircolors ]; then
-#test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-#fi
-
-# add colors to ls and grep
+#!/bin/bash
+# aliases
 alias ls='ls -h --color=auto --group-directories-first'
 alias ll='ls -alF --group-directories-first'
 alias la='ls -A'
 alias l='ls -CF'
-
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
-
-# grep alias
 alias grep='grep -n -I --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
-
-#better cp, df
 alias cp='cp -i'
 alias df='df -h'
-
-# change and list directory
-cdl() {
-    cd "$1" && ls
-}
-
-# make directory and change into it
-mkcdir() {
-    mkdir "$@";
-    if [ "$1" = "-p" ]; then
-        cd "$2";
-    else
-        cd "$1";
-    fi
-}
-
-# some more ls aliases
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
-# User defined aliases
+alias du='du -h'
+alias less='less -r' # raw control characters
+alias whence='type -a' # where, of a sort
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias youtube-dl="youtube-dl -o '%(title)s.%(ext)s'"
-alias mp3-dl="youtube-dl -x --audio-format mp3 --audio-quality 0 -o '%(title)s.%(ext)s'"
 alias py='python3'
 alias doc="cd ~/Documenti"
 alias dl="cd ~/Scaricati"
 alias h="cd ~"
 alias repo="cd ~/Repositories"
-
-# git
 alias gits="git status"
-
-# smw hacking aliases
-alias lunarmagic="wine /home/chri/SMWHacking/lunar-magic/Lunar\ Magic.exe"
-#alias bsnes="/home/chri/Compilati/bsnes-plus/bsnes/out/bsnes"
-
-#gcc and gdb
+alias unixtime="date +%s"
+alias bc="bc -q"
 alias gdb="gdb -q"
 alias gcc-asm="gcc -S -masm=intel -fno-asynchronous-unwind-tables -fno-exceptions -fverbose-asm -Wall -Wextra -O2"
 alias g++-asm="g++ -S -masm=intel -fno-asynchronous-unwind-tables -fno-exceptions -fno-rtti -fverbose-asm -Wall -Wextra -O2"
+# add an "alert" alias for long running commands.  Use like so: sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+if command -v xdg-open &> /dev/null; then
+    alias open="xdg-open"
+fi
 
-alias open="xdg-open"
-
-alias unixtime="date +%s"
-
-alias bc="bc -q"
+# os-specific aliases
+if [[ $(expr substr $(uname -s) 1 5) == "Linux" ]]; then
+    alias lunarmagic="wine /home/chri/SMWHacking/lunar-magic/Lunar\ Magic.exe"
+    alias youtube-dl="youtube-dl -o '%(title)s.%(ext)s'"
+    alias mp3-dl="youtube-dl -x --audio-format mp3 --audio-quality 0 -o '%(title)s.%(ext)s'"
+elif [[ $(expr substr $(uname -s) 1 4) == "MSYS" ]]; then
+    alias winhome="cd /c/Users/chri"
+    alias winprog="cd /c/Users/chri/Principale/programming"
+elif [[ $(expr substr $(uname -s) 1 5) == "MINGW" ]]; then 
+    alias winhome="cd /c/Users/chri"
+    alias winprog="cd /c/Users/chri/Principale/programming"
+fi

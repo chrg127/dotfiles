@@ -40,8 +40,6 @@ set tabstop=4       " Tab = 4 spaces
 set shiftwidth=4
 set expandtab       " Insert spaces instead of tabs
 
-let &t_ut=''        " some shit to make vim behave in kitty
-
 "set nobackup        " Don't create backups and swap files
 "set noswapfile
 
