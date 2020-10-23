@@ -60,10 +60,13 @@ export PROMPT_DIRTRIM=2
 # os specific stuff
 if [[ "$(expr substr $(uname -s) 1 10)" == "MSYS_NT-10" ]]; then
     eval "$(dircolors /etc/DIR_COLORS)"
+    export PATH="/c/Users/chri/Path:$PATH"
 elif [[ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]]; then
     eval "$(dircolors /etc/DIR_COLORS)"
+    export PATH="/c/Users/chri/Path:$PATH"
 elif [[ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]]; then
     eval "$(dircolors /etc/DIR_COLORS)"
+    export PATH="/c/Users/chri/Path:$PATH"
 elif [[ "$(expr substr $(uname -s) 1 10)" == "Linux" ]]; then
     eval "$(dircolors ${HOME}/.dircolors)"
     PROMPT_COMMAND=draw_prompt
