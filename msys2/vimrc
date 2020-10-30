@@ -41,7 +41,7 @@ set secure
 set autoindent
 
 let c_gnu = 1
-let c_space_errors = 1
+"let c_space_errors = 1
 let c_curly_error = 1
 let c_ansi_typedefs = 1
 let c_ansi_constants = 1
