@@ -24,14 +24,9 @@ set laststatus=2    " Always display the status line
 set autoread        " Read open files when changed in the background
 set autowrite		" Automatically save before commands like :next and :make
 
-set ignorecase		" Do case insensitive matching
-set smartcase       " Unless we type a capital
-
-"set listchars=""    " Empty listchars
-"set listchars=tab:>. " A tab will be displayed as >...
-" set listchars+=trail;.
 set fillchars=vert:¦
 
+set ignorecase		" Do case insensitive matching
 set smartcase		" Do smart case matching
 set incsearch		" Incremental search
 set hlsearch        " Highlight searches
@@ -40,11 +35,7 @@ set tabstop=4       " Tab = 4 spaces
 set shiftwidth=4
 set expandtab       " Insert spaces instead of tabs
 
-"set nobackup        " Don't create backups and swap files
-"set noswapfile
-
 set splitright      " Splits
-"set splitbelow
 
 set foldmethod=indent   " Folding
 set foldnestmax=10
@@ -65,18 +56,9 @@ set ffs=unix,dos
 set encoding=UTF-8
 set exrc
 set secure
-"set grepprg=grep\ --color=always\ -n\ $*\
-"set makeprg=make\ EXTRA_CFLAGS=fdiagnostics-color=always
+set directory=~/.cache/vim/swap//
 
-" set modeline
-
-" Airline settings
-" let g:airline_powerline_fonts = 1  "use powerline fonts
-" let g:airline_skip_empty_sections = 0
-" let g:airline#parts#ffenc#skip_expected_string='utf-8 - unix'
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#buffer_nr_show = 1
-" let g:airline#extensions#whitespace#enabled = 0
+set modeline
 
 " NERDtree settings
 " close NERDTree if it's the last window opened
@@ -131,6 +113,7 @@ let c_curly_error = 1
 let c_ansi_typedefs = 1
 let c_ansi_constants = 1
 
+" custom statusline
 let g:currentmode={
     \ 'n'       : 'Normale'        ,
     \ 'no'      : 'N·Attesa'       ,
@@ -175,7 +158,6 @@ let g:mode_colors={
     \ 't'       : 'PMenuSel'    ,
     \}
 
-" custom statusline
 function! Status(winnum)
     let stat=''
     let active = a:winnum == winnr()
@@ -240,8 +222,6 @@ function! Status(winnum)
     return stat
 endfunction
 
-" after :make, have the quick fix list open
-autocmd QuickFixCmdPost * copen | RefreshStatus
 
 function! s:RefreshStatus()
     " for each window
@@ -257,6 +237,11 @@ augroup status
     autocmd!
     autocmd VimEnter,VimLeave,WinEnter,WinLeave,BufWinEnter,BufWinLeave * :RefreshStatus
 augroup END
+
+" after :make, have the quick fix list open
+autocmd QuickFixCmdPost * copen | RefreshStatus
+
+match SpellBad /s+$| +zet/
 
 " mappings
 " Set <Leader>

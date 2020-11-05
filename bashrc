@@ -77,7 +77,7 @@ fi
 # print message when opening terminal
 if command -v cowsay &> /dev/null; then
     if command -v fortune &> /dev/null; then
-        fortune -e fortunes | cowsay
+        fortune -e fortunes | cowsay -f moofasa
     fi
 fi
 

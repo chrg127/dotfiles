@@ -352,8 +352,8 @@ if !exists('cpp_no_cpp20')
             \ weak_ordering strong_ordering partial_ordering weak_equality strong_equality common_comparison_category common_comparison_category_t
 
     " concepts
-    syntax keyword cppSTLconcept
-            \ assignable_from boolean common_reference_with common_with constructible_from convertible_to copy_constructible copyable default_constructible derived_from destructible equality_comparable equality_comparable_with equivalence_relation floating_point integral invocable movable move_constructible predicate regular regular_invocable relation same_as semiregular signed_integral strict_weak_order swappable swappable_with totally_ordered totally_ordered_with unsigned_integral
+    " syntax keyword cppSTLconcept
+    "         \ assignable_from boolean common_reference_with common_with constructible_from convertible_to copy_constructible copyable default_constructible derived_from destructible equality_comparable equality_comparable_with equivalence_relation floating_point integral invocable movable move_constructible predicate regular regular_invocable relation same_as semiregular signed_integral strict_weak_order swappable swappable_with totally_ordered totally_ordered_with unsigned_integral
 
     " concepts - named requirements
     " These are concepts that haven't made it into the C++ Standard yet
@@ -411,36 +411,6 @@ if !exists('cpp_no_boost')
 endif
 " }}}
 
-
-" Default highlighting
-hi def link cppSTLbool         Boolean
-hi def link cppStatement       Statement
-hi def link cppSTLfunction     Function
-hi def link cppSTLfunctional   Typedef
-hi def link cppSTLconstant     Constant
-hi def link cppSTLnamespace    Constant
-hi def link cppSTLtype         Typedef
-hi def link cppSTLexception    Exception
-hi def link cppSTLiterator     Typedef
-hi def link cppSTLiterator_tag Typedef
-hi def link cppSTLenum         Typedef
-hi def link cppSTLios          Function
-hi def link cppSTLcast         Statement
-hi def link cppSTLconcept      Typedef
-hi def link cppSTLVariable     Identifier
-
-" The keywords {inline, virtual, explicit, export, override, final} are
-" standard C++ keywords and NOT types!
-hi link cppModifier Statement
-
-
-" Highlight all standard C++ keywords as Statement
-if get(g:, 'cpp_simple_highlight', 0)
-    hi link cppStructure    Statement
-    hi link cppExceptions   Statement
-    hi link cppStorageClass Statement
-    hi link cppSTLexception Typedef
-endif
 
 " Qt Namespace
 syn keyword qtNamespace QAlgorithmsPrivate
@@ -1838,3 +1808,33 @@ highlight link qtEnumValue cppConstant
 highlight link qtStatement cppStatement
 highlight link qtAccess cppAccess
 highlight link qtType Type
+
+" Default highlighting
+hi def link cppSTLbool         Boolean
+hi def link cppStatement       Statement
+hi def link cppSTLfunction     Function
+hi def link cppSTLfunctional   Typedef
+hi def link cppSTLconstant     Constant
+hi def link cppSTLnamespace    Constant
+hi def link cppSTLtype         Typedef
+hi def link cppSTLexception    Exception
+hi def link cppSTLiterator     Typedef
+hi def link cppSTLiterator_tag Typedef
+hi def link cppSTLenum         Typedef
+hi def link cppSTLios          Function
+hi def link cppSTLcast         Statement
+hi def link cppSTLconcept      Typedef
+hi def link cppSTLVariable     Identifier
+
+" The keywords {inline, virtual, explicit, export, override, final} are
+" standard C++ keywords and NOT types!
+hi link cppModifier Statement
+
+" Highlight all standard C++ keywords as Statement
+if get(g:, 'cpp_simple_highlight', 0)
+    hi link cppStructure    Statement
+    hi link cppExceptions   Statement
+    hi link cppStorageClass Statement
+    hi link cppSTLexception Typedef
+endif
+
