@@ -2,10 +2,10 @@
 execute pathogen#infect()
 
 "colors
-set background=dark
+"set background=dark
 set termguicolors
-colorscheme palenight
-let g:airline_theme="palenight"
+"colorscheme palenight
+colorscheme dosboxblack
 
 " settings
 " Jump to the last position when reopening a file
