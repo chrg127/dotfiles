@@ -74,3 +74,5 @@ no <leader>v :vsp
 
 " switch buffers using ,b
 nnoremap <leader>b :b <C-d>
+
+noremap Y y$
