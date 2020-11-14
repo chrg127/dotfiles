@@ -2,10 +2,10 @@
 execute pathogen#infect()
 
 "colors
-"set background=dark
+set background=dark
 set termguicolors
-"colorscheme palenight
-colorscheme dosboxblack
+colorscheme palenight
+"colorscheme dosboxblack
 
 " settings
 " Jump to the last position when reopening a file
@@ -97,7 +97,7 @@ let g:gutentags_ctags_exclude=[
             \ ]
 
 " filetypes
-au BufNewFile,BufRead *.asm,*.inc set filetype=snes
+autocmd BufNewFile,BufRead *.asm,*.inc set filetype=snes
 autocmd BufNewFile,BufRead *.qbs setfiletype qbs
 autocmd BufNewFile,BufRead *.pro,*.pri set filetype=qmake
 autocmd BufNewFile,BufRead *.qml setfiletype qml
