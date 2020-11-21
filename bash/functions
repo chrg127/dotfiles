@@ -45,12 +45,12 @@ function draw_prompt {
     local ERRCODE="$?"
     PS1=""
 
-    PS1+='\[\033[01;92m\]\u@\h ' # user@host
-    PS1+='\[\033[01;94m\]\w '    # directory
-    PS1+='\[\033[01;95m\]'       # ssh
+    PS1+=$CYAN'\u@\h ' # user@host
+    PS1+=$BLUE'\w '    # directory
+    PS1+=$PURPLE
     PS1+="\$(ps1_ssh)"
     PS1+="\$(ps1_git)"
-    PS1+='\[\033[1;91m\]'
+    PS1+=$RED
     PS1+="\$(ps1_read_only)"
     if [ $ERRCODE != 0 ]; then
         PS1+="$ERRCODE"

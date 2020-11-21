@@ -31,6 +31,7 @@ if [ -d "$HOME/.local/bin" ] ; then PATH="$HOME/.local/bin:$PATH"; fi
 if [ -d "$HOME/.bin/aseprite" ]; then PATH="$HOME/.bin/aseprite:$PATH"; fi
 if [ -d "${HOME}/.man" ]; then MANPATH="${HOME}/.man:${MANPATH}"; fi
 if [ -d "${HOME}/.info" ]; then INFOPATH="${HOME}/.info:${INFOPATH}"; fi
+if [ -f "$HOME/.bash/colors" ]; then . "$HOME/.bash/colors"; fi
 if [ -f "$HOME/.bash/aliases" ]; then . "$HOME/.bash/aliases"; fi
 if [ -f "$HOME/.bash/functions" ]; then . "$HOME/.bash/functions"; fi
 export PATH
