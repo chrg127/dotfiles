@@ -57,6 +57,8 @@ bind '"\C-z":"fg\015"'
 export VISUAL=vim
 export EDITOR="$VISUAL"
 export PROMPT_DIRTRIM=2
+# make fonts in java programs look good
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'   
 
 # os specific stuff
 if [[ "$(expr substr $(uname -s) 1 10)" == "MSYS_NT-10" ]]; then
@@ -81,5 +83,4 @@ if command -v cowsay &> /dev/null; then
         fortune -e fortunes | cowsay -f moofasa
     fi
 fi
-
 
