@@ -30,6 +30,7 @@ alias gcc-asm="gcc -S -Wall -Wextra -O3 -masm=intel -fno-asynchronous-unwind-tab
 alias g++-asm="g++ -S -Wall -Wextra -O3 -masm=intel -fno-asynchronous-unwind-tables -fno-exceptions -fno-rtti"
 # add an "alert" alias for long running commands.  Use like so: sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+alias easyrpg="easyrpg-player --window"
 if command -v xdg-open &> /dev/null; then
     alias open="xdg-open"
 fi
@@ -39,6 +40,7 @@ if [[ $(expr substr $(uname -s) 1 5) == "Linux" ]]; then
     alias lunarmagic="wine /home/chri/SMWHacking/lunar-magic/Lunar\ Magic.exe"
     alias youtube-dl="youtube-dl -o '%(title)s.%(ext)s'"
     alias mp3-dl="youtube-dl -x --audio-format mp3 --audio-quality 0 -o '%(title)s.%(ext)s'"
+    alias pl-dl="youtube-dl -x --audio-format vorbis --audio-quality 0 -o '%(playlist_index)s. %(title)s.%(ext)s'"
 elif [[ $(expr substr $(uname -s) 1 4) == "MSYS" ]]; then
     alias winhome="cd /c/Users/chri"
     alias winprog="cd /c/Users/chri/Principale/programming"

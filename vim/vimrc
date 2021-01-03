@@ -3,7 +3,9 @@ execute pathogen#infect()
 
 "colors
 set background=dark
-set termguicolors
+if has("termguicolors")
+    set termguicolors
+end
 colorscheme palenight
 "colorscheme dosboxblack
 
@@ -24,12 +26,10 @@ set laststatus=2    " Always display the status line
 set autoread        " Read open files when changed in the background
 set autowrite		" Automatically save before commands like :next and :make
 
-" set fillchars=vert:¦
-
-set ignorecase		" Do case insensitive matching
-set smartcase		" Do smart case matching
-set incsearch		" Incremental search
 set hlsearch        " Highlight searches
+set ignorecase		" Do case insensitive matching
+set incsearch		" Incremental search
+set smartcase		" Do smart case matching
 
 set tabstop=4       " Tab = 4 spaces
 set shiftwidth=4
@@ -112,6 +112,10 @@ let c_space_errors = 1
 let c_curly_error = 1
 let c_ansi_typedefs = 1
 let c_ansi_constants = 1
+" Java
+let java_highlight_java_lang_ids=1
+let java_highlight_java_io=1
+"let java_highlight_functions="style"
 
 " custom statusline
 let g:currentmode={

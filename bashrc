@@ -58,7 +58,8 @@ export VISUAL=vim
 export EDITOR="$VISUAL"
 export PROMPT_DIRTRIM=2
 # make fonts in java programs look good
-export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'   
+#export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'   
+export PASSWORD_STORE_ENABLE_EXTENSIONS=true
 
 # os specific stuff
 if [[ "$(expr substr $(uname -s) 1 10)" == "MSYS_NT-10" ]]; then
