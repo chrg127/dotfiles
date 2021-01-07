@@ -6,8 +6,8 @@ set background=dark
 if has("termguicolors")
     set termguicolors
 end
-colorscheme palenight
-"colorscheme dosboxblack
+"colorscheme palenight
+colorscheme dosboxblack
 
 " settings
 " Jump to the last position when reopening a file

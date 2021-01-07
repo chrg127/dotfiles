@@ -1,12 +1,25 @@
-# colors...
-# name          light  dark
-# foreground    E1EFFF
-# background    292D3E
-# black         7F7F7F 000000
-# red           FF5370 BE5046
-# green         C3E88D 92B65D
-# yellow        FFCB6B E8AF46
-# blue          A5B1FB 6473C7
-# magenta       C792EA 8750AB
-# cyan          89DDFF 5FACCB
-# white         ffffff A9A9A9
+palenight colors
+name          light  dark
+foreground    E1EFFF
+background    292D3E
+black         7F7F7F 000000
+red           FF5370 BE5046
+green         C3E88D 92B65D
+yellow        FFCB6B E8AF46
+blue          A5B1FB 6473C7
+magenta       C792EA 8750AB
+cyan          89DDFF 5FACCB
+white         ffffff A9A9A9
+
+dos colors
+name        light   dark
+foreground  b1b2b9
+background  000000
+black       000000  000000
+red         d04863  250909
+green       00a800  092509
+yellow      f7ce82  
+blue        00a8a8  
+magenta     7c80f8
+cyan        89ddff  3fb6a6
+white       f5fef8  616161
