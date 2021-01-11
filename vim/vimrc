@@ -260,7 +260,7 @@ nnoremap <Right> :vertical resize -2<CR>
 no <S-Down> ddp
 no <S-Up> ddkP
 " NERDtree shortcut
-nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <C-n> :NERDTreeToggle<CR> :RefreshStatus<CR>
 " tagbar shortcut
 nnoremap <F8> :TagbarToggle<CR>
 " autoclosing brackets
