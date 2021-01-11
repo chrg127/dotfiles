@@ -72,4 +72,4 @@ syn match cOperator ":"
 hi def link cOperator Operator
 
 " These are kinda everywhere
-syn keyword cType uint8 uint16 uint32 uint64
+syn keyword cType uint8 uint16 uint32 uint64 u8

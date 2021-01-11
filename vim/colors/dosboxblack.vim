@@ -64,6 +64,7 @@ hi WarningMsg gui=NONE guifg=NONE guibg=#250909
 hi WildMenu gui=NONE guifg=NONE guibg=#525252
 hi lCursor gui=NONE guifg=NONE guibg=NONE
 hi Identifier gui=NONE guifg=#89ddff guibg=NONE cterm=NONE
+hi SpecialChar gui=NONE guifg=#89ddff guibg=NONE cterm=NONE
 hi PreProc gui=NONE guifg=NONE guibg=NONE
 
 hi User1 guifg=#d04863 guibg=#1a1a1a " read only

@@ -1,9 +1,6 @@
 [submodule "vim/bundle/nerdtree"]
 	path = vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree
-[submodule "vim/bundle/tagbar"]
-	path = vim/bundle/tagbar
-	url = https://github.com/majutsushi/tagbar
 [submodule "vim/bundle/vim-devicons"]
 	path = vim/bundle/vim-devicons
 	url = https://github.com/ryanoasis/vim-devicons
@@ -13,3 +10,6 @@
 [submodule "vim/bundle/vim-gutentags"]
 	path = vim/bundle/vim-gutentags
 	url = https://github.com/ludovicchabant/vim-gutentags
+[submodule "vim/bundle/vim-fswitch"]
+	path = vim/bundle/vim-fswitch
+	url = https://github.com/derekwyatt/vim-fswitch

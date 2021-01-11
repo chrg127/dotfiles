@@ -4,10 +4,14 @@
 " License:    The MIT License (MIT)
 " Based On:   https://github.com/joshdick/onedark.vim
 
+set background=dark
 hi clear
 if exists("syntax on")
     syntax reset
 endif
+if has("termguicolors")
+    set termguicolors
+end
 
 set t_Co=256
 
