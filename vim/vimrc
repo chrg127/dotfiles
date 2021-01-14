@@ -23,8 +23,8 @@ set foldnestmax=10  " max nesting of folds
 set nofoldenable    " open all folds automatically
 set foldlevel=2
 set cursorline      " highlight current line bg
-"autocmd WinEnter * setlocal cursorline
-"autocmd WinLeave * setlocal nocursorline
+autocmd WinEnter * setlocal cursorline
+autocmd WinLeave * setlocal nocursorline
 set wildmenu        " Enhanced command completion
 set hidden		    " Hide buffers when they are abandoned
 set showmatch		" Show matching bracket
@@ -37,10 +37,19 @@ set exrc            " read current dir's .vimrc
 set secure          " secure local .vimrc by disabling some commands
 set directory=~/.cache/vim/swap//   " set a cache directory for swap files
 "set modeline
+"set completeopt=menuone
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "<Esc>"
+"inoremap <C-x> <Esc>:echo "C-x"<CR>i<C-x>
 
-" *** colors ***
-"colorscheme palenight
-colorscheme dosboxblack
+"inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+"            \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+"inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
+"  \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+
+" ===== colors =====
+colorscheme palenight
+"colorscheme dosboxblack
 
 " *** plugin settings ***
 " close NERDTree if it's the last window opened
@@ -133,7 +142,7 @@ function! Status(winnum)
         elseif filetype ==# "man"
             let stat.= ' man '
         else
-            let stat.= ' ??? ì
+            let stat.= ' ??? '
         endif
         let stat.= '%#StatusLine#'
         let stat.='%<%='
