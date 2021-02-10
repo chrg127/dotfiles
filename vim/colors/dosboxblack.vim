@@ -13,7 +13,7 @@ hi Cursor gui=reverse guifg=NONE guibg=NONE
 hi CursorColumn gui=NONE guifg=NONE guibg=#1a1a1a
 hi CursorLine gui=NONE guifg=NONE guibg=#262626 term=NONE cterm=NONE
 hi CursorLineNr gui=NONE guifg=#f5fef8 guibg=NONE term=NONE cterm=NONE
-hi DiffAdd gui=NONE guifg=#000000 guibg=#00a8a8
+hi DiffAdd gui=NONE guifg=#000000 guibg=#00baa8
 hi DiffChange gui=NONE guifg=#000000 guibg=#f7ce82
 hi DiffDelete gui=NONE guifg=#000000 guibg=#d04863
 hi DiffText gui=NONE guifg=NONE guibg=#333333 term=reverse cterm=NONE
@@ -38,14 +38,14 @@ hi PmenuThumb gui=NONE guifg=NONE guibg=#525252
 hi Question gui=NONE guifg=NONE guibg=NONE
 hi Search gui=NONE guifg=#000000 guibg=#f7ce82
 hi SignColumn gui=NONE guifg=#616161 guibg=NONE
-hi Special gui=NONE guifg=#00a800 guibg=NONE
+hi Special gui=NONE guifg=#00ca00 guibg=NONE
 hi SpecialKey gui=NONE guifg=#616161 guibg=NONE
 hi SpellBad gui=undercurl guisp=NONE guifg=NONE guibg=#250909
 hi SpellCap gui=undercurl guisp=NONE guifg=NONE guibg=NONE
 hi SpellLocal gui=undercurl guisp=NONE guifg=NONE guibg=#092509
 hi SpellRare gui=undercurl guisp=NONE guifg=NONE guibg=#262626
 hi Statement term=NONE gui=NONE guifg=#f5fef8 guibg=NONE
-hi Operator term=NONE gui=NONE guifg=#00a8a8 guibg=NONE
+hi Operator term=NONE gui=NONE guifg=#00baa8 guibg=NONE
 hi StatusLine guifg=#1a1a1a guibg=#b1b2b9 cterm=reverse gui=NONE 
 hi StatusLineNC gui=NONE guifg=#707070 guibg=#262626
 hi StorageClass gui=NONE guifg=#e9f1e9 guibg=NONE
@@ -68,6 +68,6 @@ hi SpecialChar gui=NONE guifg=#89ddff guibg=NONE cterm=NONE
 hi PreProc gui=NONE guifg=NONE guibg=NONE
 
 hi User1 guifg=#d04863 guibg=#1a1a1a " read only
-hi User2 guifg=#00a8a8 guibg=#1a1a1a " modified
-hi User3 guifg=#89ddff guibg=#1a1a1a " filename
+hi User2 guifg=#00baa8 guibg=#1a1a1a " modified
+hi User3 guifg=#f5fef8 guibg=#1a1a1a " filename
 hi User4 guifg=#000000 guibg=#8f8f8f gui=NONE cterm=NONE " inactive

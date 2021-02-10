@@ -74,7 +74,7 @@ hi SpellBad gui=underline guifg=#ff5370 guibg=NONE ctermfg=204 ctermbg=NONE cter
 hi SpellCap gui=NONE guifg=#F78C6C guibg=NONE ctermfg=173 ctermbg=NONE cterm=NONE
 hi SpellLocal gui=NONE guifg=#F78C6C guibg=NONE ctermfg=173 ctermbg=NONE cterm=NONE
 hi SpellRare gui=NONE guifg=#F78C6C guibg=NONE ctermfg=173 ctermbg=NONE cterm=NONE
-hi StatusLine gui=NONE guifg=#bfc7d5 guibg=#3E4452 ctermfg=145 ctermbg=236 cterm=NONE
+hi StatusLine term=NONE cterm=NONE gui=NONE guifg=#bfc7d5 guibg=#3E4452 ctermfg=145 ctermbg=236
 hi StatusLineNC gui=NONE guifg=#7078A1 guibg=NONE ctermfg=59 ctermbg=NONE cterm=NONE
 hi TabLine gui=NONE guifg=#3e4456 guibg=#989aa2 ctermfg=237 ctermbg=59 cterm=NONE
 hi TabLineFill gui=NONE guifg=NONE guibg=#3e4452 ctermfg=NONE ctermbg=237 cterm=NONE
@@ -245,7 +245,7 @@ hi gitcommitUnmergedFile gui=NONE guifg=#ffcb6b guibg=NONE ctermfg=180 ctermbg=N
 hi gitcommitFile gui=NONE guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE cterm=NONE
 hi gitcommitSummary gui=NONE guifg=#bfc7d5 guibg=NONE ctermfg=145 ctermbg=NONE cterm=NONE
 hi gitcommitOverflow gui=NONE guifg=#ff5370 guibg=NONE ctermfg=204 ctermbg=NONE cterm=NONE
-hi User1 guifg=#ff5370 guibg=#3E4452 ctermfg=204 ctermbg=237 " read only
-hi User2 guifg=#c3e88d guibg=#3e4452 ctermfg=114 ctermbg=237 " modified
+hi User1 guifg=#ff5370 guibg=#3e4453 ctermfg=204 ctermbg=236 " read only
+hi User2 guifg=#c3e88d guibg=#3e4453 ctermfg=114 ctermbg=236 " modified
 hi User3 guifg=#89ddff guibg=#3e4452 ctermfg=39 ctermbg=236 " filename
-hi User4 guifg=#3e4452 guibg=#989aa2 ctermfg=237 ctermbg=59 " inactive
+hi User4 guifg=#3e4452 guibg=#989aa2 ctermfg=237 ctermbg=59 gui=NONE cterm=NONE " inactive

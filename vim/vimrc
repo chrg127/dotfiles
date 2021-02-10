@@ -1,7 +1,8 @@
 " Load pathogen
 execute pathogen#infect()
 
-" *** settings ***
+" ===== settings =====
+syntax on
 set showcmd 		" Show (partial) command in status line.
 set noshowmode      " Already have it in statusline
 set ruler           " Show line and column number
@@ -22,9 +23,11 @@ set foldmethod=indent   " Folding
 set foldnestmax=10  " max nesting of folds
 set nofoldenable    " open all folds automatically
 set foldlevel=2
-set cursorline      " highlight current line bg
-autocmd WinEnter * setlocal cursorline
-autocmd WinLeave * setlocal nocursorline
+if (&diff ==# 0)
+    set cursorline      " highlight current line bg
+    autocmd WinEnter * setlocal cursorline
+    autocmd WinLeave * setlocal nocursorline
+endif
 set wildmenu        " Enhanced command completion
 set hidden		    " Hide buffers when they are abandoned
 set showmatch		" Show matching bracket
@@ -38,167 +41,15 @@ set secure          " secure local .vimrc by disabling some commands
 set directory=~/.cache/vim/swap//   " set a cache directory for swap files
 "set modeline
 "set completeopt=menuone
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "<Esc>"
-"inoremap <C-x> <Esc>:echo "C-x"<CR>i<C-x>
-
-"inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
-"            \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-"inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
-"  \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
 " ===== colors =====
 colorscheme palenight
 "colorscheme dosboxblack
 
-" *** plugin settings ***
-" close NERDTree if it's the last window opened
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-let NERDTreeDirArrows=1
-let g:gutentags_add_default_project_roots = 0
-let g:gutentags_project_root = ['.git', '.hg', '.svn', 'Makefile']
-let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/')
-command! -nargs=0 GutentagsClearCache call system('rm ' . g:gutentags_cache_dir . '/*')
-let g:gutentags_generate_on_new = 1
-let g:gutentags_generate_on_missing = 1
-let g:gutentags_generate_on_write = 1
-let g:gutentags_generate_on_empty_buffer = 0
-let g:gutentags_ctags_extra_args=[ '--tag-relative=yes', '--fields=+ailmnS', ]
-let g:gutentags_ctags_exclude=[
-            \ '.git', '.svg', '.hg', '/tests/', 'build', 'dist', 'bin',
-            \ 'cache', 'debug', 'release', 'compiled', 'docs', 'example',
-            \ 'bundle', 'vendor', '-lock.json', '.lock', '.md', '.rc',
-            \ '.json', '.min.', '.map', '.bak', '.zip', '.pyc', '.class',
-            \ '.sln', '.Master', '.csproj', '.tmp', '.csproj.user',
-            \ '.cache', '.pdb', 'tags', 'cscope.', '.css', '.less', '.scss',
-            \ '.exe', '.dll', '.mp3', '.ogg', '.flac', '.swp', '.swo',
-            \ '.bmp', '.gif', '.ico', '.jpg', '.png', '.rar', '.zip',
-            \ '.tar', '.tar.gz', '.tar.xz', '.tar.bz2', '.pdf', '.doc',
-            \'.docx', '.ppt', '.pptx',
-            \ ]
-au BufEnter *.hpp let b:fswitchdst = "cpp"
-au BufEnter *.cpp let b:fswitchdst = "hpp"
-
-" *** statusline ***
-let g:currentmode={
-    \ 'n'       : 'Normale'        , 'no'      : 'N·Attesa'       ,
-    \ 'v'       : 'Visuale'        , 'V'       : 'V·Riga'         ,
-    \ "\<c-v>"  : 'V·Blocco'       , 's'       : 'Selezione'      ,
-    \ 'S'       : 'S·Riga'         , '^S'      : 'S·Blocco'       ,
-    \ 'i'       : 'Inserisci'      , 'R'       : 'Sostituisci'    ,
-    \ 'Rv'      : 'V·Sostituisci'  , 'c'       : 'Comando'        ,
-    \ 'cv'      : 'Vim Ex'         , 'ce'      : 'Ex'             ,
-    \ 'r'       : 'Prompt'         , 'rm'      : 'Di piu'         ,
-    \ 'r?'      : 'Conferma'       , '!'       : 'Shell'          ,
-    \ 't'       : 'Terminale'      ,
-    \}
-
-let g:mode_colors={
-    \ 'n'      : 'PMenuSel'  , 'no'     : 'PMenuSel'  ,
-    \ 'v'      : 'DiffChange', 'V'      : 'DiffChange',
-    \ "\<c-v>" : 'DiffChange', 's'      : 'DiffDelete',
-    \ 'S'      : 'DiffDelete', '^S'     : 'DiffDelete',
-    \ 'i'      : 'DiffAdd'   , 'R'      : 'DiffDelete',
-    \ 'Rv'     : 'DiffDelete', 'c'      : 'PMenuSel'  ,
-    \ 'cv'     : 'PMenuSel'  , 'ce'     : 'PMenuSel'  ,
-    \ 'r'      : 'PMenuSel'  , 'rm'     : 'PMenuSel'  ,
-    \ 'r?'     : 'PMenuSel'  , '!'      : 'PMenuSel'  ,
-    \ 't'      : 'PMenuSel'  ,
-    \}
-
-function! Status(winnum)
-    let stat=''
-    let active = a:winnum == winnr()
-    let bufnum = winbufnr(a:winnum)
-    let type = getbufvar(bufnum, '&buftype')
-    let ismodified = getbufvar(bufnum, '&modified')
-    let ismodifiable = getbufvar(bufnum, '&modifiable')
-    let filetype = getbufvar(bufnum, '&ft')
-    let readonly = getbufvar(bufnum, '&readonly')
-
-    " create custom statusline for quickfix buffer and help buffer
-    if type ==# 'quickfix'
-        let stat.= active ? '%#PMenuSel#' : '%4*'
-        let stat.=' %q %#StatusLine#'
-        let stat.= exists('w:quickfix_title') ? ' ' . w:quickfix_title : ''
-        let stat.='%<%='
-        let stat.= active ? '%#PMenuSel#' : '%4*'
-        let stat.=' %l/%L '
-        return stat
-    elseif type ==# 'help'
-        let stat.= active ? '%#PMenuSel#' : '%4*'
-        let stat.= ' Aiuto %#StatusLine#'
-        let stat.= active ? '%3*' : ''
-        let stat.=' %f%#StatusLine#'
-        let stat.='%<%='
-        let stat.=filetype . ' '
-        let stat.= active ? '%#PMenuSel#' : '%4*'
-        let stat.=' %l, %v :: %L '
-        return stat
-    elseif type ==# 'nofile'
-        let stat.= active ? '%#PMenuSel#' : '%4*'
-        if filetype ==# "nerdtree"
-            let stat.= ' NERDTree '
-        elseif filetype ==# "man"
-            let stat.= ' man '
-        else
-            let stat.= ' ??? '
-        endif
-        let stat.= '%#StatusLine#'
-        let stat.='%<%='
-        let stat.= active ? '%#PMenuSel#' : '%4*'
-        return stat
-    endif
-
-    if active
-        let stat.='%#' . g:mode_colors[mode()] . '#'
-        let stat.='  %{toupper(g:currentmode[mode()])}  '
-    else
-        let stat.='%4*  Inattivo  '
-    endif
-    let stat.='%#StatusLine#'
-    let stat.=' %n: '
-    let stat.=active ? '%3*' : ''
-    let stat.='%f%#StatusLine#'
-    let stat.=ismodified ? '%2* [+] %#StatusLine#' : ''
-    let stat.=readonly || !ismodifiable ? '%1*  %#StatusLine#'   : ''
-    let stat.='%w'
-    let stat.='%<%='
-    if active
-        let stat.= gutentags#statusline('[', ']') . ' '
-    endif
-    if filetype ==# ''
-        let stat.='normal text '
-    else
-        let stat.=filetype . ' '
-    endif
-    let stat.= WebDevIconsGetFileTypeSymbol(bufname(bufnum)) . '  '
-    let stat.= active ? '%#PMenuSel#' : '%4*'
-    let stat.=' %l, %v :: %L '
-    return stat
-endfunction
-
-function! s:RefreshStatus()
-    " for each window
-    for nr in range(1, winnr('$'))
-        " set statusline to whatever Status() returns
-        call setwinvar(nr, '&statusline', '%!Status(' . nr . ')')
-    endfor
-endfunction
-
-command! RefreshStatus :call <SID>RefreshStatus()
-
-augroup status
-    autocmd!
-    autocmd VimEnter,VimLeave,WinEnter,WinLeave,BufWinEnter,BufWinLeave * :RefreshStatus
-augroup END
-
-" *** misc ***
+" ===== misc options =====
 " Jump to the last position when reopening a file
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 filetype plugin indent on
-syntax on           " Will make sure the syntax is always on
-"syntax enable
 
 " highlight extra whitespace
 match Error /\s\+$/
@@ -221,23 +72,20 @@ autocmd QuickFixCmdPost * copen | RefreshStatus
 
 " use :Man
 runtime ftplugin/man.vim
+
 " and configure cppman
-function! s:JbzCppMan()
-    let old_isk = &iskeyword
-    setl iskeyword+=:
-    let str = expand("<cword>")
-    let &l:iskeyword = old_isk
-    execute '!cppman ' . str
+function! s:CppMan(str)
+    execute '!cppman ' . a:str
 endfunction
-command! JbzCppMan :call s:JbzCppMan()
+command! -nargs=1 CppMan :call s:CppMan(<f-args>)
 
 " use clang-format
-function! s:JbzClangFormat(first, last)
-  let l:winview = winsaveview()
-  execute a:first . "," . a:last . "!clang-format"
-  call winrestview(l:winview)
+function! s:ClangFormat(first, last)
+    let l:winview = winsaveview()
+    execute a:first . "," . a:last . "!clang-format --style=WebKit"
+    call winrestview(l:winview)
 endfunction
-command! -range=% JbzClangFormat call <sid>JbzClangFormat (<line1>, <line2>)
+command! -range=% ClangFormat call <sid>ClangFormat (<line1>, <line2>)
 
 " filetypes
 autocmd BufNewFile,BufRead *.asm,*.inc set filetype=snes
@@ -257,7 +105,106 @@ let c_ansi_constants = 1
 let java_highlight_java_lang_ids=1
 let java_highlight_java_io=1
 
-" *** mappings ***
+" ===== plugin settings =====
+" nerdtree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let NERDTreeDirArrows=1
+" gutentags
+let g:gutentags_add_default_project_roots = 0
+let g:gutentags_project_root = ['.git', '.hg', '.svn', 'Makefile']
+let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/')
+command! -nargs=0 GutentagsClearCache call system('rm ' . g:gutentags_cache_dir . '/*')
+let g:gutentags_generate_on_new = 1
+let g:gutentags_generate_on_missing = 1
+let g:gutentags_generate_on_write = 1
+let g:gutentags_generate_on_empty_buffer = 0
+let g:gutentags_ctags_extra_args=[ '--tag-relative=yes', '--fields=+S', ]
+let g:gutentags_ctags_exclude=[
+            \ '.git', '.svg', '.hg', '/tests/', 'build', 'dist', 'bin',
+            \ 'cache', 'debug', 'release', 'compiled', 'docs', 'example',
+            \ 'bundle', 'vendor', '-lock.json', '.lock', '.md', '.rc',
+            \ '.json', '.min.', '.map', '.bak', '.zip', '.pyc', '.class',
+            \ '.sln', '.Master', '.csproj', '.tmp', '.csproj.user',
+            \ '.cache', '.pdb', 'tags', 'cscope.', '.css', '.less', '.scss',
+            \ '.exe', '.dll', '.mp3', '.ogg', '.flac', '.swp', '.swo',
+            \ '.bmp', '.gif', '.ico', '.jpg', '.png', '.rar', '.zip',
+            \ '.tar', '.tar.gz', '.tar.xz', '.tar.bz2', '.pdf', '.doc',
+            \'.docx', '.ppt', '.pptx',
+            \ ]
+" fswitch
+au BufEnter *.hpp let b:fswitchdst = "cpp"
+au BufEnter *.cpp let b:fswitchdst = "hpp"
+" netrw...?
+let loaded_netrwPlugin = 1
+" ultisnips
+let g:UltiSnipsExpandTrigger = '<tab>'
+let g:UltiSnipsJumpForwardTrigger = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+
+" ===== statusline =====
+let g:currentmode={
+    \ 'n'       : 'Normale',   'no' : 'N·Attesa',    'v'  : 'Visuale',       'V'  : 'V·Riga',
+    \ "\<c-v>"  : 'V·Blocco',  's'  : 'Selezione',   'S'  : 'S·Riga',        '^S' : 'S·Blocco',
+    \ 'i'       : 'Inserisci', 'R'  : 'Sostituisci', 'Rv' : 'V·Sostituisci', 'c'  : 'Comando',
+    \ 'cv'      : 'Vim Ex',    'ce' : 'Ex',          'r'  : 'Prompt',        'rm' : 'Di piu',
+    \ 'r?'      : 'Conferma',  '!'  : 'Shell',       't'  : 'Terminale',
+    \}
+let g:mode_colors={
+    \ 'n'       : 'PMenuSel',   'no' : 'PMenuSel',    'v'  : 'DiffChange',    'V'  : 'DiffChange',
+    \ "\<c-v>"  : 'DiffChange', 's'  : 'DiffDelete',  'S'  : 'DiffDelete',    '^S' : 'DiffDelete',
+    \ 'i'       : 'DiffAdd',    'R'  : 'DiffDelete',  'Rv' : 'DiffDelete',    'c'  : 'PMenuSel'  ,
+    \ 'cv'      : 'PMenuSel',   'ce' : 'PMenuSel',    'r'  : 'PMenuSel',      'rm' : 'PMenuSel'  ,
+    \ 'r?'      : 'PMenuSel',   '!'  : 'PMenuSel',    't'  : 'PMenuSel',
+    \}
+
+function! Status(winnum)
+    let stat=''
+    let active = a:winnum == winnr()
+    let bufnum = winbufnr(a:winnum)
+    let type = getbufvar(bufnum, '&buftype')
+    let filetype = getbufvar(bufnum, '&ft')
+    let stat .= active ? '%#' . g:mode_colors[mode()] . '#  %{toupper(g:currentmode[mode()])}  ' : '%4*  INATTIVO  '
+    let stat .= '%#StatusLine#'
+    if type ==# 'nofile'
+        let stat.=active ? '%3*' : ''
+        if filetype ==# "nerdtree"
+            let stat.=' NERDTree'
+        elseif filetype ==# 'man'
+            let stat.=' man'
+        else
+            let stat.=' ???'
+        endif
+        let stat.='%#StatusLine#'
+    else
+        let stat .= ' %n: '
+        let stat .= active ? '%3*' : ''
+        let stat .= type ==# 'help' ? '[Aiuto] ' : ''
+        let stat .= '%f%#StatusLine#'
+        let stat .= getbufvar(bufnum, '&modified') ? '%2* [+] %#StatusLine#' : ''
+        let stat .= getbufvar(bufnum, '&readonly') || !getbufvar(bufnum, '&modifiable') ? '%1*  %#StatusLine#'   : ''
+        let stat .= '%w%<%='
+        let stat .= active ? gutentags#statusline('[', ']') . ' ' : ''
+        let stat .= filetype ==# '' ? 'normal text' : filetype . ' '
+        let stat .= WebDevIconsGetFileTypeSymbol(bufname(bufnum)) . '  '
+        let stat .= active ? '%#PMenuSel#' : '%4*'
+        let stat .= ' %l, %v :: %L '
+    endif
+    return stat
+endfunction
+
+function! s:RefreshStatus()
+    for nr in range(1, winnr('$')) " for each window
+        " set statusline to whatever Status() returns
+        call setwinvar(nr, '&statusline', '%!Status(' . nr . ')')
+    endfor
+endfunction
+command! RefreshStatus :call <SID>RefreshStatus()
+augroup status
+    autocmd!
+    autocmd VimEnter,VimLeave,WinEnter,WinLeave,BufWinEnter,BufWinLeave * :RefreshStatus
+augroup END
+
+" ===== mappings =====
 " Set <Leader>
 let mapleader = ","
 " Disable arrow movement, resize splits instead.
@@ -285,12 +232,20 @@ xnoremap <leader>c "+y
 noremap <leader>s :sp 
 noremap <leader>v :vsp 
 " switch buffers using ,b
-nnoremap <leader>b :b <C-d>
+nnoremap <leader>b :ls<CR>:b 
 noremap Y y$
-au FileType cpp nnoremap <buffer>K :JbzCppMan<CR>
-au FileType c,cpp nnoremap <buffer><leader>lf :<C-u>JbzClangFormat<CR>
-au FileType c,cpp vnoremap <buffer><leader>lf :JbzClangFormat<CR>
+" au FileType cpp nnoremap <buffer>K :ShortcutCppMan<CR>
+au FileType c,cpp nnoremap <buffer><leader>lf :<C-u>ClangFormat<CR>
+au FileType c,cpp vnoremap <buffer><leader>lf :ClangFormat<CR>
 nnoremap <silent> <leader>ok :FSSplitAbove<cr>
 nnoremap <silent> <leader>oj :FSSplitBelow<cr>
 nnoremap <silent> <leader>oh :FSSplitLeft<cr>
 nnoremap <silent> <leader>ol :FSSplitRight<cr>
+" autocompletion mappings
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+"inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "<Esc>"
+"inoremap <C-x> <Esc>:echo "C-x"<CR>i<C-x>
+"inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+"            \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+"inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
+"  \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
