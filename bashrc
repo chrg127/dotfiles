@@ -74,6 +74,7 @@ elif [[ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]]; then
 elif [[ "$(expr substr $(uname -s) 1 10)" == "Linux" ]]; then
     eval "$(dircolors ${HOME}/.dircolors)"
     PROMPT_COMMAND=draw_prompt
+    source "$HOME/.cargo/env"
 else
     echo "WARNING: SHELL/OS NOT SUPPORTED!"
 fi
@@ -84,4 +85,3 @@ if command -v cowsay &> /dev/null; then
         fortune -e fortunes | cowsay -f moofasa
     fi
 fi
-

@@ -2,7 +2,10 @@
 execute pathogen#infect()
 
 " ===== settings =====
+filetype plugin indent on
 syntax on
+
+set nocompatible
 set showcmd 		" Show (partial) command in status line.
 set noshowmode      " Already have it in statusline
 set ruler           " Show line and column number
@@ -23,8 +26,8 @@ set foldmethod=indent   " Folding
 set foldnestmax=10  " max nesting of folds
 set nofoldenable    " open all folds automatically
 set foldlevel=2
-if (&diff ==# 0)
-    set cursorline      " highlight current line bg
+if (&diff ==# 0)    " cursorline with diff is shit
+    set cursorline
     autocmd WinEnter * setlocal cursorline
     autocmd WinLeave * setlocal nocursorline
 endif
@@ -39,17 +42,16 @@ set encoding=UTF-8
 set exrc            " read current dir's .vimrc
 set secure          " secure local .vimrc by disabling some commands
 set directory=~/.cache/vim/swap//   " set a cache directory for swap files
-"set modeline
-"set completeopt=menuone
+set linebreak
+set clipboard+=unnamedplus
 
 " ===== colors =====
-colorscheme palenight
-"colorscheme dosboxblack
+"colorscheme palenight
+colorscheme dosboxblack
 
 " ===== misc options =====
 " Jump to the last position when reopening a file
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-filetype plugin indent on
 
 " highlight extra whitespace
 match Error /\s\+$/
@@ -140,6 +142,18 @@ let loaded_netrwPlugin = 1
 let g:UltiSnipsExpandTrigger = '<tab>'
 let g:UltiSnipsJumpForwardTrigger = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+" startify
+let g:startify_lists = [
+    \ { 'type': 'files',    'header': ['   Recent files']    },
+    \ ]
+" let g:startify_custom_header = 'startify#center(["' . "hello" . '"])'
+let g:ascii = [
+      \ '        __',
+      \ '.--.--.|__|.--------.',
+      \ '|  |  ||  ||        |',
+      \ ' \___/ |__||__|__|__|',
+      \]
+let g:startify_custom_header = 'startify#pad(g:ascii)'
 
 " ===== statusline =====
 let g:currentmode={
@@ -205,20 +219,23 @@ augroup status
 augroup END
 
 " ===== mappings =====
-" Set <Leader>
+" set <Leader>
 let mapleader = ","
-" Disable arrow movement, resize splits instead.
+" use arrow keys for window management
 nnoremap <Down>  :resize +2<CR>
 nnoremap <Up>    :resize -2<CR>
 nnoremap <Left>  :vertical resize +2<CR>
 nnoremap <Right> :vertical resize -2<CR>
 " Moves a line up/down
-no <S-Down> ddp
-no <S-Up> ddkP
+nnoremap <S-Down> ddp
+nnoremap <S-Up> ddkP
+
+nnoremap <Leader>k <C-w>k
+nnoremap <Leader>j <C-w>j
+nnoremap <Leader>h <C-w>h
+nnoremap <Leader>l <C-w>l
 " NERDtree shortcut
 nnoremap <C-n> :NERDTreeToggle<CR> :RefreshStatus<CR>
-" tagbar shortcut
-nnoremap <F8> :TagbarToggle<CR>
 " autoclosing brackets
 inoremap (<CR> (<CR>)<Esc>O
 inoremap {<CR> {<CR>}<Esc>O
@@ -227,21 +244,27 @@ inoremap {, {<CR>},<Esc>O
 inoremap [<CR> [<CR>]<Esc>O
 inoremap [; [<CR>];<Esc>O
 inoremap [, [<CR>],<Esc>O
-" copy to system clipboard using ,c
-xnoremap <leader>c "+y
-noremap <leader>s :sp 
-noremap <leader>v :vsp 
+" copy to system clipboard
+" xnoremap <leader>c "+y
+noremap <leader>s :sp **/
+noremap <leader>v :vsp **/
 " switch buffers using ,b
-nnoremap <leader>b :ls<CR>:b 
+nnoremap <leader>b :ls<CR>:b<space>
+" better :e
+nnoremap <leader>e :e **/
+" quick switch to last buffer
+nnoremap <leader>q :b#<CR>
+" obvious
 noremap Y y$
 " au FileType cpp nnoremap <buffer>K :ShortcutCppMan<CR>
-au FileType c,cpp nnoremap <buffer><leader>lf :<C-u>ClangFormat<CR>
-au FileType c,cpp vnoremap <buffer><leader>lf :ClangFormat<CR>
+" au FileType c,cpp nnoremap <buffer><leader>lf :<C-u>ClangFormat<CR>
+" au FileType c,cpp vnoremap <buffer><leader>lf :ClangFormat<CR>
 nnoremap <silent> <leader>ok :FSSplitAbove<cr>
 nnoremap <silent> <leader>oj :FSSplitBelow<cr>
 nnoremap <silent> <leader>oh :FSSplitLeft<cr>
 nnoremap <silent> <leader>ol :FSSplitRight<cr>
 " autocompletion mappings
+"inoremap <silent> <leader>n <C-x><C-n>
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 "inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "<Esc>"
 "inoremap <C-x> <Esc>:echo "C-x"<CR>i<C-x>

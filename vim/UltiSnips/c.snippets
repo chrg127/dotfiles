@@ -16,18 +16,6 @@ int main(void)
 }
 endsnippet
 
-# main but for pthreads
-snippet mainp
-#include "libc.h"
-#include "util.h"
-
-int main(void)
-{
-	${0}
-	pthread_exit(NULL)
-}
-endsnippet
-
 # header include guard
 snippet once
 #ifndef ${1:`toupper(vim_snippets#Filename('$1_H', 'UNTITLED_H'))`}
@@ -38,11 +26,3 @@ ${0}
 #endif
 endsnippet
 
-# pthread functions
-snippet thfunc
-void *${1}(void *arg)
-{
-	${0}
-	pthread_exit(NULL);
-}
-endsnippet
