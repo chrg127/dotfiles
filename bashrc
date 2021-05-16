@@ -29,6 +29,7 @@ export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:ls' # Ignore the ls command as well
 if [ -d "$HOME/.bin" ]; then PATH="$HOME/.bin:$PATH"; fi
 if [ -d "$HOME/.local/bin" ] ; then PATH="$HOME/.local/bin:$PATH"; fi
 if [ -d "$HOME/.bin/aseprite" ]; then PATH="$HOME/.bin/aseprite:$PATH"; fi
+if [ -d "$HOME/.bin/clion/bin" ]; then PATH="$HOME/.bin/clion/bin":$PATH; fi
 if [ -d "${HOME}/.man" ]; then MANPATH="${HOME}/.man:${MANPATH}"; fi
 if [ -d "${HOME}/.info" ]; then INFOPATH="${HOME}/.info:${INFOPATH}"; fi
 if [ -f "$HOME/.bash/colors" ]; then . "$HOME/.bash/colors"; fi
@@ -58,7 +59,7 @@ export VISUAL=vim
 export EDITOR="$VISUAL"
 export PROMPT_DIRTRIM=2
 # make fonts in java programs look good
-#export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'   
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
 export PASSWORD_STORE_ENABLE_EXTENSIONS=true
 
 # os specific stuff

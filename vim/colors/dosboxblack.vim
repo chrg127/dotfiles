@@ -12,7 +12,7 @@ hi Constant gui=NONE guifg=#808080 guibg=NONE
 hi Cursor gui=reverse guifg=NONE guibg=NONE
 hi CursorColumn gui=NONE guifg=NONE guibg=#1a1a1a
 hi CursorLine gui=NONE guifg=NONE guibg=#262626 term=NONE cterm=NONE
-hi CursorLineNr gui=NONE guifg=#f5fef8 guibg=NONE term=NONE cterm=NONE
+hi CursorLineNr gui=NONE guifg=#f5fef8 guibg=#1a1a1a term=NONE cterm=NONE
 hi DiffAdd gui=NONE guifg=#000000 guibg=#00baa8
 hi DiffChange gui=NONE guifg=#000000 guibg=#f7ce82
 hi DiffDelete gui=NONE guifg=#000000 guibg=#d04863
@@ -21,7 +21,7 @@ hi Directory gui=NONE guifg=#8f8f8f guibg=NONE
 hi Error gui=NONE guifg=NONE guibg=#250909
 hi ErrorMsg gui=NONE guifg=NONE guibg=#250909
 hi FoldColumn gui=NONE guifg=#616161 guibg=NONE
-hi Folded gui=NONE guifg=#707070 guibg=NONE
+hi Folded gui=NONE guifg=#707070 guibg=#1a1a1a
 hi Ignore gui=NONE guifg=NONE guibg=NONE
 hi IncSearch gui=NONE guifg=#f7ce82 guibg=#000000
 hi LineNr gui=NONE guifg=#616161 guibg=NONE
@@ -67,7 +67,7 @@ hi Identifier gui=NONE guifg=#89ddff guibg=NONE cterm=NONE
 hi SpecialChar gui=NONE guifg=#89ddff guibg=NONE cterm=NONE
 hi PreProc gui=NONE guifg=NONE guibg=NONE
 
-hi User1 guifg=#d04863 guibg=#1a1a1a " read only
-hi User2 guifg=#00baa8 guibg=#1a1a1a " modified
-hi User3 guifg=#f5fef8 guibg=#1a1a1a " filename
-hi User4 guifg=#000000 guibg=#8f8f8f gui=NONE cterm=NONE " inactive
+hi User1 guifg=#d04863 guibg=#1a1a1a
+hi User2 guifg=#00baa8 guibg=#1a1a1a
+hi User3 guifg=#f5fef8 guibg=#1a1a1a
+hi User4 guifg=#000000 guibg=#8f8f8f gui=NONE cterm=NONE

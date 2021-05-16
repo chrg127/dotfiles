@@ -46,18 +46,22 @@ set linebreak
 set clipboard+=unnamedplus
 
 " ===== colors =====
-"colorscheme palenight
+" colorscheme palenight
 colorscheme dosboxblack
+" let g:gruvbox_contrast_dark = 'hard'
+" let g:gruvbox_italic = 1
+" let g:gruvbox_underline = 1
+" colorscheme gruvbox
 
 " ===== misc options =====
 " Jump to the last position when reopening a file
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 " highlight extra whitespace
 match Error /\s\+$/
-au BufWinEnter * match Error /\s\+$/
-au InsertEnter * match Error /\s\+\%#\@<!$/
-au InsertLeave * match Error /\s\+$/
+autocmd BufWinEnter * match Error /\s\+$/
+autocmd InsertEnter * match Error /\s\+\%#\@<!$/
+autocmd InsertLeave * match Error /\s\+$/
 function! s:StripTrailingWhitespace()
     if !&binary && &filetype != 'diff'
         normal mz
@@ -69,12 +73,22 @@ function! s:StripTrailingWhitespace()
 endfunction
 command! StripTrailingWhitespace :call s:StripTrailingWhitespace()
 
-" after :make, have the quick fix list open
+function! s:ShowASM()
+    if &filetype != 'cpp' && &filetype != 'c'
+        return
+    endif
+    let filename = expand("%r")
+    let tmpfile = "/tmp/disassembled_" . expand("%:r") . ".s"
+    execute "!g++ -std=c++20 -S -O3 -masm=intel -fno-asynchronous-unwind-tables " . filename . " -o " . tmpfile
+    execute "split" . tmpfile
+    normal gg
+endfunction
+command! ShowASM :call s:ShowASM()
+
 autocmd QuickFixCmdPost * copen | RefreshStatus
 
 " use :Man
 runtime ftplugin/man.vim
-
 " and configure cppman
 function! s:CppMan(str)
     execute '!cppman ' . a:str
@@ -90,7 +104,7 @@ endfunction
 command! -range=% ClangFormat call <sid>ClangFormat (<line1>, <line2>)
 
 " filetypes
-autocmd BufNewFile,BufRead *.asm,*.inc set filetype=snes
+"autocmd BufNewFile,BufRead *.asm,*.inc set filetype=snes
 autocmd BufNewFile,BufRead *.qbs setfiletype qbs
 autocmd BufNewFile,BufRead *.pro,*.pri set filetype=qmake
 autocmd BufNewFile,BufRead *.qml setfiletype qml
@@ -142,18 +156,6 @@ let loaded_netrwPlugin = 1
 let g:UltiSnipsExpandTrigger = '<tab>'
 let g:UltiSnipsJumpForwardTrigger = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
-" startify
-let g:startify_lists = [
-    \ { 'type': 'files',    'header': ['   Recent files']    },
-    \ ]
-" let g:startify_custom_header = 'startify#center(["' . "hello" . '"])'
-let g:ascii = [
-      \ '        __',
-      \ '.--.--.|__|.--------.',
-      \ '|  |  ||  ||        |',
-      \ ' \___/ |__||__|__|__|',
-      \]
-let g:startify_custom_header = 'startify#pad(g:ascii)'
 
 " ===== statusline =====
 let g:currentmode={
@@ -207,8 +209,8 @@ function! Status(winnum)
 endfunction
 
 function! s:RefreshStatus()
-    for nr in range(1, winnr('$')) " for each window
-        " set statusline to whatever Status() returns
+    " for each window set statusline to whatever Status() returns
+    for nr in range(1, winnr('$'))
         call setwinvar(nr, '&statusline', '%!Status(' . nr . ')')
     endfor
 endfunction
