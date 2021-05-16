@@ -16,3 +16,6 @@
 [submodule "vim/bundle/UltiSnips"]
 	path = vim/bundle/UltiSnips
 	url = https://github.com/sirver/UltiSnips
+[submodule "vim/bundle/vim-dirvish"]
+	path = vim/bundle/vim-dirvish
+	url = https://github.com/justinmk/vim-dirvish

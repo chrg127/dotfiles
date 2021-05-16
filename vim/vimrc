@@ -1,9 +1,9 @@
-" Load pathogen
+" load pathogen
 execute pathogen#infect()
 
 " ===== settings =====
-filetype plugin indent on
 syntax on
+filetype plugin indent on
 
 set nocompatible
 set showcmd 		" Show (partial) command in status line.
@@ -44,6 +44,8 @@ set secure          " secure local .vimrc by disabling some commands
 set directory=~/.cache/vim/swap//   " set a cache directory for swap files
 set linebreak
 set clipboard+=unnamedplus
+set suffixes=".bak,~,.o,.swp,.obj,.d"
+set wildignore=*.o,*.d
 
 " ===== colors =====
 " colorscheme palenight
@@ -54,7 +56,7 @@ colorscheme dosboxblack
 " colorscheme gruvbox
 
 " ===== misc options =====
-" Jump to the last position when reopening a file
+" jump to the last position when reopening a file
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 " highlight extra whitespace
@@ -73,6 +75,7 @@ function! s:StripTrailingWhitespace()
 endfunction
 command! StripTrailingWhitespace :call s:StripTrailingWhitespace()
 
+" utility function to show assembly output
 function! s:ShowASM()
     if &filetype != 'cpp' && &filetype != 'c'
         return
@@ -85,11 +88,11 @@ function! s:ShowASM()
 endfunction
 command! ShowASM :call s:ShowASM()
 
+" open quickfix list after commands like :make
 autocmd QuickFixCmdPost * copen | RefreshStatus
 
-" use :Man
+" use :Man and configure cppman
 runtime ftplugin/man.vim
-" and configure cppman
 function! s:CppMan(str)
     execute '!cppman ' . a:str
 endfunction
@@ -136,26 +139,28 @@ let g:gutentags_generate_on_write = 1
 let g:gutentags_generate_on_empty_buffer = 0
 let g:gutentags_ctags_extra_args=[ '--tag-relative=yes', '--fields=+S', ]
 let g:gutentags_ctags_exclude=[
-            \ '.git', '.svg', '.hg', '/tests/', 'build', 'dist', 'bin',
-            \ 'cache', 'debug', 'release', 'compiled', 'docs', 'example',
-            \ 'bundle', 'vendor', '-lock.json', '.lock', '.md', '.rc',
-            \ '.json', '.min.', '.map', '.bak', '.zip', '.pyc', '.class',
-            \ '.sln', '.Master', '.csproj', '.tmp', '.csproj.user',
-            \ '.cache', '.pdb', 'tags', 'cscope.', '.css', '.less', '.scss',
-            \ '.exe', '.dll', '.mp3', '.ogg', '.flac', '.swp', '.swo',
-            \ '.bmp', '.gif', '.ico', '.jpg', '.png', '.rar', '.zip',
-            \ '.tar', '.tar.gz', '.tar.xz', '.tar.bz2', '.pdf', '.doc',
-            \'.docx', '.ppt', '.pptx',
+            \ 'build', 'dist', 'bin', 'cache', 'debug', 'release',
+            \ 'compiled', 'docs', 'example', 'bundle', 'vendor', '.md',
+            \ '.json',
             \ ]
 " fswitch
 au BufEnter *.hpp let b:fswitchdst = "cpp"
 au BufEnter *.cpp let b:fswitchdst = "hpp"
-" netrw...?
+" disable netrw
 let loaded_netrwPlugin = 1
 " ultisnips
 let g:UltiSnipsExpandTrigger = '<tab>'
 let g:UltiSnipsJumpForwardTrigger = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+" dirvish
+let g:dirvish_mode = ':sort ,^.*[\/], | :silent keeppatterns g@\v/\.[^\/]+/?$@d _'
+augroup dirvish_config
+    autocmd!
+    autocmd FileType dirvish nnoremap <silent><buffer>
+        \ gh :silent keeppatterns g@\v/\.[^\/]+/?$@d _<cr>:setl cole=3<cr>
+    autocmd FileType dirvish :RefreshStatus
+augroup END
+" call dirvish#add_icon_fn({pathname -> WebDevIconsGetFileTypeSymbol(pathname) . '   '})
 
 " ===== statusline =====
 let g:currentmode={
@@ -182,13 +187,15 @@ function! Status(winnum)
     let stat .= active ? '%#' . g:mode_colors[mode()] . '#  %{toupper(g:currentmode[mode()])}  ' : '%4*  INATTIVO  '
     let stat .= '%#StatusLine#'
     if type ==# 'nofile'
-        let stat.=active ? '%3*' : ''
+        let stat.=active ? '%3* ' : ' '
         if filetype ==# "nerdtree"
-            let stat.=' NERDTree'
+            let stat.='NERDTree'
         elseif filetype ==# 'man'
-            let stat.=' man'
+            let stat.='man'
+        elseif filetype ==# 'dirvish'
+            let stat.='dirvish: ' . bufname(bufnum) . ' '
         else
-            let stat.=' ???'
+            let stat.='???'
         endif
         let stat.='%#StatusLine#'
     else
@@ -200,7 +207,7 @@ function! Status(winnum)
         let stat .= getbufvar(bufnum, '&readonly') || !getbufvar(bufnum, '&modifiable') ? '%1*  %#StatusLine#'   : ''
         let stat .= '%w%<%='
         let stat .= active ? gutentags#statusline('[', ']') . ' ' : ''
-        let stat .= filetype ==# '' ? 'normal text' : filetype . ' '
+        let stat .= filetype ==# '' ? 'normal text ' : filetype . ' '
         let stat .= WebDevIconsGetFileTypeSymbol(bufname(bufnum)) . '  '
         let stat .= active ? '%#PMenuSel#' : '%4*'
         let stat .= ' %l, %v :: %L '
