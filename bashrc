@@ -2,20 +2,17 @@
 [[ $- != *i* ]] && return
 
 # completion
-# Define to avoid stripping description in --option=description of './configure --help'
+# define to avoid stripping description in --option=description of './configure --help'
 COMP_CONFIGURE_HINTS=1
-# Define to avoid flattening internal contents of tar files
+# define to avoid flattening internal contents of tar files
 COMP_TAR_INTERNAL_PATHS=1
-# Any completions you add in ~/.bash_completion are sourced last.
-# source bash_completion
+# source bash_completion (second one is for MSYS2)
 [[ -r /usr/share/bash-completion/bash_completion ]] && . /usr/share/bash-completion/bash_completion
-#msys2
 [[ -f /etc/bash_completion ]] && . /etc/bash_completion
-# completion for sudo (?)
+# completion for sudo
 complete -cf sudo
 
 # history
-# append to the history file, don't overwrite it
 shopt -s histappend
 # don't put duplicate lines or lines starting with space in the history.
 export HISTCONTROL=ignoreboth
@@ -25,16 +22,15 @@ export HISTFILESIZE=2000
 # The '&' is a special pattern which suppresses duplicate entries.
 export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:ls' # Ignore the ls command as well
 
-# private bin dirs
-if [ -d "$HOME/.bin" ]; then PATH="$HOME/.bin:$PATH"; fi
-if [ -d "$HOME/.local/bin" ] ; then PATH="$HOME/.local/bin:$PATH"; fi
-if [ -d "$HOME/.bin/aseprite" ]; then PATH="$HOME/.bin/aseprite:$PATH"; fi
-if [ -d "$HOME/.bin/clion/bin" ]; then PATH="$HOME/.bin/clion/bin":$PATH; fi
-if [ -d "${HOME}/.man" ]; then MANPATH="${HOME}/.man:${MANPATH}"; fi
-if [ -d "${HOME}/.info" ]; then INFOPATH="${HOME}/.info:${INFOPATH}"; fi
-if [ -f "$HOME/.bash/colors" ]; then . "$HOME/.bash/colors"; fi
-if [ -f "$HOME/.bash/aliases" ]; then . "$HOME/.bash/aliases"; fi
-if [ -f "$HOME/.bash/functions" ]; then . "$HOME/.bash/functions"; fi
+[[ -d "$HOME/.bin" ]] && PATH="$HOME/.bin:$PATH"
+[[ -d "$HOME/.local/bin" ]] && PATH="$HOME/.local/bin:$PATH"
+[[ -d "$HOME/.bin/aseprite" ]] && PATH="$HOME/.bin/aseprite:$PATH"
+[[ -d "$HOME/.bin/clion/bin" ]] && PATH="$HOME/.bin/clion/bin":$PATH
+[[ -d "${HOME}/.man" ]] && MANPATH="${HOME}/.man:${MANPATH}"
+[[ -d "${HOME}/.info" ]] && INFOPATH="${HOME}/.info:${INFOPATH}"
+[[ -f "${HOME}/.cargo/env" ]] && source "$HOME/.cargo/env"
+[[ -f "$HOME/.bash/aliases" ]] && . "$HOME/.bash/aliases"
+[[ -f "$HOME/.bash/functions" ]] && . "$HOME/.bash/functions"
 export PATH
 
 # misc
@@ -44,45 +40,29 @@ set -o notify
 shopt -s checkwinsize
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-# gcc colors
-export GCC_COLORS='error=01;91:warning=01;95:note=01;96:caret=01;92:locus=01:quote=01'
-
-
 # forgot
-xhost +local:root > /dev/null 2>&1
-stty susp undef
-# disable C-s
-#stty -ixon
+# xhost +local:root > /dev/null 2>&1
 # set CTRL-Z to be equal to 'fg'
+stty susp undef
 bind '"\C-z":"fg\015"'
+export GCC_COLORS='error=01;91:warning=01;95:note=01;96:caret=01;92:locus=01:quote=01'
 export VISUAL=vim
 export EDITOR="$VISUAL"
 export PROMPT_DIRTRIM=2
-# make fonts in java programs look good
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
 export PASSWORD_STORE_ENABLE_EXTENSIONS=true
 
-# os specific stuff
-if [[ "$(expr substr $(uname -s) 1 10)" == "MSYS_NT-10" ]]; then
+OSNAME=$(expr substr $(uname -s) 1 10)
+if [[ "$OSNAME" == "MSYS_NT-10" || "$OSNAME" == "MINGW64_NT" || "$OSNAME" == "MINGW32_NT" ]]; then
     eval "$(dircolors /etc/DIR_COLORS)"
     export PATH="/c/Users/chri/Path:$PATH"
-elif [[ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]]; then
-    eval "$(dircolors /etc/DIR_COLORS)"
-    export PATH="/c/Users/chri/Path:$PATH"
-elif [[ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]]; then
-    eval "$(dircolors /etc/DIR_COLORS)"
-    export PATH="/c/Users/chri/Path:$PATH"
-elif [[ "$(expr substr $(uname -s) 1 10)" == "Linux" ]]; then
+elif [[ "$OSNAME" == "Linux" ]]; then
     eval "$(dircolors ${HOME}/.dircolors)"
     PROMPT_COMMAND=draw_prompt
-    source "$HOME/.cargo/env"
 else
     echo "WARNING: SHELL/OS NOT SUPPORTED!"
 fi
 
-# print message when opening terminal
-if command -v cowsay &> /dev/null; then
-    if command -v fortune &> /dev/null; then
-        fortune -e fortunes | cowsay -f moofasa
-    fi
+if [[ $(command -v cowsay > /dev/null && command -v fortune > /dev/null) -eq 0 ]]; then
+    fortune -e fortunes | cowsay -f moofasa
 fi
