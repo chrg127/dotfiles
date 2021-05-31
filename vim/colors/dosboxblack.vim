@@ -9,6 +9,8 @@ hi Comment gui=NONE guifg=#d04863 guibg=NONE
 hi Conceal gui=NONE guifg=#808080 guibg=NONE
 hi Conditional gui=NONE guifg=#f5fef8 guibg=NONE
 hi Constant gui=NONE guifg=#808080 guibg=NONE
+"hi Constant gui=NONE guifg=#f5fef8 guibg=NONE
+" hi Constant gui=NONE guifg=NONE guibg=NONE ctermfg=81
 hi Cursor gui=reverse guifg=NONE guibg=NONE
 hi CursorColumn gui=NONE guifg=NONE guibg=#1a1a1a
 hi CursorLine gui=NONE guifg=NONE guibg=#262626 term=NONE cterm=NONE
@@ -66,6 +68,8 @@ hi lCursor gui=NONE guifg=NONE guibg=NONE
 hi Identifier gui=NONE guifg=#89ddff guibg=NONE cterm=NONE
 hi SpecialChar gui=NONE guifg=#89ddff guibg=NONE cterm=NONE
 hi PreProc gui=NONE guifg=NONE guibg=NONE
+hi! link Directory Number
+hi! link SpecialKey PreProc
 
 hi User1 guifg=#d04863 guibg=#1a1a1a
 hi User2 guifg=#00baa8 guibg=#1a1a1a
