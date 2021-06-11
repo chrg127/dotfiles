@@ -1,20 +1,20 @@
 [Background]
-Color=0,0,0
+Color=8,8,8
 
 [BackgroundFaint]
-Color=0,0,0
+Color=8,8,8
 
 [BackgroundIntense]
-Color=0,0,0
+Color=8,8,8
 
 [Color0]
-Color=0,0,0
+Color=8,8,8
 
 [Color0Faint]
 Color=24,24,24
 
 [Color0Intense]
-Color=0,0,0
+Color=8,8,8
 
 [Color1]
 Color=208,72,99

@@ -3,13 +3,10 @@ let g:loaded_startscreen = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-fun! startscreen#fortune()
-    call append('$', "hello")
-    :1
-    redraw!
-endfun
+" fun! startscreen#fortune()
+" endfun
 
-let g:Startscreen_function = function('startscreen#fortune')
+" let g:Startscreen_function = function('startscreen#fortune')
 
 fun! startscreen#start()
     " Don't run if:
@@ -22,21 +19,18 @@ fun! startscreen#start()
     endif
 
     " Start a new buffer and set some options for it
-    " enew
+    enew
     setlocal
         \ bufhidden=wipe
         \ buftype=nofile
         \ ft=startscreen
         \ nobuflisted
-        \ nocursorcolumn
-        \ nocursorline
         \ nolist
-        \ nonumber
         \ noswapfile
-        \ norelativenumber
 
-    " Now we can just write to the buffer whatever you want.
-    call g:Startscreen_function()
+    read /home/chris/Documenti/message.txt
+    :1
+    redraw!
 
     " No modifications to this buffer
     setlocal nomodifiable nomodified

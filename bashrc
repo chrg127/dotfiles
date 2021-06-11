@@ -26,6 +26,7 @@ export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:ls' # Ignore the ls command as well
 [[ -d "$HOME/.local/bin" ]] && PATH="$HOME/.local/bin:$PATH"
 [[ -d "$HOME/.bin/aseprite" ]] && PATH="$HOME/.bin/aseprite:$PATH"
 [[ -d "$HOME/.bin/clion/bin" ]] && PATH="$HOME/.bin/clion/bin":$PATH
+[[ -d "$HOME/.bin/melonds" ]] && PATH="$HOME/.bin/melonds":$PATH
 [[ -d "${HOME}/.man" ]] && MANPATH="${HOME}/.man:${MANPATH}"
 [[ -d "${HOME}/.info" ]] && INFOPATH="${HOME}/.info:${INFOPATH}"
 [[ -f "${HOME}/.cargo/env" ]] && source "$HOME/.cargo/env"

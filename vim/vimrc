@@ -1,8 +1,243 @@
 " load pathogen
 execute pathogen#infect()
 
-source ~/.vim/startup/settings.vim
-source ~/.vim/startup/plugins.vim
+" ===== settings =====
+syntax on
+filetype plugin indent on
+
+set nocompatible
+set showcmd 		" Show (partial) command in status line.
+set noshowmode      " Already have it in statusline
+set ruler           " Show line and column number
+set relativenumber  " left column displays relative numbers lines
+set number          " now with current line number instead of 0
+set laststatus=2    " Always display the status line
+set autoread        " Read open files when changed in the background
+set autowrite		" Automatically save before commands like :next and :make
+set hlsearch        " Highlight searches
+set ignorecase		" Do case insensitive matching
+set incsearch		" Incremental search
+set smartcase		" Do smart case matching
+set tabstop=4       " Tab = 4 spaces
+set expandtab       " Insert spaces instead of tabs
+set shiftwidth=4    " Indent with 4 spaces
+set splitright      " Splits
+set foldmethod=indent   " Folding
+set foldnestmax=10  " max nesting of folds
+set nofoldenable    " open all folds automatically
+set foldlevel=2
+if (&diff ==# 0)    " cursorline with diff is shit
+    set cursorline
+    autocmd WinEnter * setlocal cursorline
+    autocmd WinLeave * setlocal nocursorline
+endif
+set wildmenu        " Enhanced command completion
+set hidden		    " Hide buffers when they are abandoned
+set showmatch		" Show matching bracket
+set mouse=a		    " Enable mouse usage (all modes)
+set history=200     " Keep 200 lines of command history
+set ttimeoutlen=5   " Time to wait for a key sequence to complete. Keep low.
+set ffs=unix,dos
+set encoding=UTF-8
+set exrc            " read current dir's .vimrc
+set secure          " secure local .vimrc by disabling some commands
+set directory=~/.cache/vim/swap//   " set a cache directory for swap files
+"set linebreak       " set to break lines at specific column.
+set clipboard+=unnamedplus
+set suffixes=".bak,~,.o,.swp,.obj,.d" " ignore these file extensions when matching
+set wildignore=*.o,*.d
+"set textwidth=0
+runtime ftplugin/man.vim " enable :Man command
+
+" language specific settings
+let c_gnu = 1
+let c_space_errors = 1
+let c_curly_error = 1
+let c_ansi_typedefs = 1
+let c_ansi_constants = 1
+let java_highlight_java_lang_ids=1
+let java_highlight_java_io=1
+
+" plugin specific settings
+let NERDTreeDirArrows=1
+" gutentags
+let g:gutentags_add_default_project_roots = 0
+let g:gutentags_project_root = ['.git', '.hg', '.svn', 'Makefile']
+let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/')
+command! -nargs=0 GutentagsClearCache call system('rm ' . g:gutentags_cache_dir . '/*')
+let g:gutentags_generate_on_new = 1
+let g:gutentags_generate_on_missing = 1
+let g:gutentags_generate_on_write = 1
+let g:gutentags_generate_on_empty_buffer = 0
+let g:gutentags_ctags_extra_args=[ '--tag-relative=yes', '--fields=+S', ]
+let g:gutentags_ctags_exclude=[
+            \ 'build', 'dist', 'bin', 'cache', 'debug', 'release',
+            \ 'compiled', 'docs', 'example', 'bundle', 'vendor', '.md',
+            \ '.json',
+            \ ]
+" disable netrw
+let loaded_netrwPlugin = 1
+" ultisnips
+let g:UltiSnipsExpandTrigger = '<tab>'
+let g:UltiSnipsJumpForwardTrigger = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+" dirvish
+let g:dirvish_mode = ':sort ,^.*[\/], | :silent keeppatterns g@\v/\.[^\/]+/?$@d _'
+
+" ===== colors =====
+" colorscheme palenight
+colorscheme dosboxblack
+" let g:gruvbox_contrast_dark = 'hard'
+" let g:gruvbox_italic = 1
+" let g:gruvbox_underline = 1
+" colorscheme gruvbox
+
+" ===== custom functions =====
+function! s:StripTrailingWhitespace()
+    if !&binary && &filetype != 'diff'
+        normal mz
+        normal Hmy
+        %s/\s\+$//e
+        normal 'yz<CR>
+        normal `z
+    endif
+endfunction
+
+function! s:ShowASM()
+    if &filetype != 'cpp' && &filetype != 'c'
+        return
+    endif
+    let filename = expand("%r")
+    let tmpfile = "/tmp/disassembled_" . expand("%:r") . ".s"
+    execute "!g++ -std=c++20 -S -O3 -masm=intel -fno-asynchronous-unwind-tables " . filename . " -o " . tmpfile
+    execute "split" . tmpfile
+    normal gg
+endfunction
+
+function! s:CppMan(str)
+    execute '!cppman ' . a:str
+endfunction
+
+function! s:ClangFormat(first, last)
+    let l:winview = winsaveview()
+    execute a:first . "," . a:last . "!clang-format --style=WebKit"
+    call winrestview(l:winview)
+endfunction
+
+function! MatchTrailingWhitespace()
+    if &ft ==# "startscreen"
+        echo "fuck"
+        return
+    endif
+    match Error /\s\+$/
+endfunction
+
+" ===== custom commands and autocmds =====
+
+" jump to the last position when reopening a file
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+" highlight extra whitespace
+" autocmd BufWinEnter * match Error /\s\+$/
+autocmd BufWinEnter * :call MatchTrailingWhitespace()
+autocmd InsertEnter * match Error /\s\+\%#\@<!$/
+autocmd InsertLeave * match Error /\s\+$/
+command! StripTrailingWhitespace :call s:StripTrailingWhitespace()
+
+" for ShowASM function
+command! ShowASM :call s:ShowASM()
+
+" open quickfix list after commands like :make
+autocmd QuickFixCmdPost * copen | RefreshStatus
+
+command! -nargs=1 CppMan :call s:CppMan(<f-args>)
+command! -range=% ClangFormat call <sid>ClangFormat (<line1>, <line2>)
+
+" filetypes
+"autocmd BufNewFile,BufRead *.asm,*.inc set filetype=snes
+autocmd BufNewFile,BufRead *.qbs setfiletype qbs
+autocmd BufNewFile,BufRead *.pro,*.pri set filetype=qmake
+autocmd BufNewFile,BufRead *.qml setfiletype qml
+autocmd BufNewFile,BufRead *.qrc setfiletype xml
+autocmd BufNewFile,BufRead *.ts setfiletype xml
+autocmd BufNewFile,BufRead *.ui setfiletype xml
+autocmd BufNewFile,BufRead *.ypp setfiletype yacc
+
+" fswitch
+autocmd BufEnter *.hpp let b:fswitchdst = "cpp"
+autocmd BufEnter *.cpp let b:fswitchdst = "hpp"
+
+" nerdtree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" dirvish
+augroup dirvish_config
+    autocmd!
+    autocmd FileType dirvish nnoremap <silent><buffer>
+        \ gh :silent keeppatterns g@\v/\.[^\/]+/?$@d _<cr>:setl cole=3<cr>
+    autocmd FileType dirvish :RefreshStatus
+augroup END
+
+
+
+" ===== mappings =====
+
+" set <Leader>
+let mapleader = ","
+
+" obvious
+noremap Y y$
+
+" use arrow keys for window management
+nnoremap <Down>  :resize +2<CR>
+nnoremap <Up>    :resize -2<CR>
+nnoremap <Left>  :vertical resize +2<CR>
+nnoremap <Right> :vertical resize -2<CR>
+
+" moves a line up/down
+nnoremap <S-Down> ddp
+nnoremap <S-Up> ddkP
+
+" <ctrl> is bad for me
+nnoremap <Leader>k <C-w>k
+nnoremap <Leader>j <C-w>j
+nnoremap <Leader>h <C-w>h
+nnoremap <Leader>l <C-w>l
+
+" autoclosing brackets
+inoremap (<CR> (<CR>)<Esc>O
+inoremap {<CR> {<CR>}<Esc>O
+inoremap {; {<CR>};<Esc>O
+inoremap {, {<CR>},<Esc>O
+inoremap [<CR> [<CR>]<Esc>O
+inoremap [; [<CR>];<Esc>O
+inoremap [, [<CR>],<Esc>O
+
+" copy and paste with system clipboard
+xnoremap <leader>y "+y
+xnoremap <leader>p "+p
+
+" better :split, :vsplit and :edit
+noremap <leader>s :sp **/
+noremap <leader>v :vsp **/
+nnoremap <leader>e :e **/
+
+" switch buffers using ,b
+nnoremap <leader>b :ls<CR>:b<space>
+
+" quick switch to last buffer
+nnoremap <leader>q :b#<CR>
+
+" shortcuts for fswitch
+nnoremap <silent> <leader>ok :FSSplitAbove<cr>
+nnoremap <silent> <leader>oj :FSSplitBelow<cr>
+nnoremap <silent> <leader>oh :FSSplitLeft<cr>
+nnoremap <silent> <leader>ol :FSSplitRight<cr>
+
+" shortcut for nerdtree
+nnoremap <C-n> :NERDTreeToggle<CR> :RefreshStatus<CR>
+
+" ===== other stuff ====
 source ~/.vim/startup/statusline.vim
 " source ~/.vim/startup/startscreen.vim
-source ~/.vim/startup/mappings.vim
+
