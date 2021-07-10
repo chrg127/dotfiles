@@ -7,4 +7,4 @@ let &errorformat = '%E%f:%l:%c: fatal error: %m,' .
       \ '%-G%\m%\%%(LLVM ERROR:%\|No compilation database found%\)%\@!%.%#,' .
       \ '%E%m'
 set cindent
-set cinoptions+=g0,:0,N-s,E-s,l1,m1,j1,(0,w1
+set cinoptions+=g0,:0,N-s,E-s,l1,m1,j1,(4,w1

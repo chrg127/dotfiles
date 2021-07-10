@@ -132,6 +132,8 @@ function! MatchTrailingWhitespace()
     match Error /\s\+$/
 endfunction
 
+
+
 " ===== custom commands and autocmds =====
 
 " jump to the last position when reopening a file
@@ -169,14 +171,6 @@ autocmd BufEnter *.cpp let b:fswitchdst = "hpp"
 
 " nerdtree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-" dirvish
-augroup dirvish_config
-    autocmd!
-    autocmd FileType dirvish nnoremap <silent><buffer>
-        \ gh :silent keeppatterns g@\v/\.[^\/]+/?$@d _<cr>:setl cole=3<cr>
-    autocmd FileType dirvish :RefreshStatus
-augroup END
 
 
 
@@ -235,7 +229,7 @@ nnoremap <silent> <leader>oh :FSSplitLeft<cr>
 nnoremap <silent> <leader>ol :FSSplitRight<cr>
 
 " shortcut for nerdtree
-nnoremap <C-n> :NERDTreeToggle<CR> :RefreshStatus<CR>
+nnoremap <leader>n :NERDTreeToggle<CR> :RefreshStatus<CR>
 
 " ===== other stuff ====
 source ~/.vim/startup/statusline.vim

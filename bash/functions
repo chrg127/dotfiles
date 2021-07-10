@@ -146,3 +146,8 @@ hex2bin() {
     done
 }
 
+bin2hex() {
+    for i in $@; do
+        echo "ibase=2; obase=16; $i" | bc
+    done
+}
