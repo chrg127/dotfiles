@@ -8,7 +8,7 @@ hi ColorColumn gui=NONE guifg=NONE guibg=#1a1a1a ctermbg=234
 hi Comment gui=NONE guifg=#d04863 guibg=NONE ctermfg=168
 hi Conceal gui=NONE guifg=#808080 guibg=NONE ctermfg=243
 hi Conditional gui=NONE guifg=#f5fef8 guibg=NONE ctermfg=255
-hi Constant gui=NONE guifg=#ad3693 guibg=NONE ctermfg=127
+hi Constant gui=NONE guifg=#ad3693 guibg=NONE ctermfg=163
 hi Cursor gui=reverse guifg=NONE guibg=NONE
 hi CursorColumn gui=NONE guifg=NONE guibg=#1a1a1a ctermbg=234
 hi CursorLine gui=NONE guifg=NONE guibg=#262626 term=NONE cterm=NONE ctermbg=235

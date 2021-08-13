@@ -6,18 +6,18 @@ syntax on
 filetype plugin indent on
 
 set nocompatible
-set showcmd 		" Show (partial) command in status line.
+set showcmd         " Show (partial) command in status line.
 set noshowmode      " Already have it in statusline
 set ruler           " Show line and column number
 set relativenumber  " left column displays relative numbers lines
 set number          " now with current line number instead of 0
 set laststatus=2    " Always display the status line
 set autoread        " Read open files when changed in the background
-set autowrite		" Automatically save before commands like :next and :make
+set autowrite       " Automatically save before commands like :next and :make
 set hlsearch        " Highlight searches
-set ignorecase		" Do case insensitive matching
-set incsearch		" Incremental search
-set smartcase		" Do smart case matching
+set ignorecase      " Do case insensitive matching
+set incsearch       " Incremental search
+set smartcase       " Do smart case matching
 set tabstop=4       " Tab = 4 spaces
 set expandtab       " Insert spaces instead of tabs
 set shiftwidth=4    " Indent with 4 spaces
@@ -32,9 +32,9 @@ if (&diff ==# 0)    " cursorline with diff is shit
     autocmd WinLeave * setlocal nocursorline
 endif
 set wildmenu        " Enhanced command completion
-set hidden		    " Hide buffers when they are abandoned
-set showmatch		" Show matching bracket
-set mouse=a		    " Enable mouse usage (all modes)
+set hidden          " Hide buffers when they are abandoned
+set showmatch       " Show matching bracket
+set mouse=a         " Enable mouse usage (all modes)
 set history=200     " Keep 200 lines of command history
 set ttimeoutlen=5   " Time to wait for a key sequence to complete. Keep low.
 set ffs=unix,dos
@@ -44,8 +44,8 @@ set secure          " secure local .vimrc by disabling some commands
 set directory=~/.cache/vim/swap//   " set a cache directory for swap files
 "set linebreak       " set to break lines at specific column.
 set clipboard+=unnamedplus
-set suffixes=".bak,~,.o,.swp,.obj,.d" " ignore these file extensions when matching
-set wildignore=*.o,*.d
+set suffixes=".bak,~,.o,.swp,.obj,.d,.class" " ignore these file extensions when matching
+set wildignore=*.o,*.d,*.class
 "set textwidth=0
 runtime ftplugin/man.vim " enable :Man command
 
@@ -124,14 +124,6 @@ function! s:ClangFormat(first, last)
     call winrestview(l:winview)
 endfunction
 
-function! MatchTrailingWhitespace()
-    if &ft ==# "startscreen"
-        echo "fuck"
-        return
-    endif
-    match Error /\s\+$/
-endfunction
-
 
 
 " ===== custom commands and autocmds =====
@@ -140,8 +132,7 @@ endfunction
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 " highlight extra whitespace
-" autocmd BufWinEnter * match Error /\s\+$/
-autocmd BufWinEnter * :call MatchTrailingWhitespace()
+autocmd BufWinEnter * match Error /\s\+$/
 autocmd InsertEnter * match Error /\s\+\%#\@<!$/
 autocmd InsertLeave * match Error /\s\+$/
 command! StripTrailingWhitespace :call s:StripTrailingWhitespace()
@@ -156,7 +147,6 @@ command! -nargs=1 CppMan :call s:CppMan(<f-args>)
 command! -range=% ClangFormat call <sid>ClangFormat (<line1>, <line2>)
 
 " filetypes
-"autocmd BufNewFile,BufRead *.asm,*.inc set filetype=snes
 autocmd BufNewFile,BufRead *.qbs setfiletype qbs
 autocmd BufNewFile,BufRead *.pro,*.pri set filetype=qmake
 autocmd BufNewFile,BufRead *.qml setfiletype qml
@@ -164,6 +154,7 @@ autocmd BufNewFile,BufRead *.qrc setfiletype xml
 autocmd BufNewFile,BufRead *.ts setfiletype xml
 autocmd BufNewFile,BufRead *.ui setfiletype xml
 autocmd BufNewFile,BufRead *.ypp setfiletype yacc
+autocmd BufNewFile,BufRead *.asm set filetype=asm_ca65
 
 " fswitch
 autocmd BufEnter *.hpp let b:fswitchdst = "cpp"
@@ -234,4 +225,5 @@ nnoremap <leader>n :NERDTreeToggle<CR> :RefreshStatus<CR>
 " ===== other stuff ====
 source ~/.vim/startup/statusline.vim
 " source ~/.vim/startup/startscreen.vim
+source ~/.vim/startup/typer.vim
 
