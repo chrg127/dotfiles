@@ -41,7 +41,7 @@ endfunction
 :command! -nargs=1 -complete=file Typer :call TyperLoop('<args>')
 
 command Save1 Typer ~/fnm/newton
-command Save2 Typer ~/fnm/newton_m.txt
+command Save2 Typer ~/fnm/newton_m
 command Save3 Typer ~/fnm/order_esteem
 command Save4 Typer ~/fnm/fixed_point
 command Save5 Typer ~/fnm/corde

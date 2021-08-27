@@ -155,6 +155,7 @@ autocmd BufNewFile,BufRead *.ts setfiletype xml
 autocmd BufNewFile,BufRead *.ui setfiletype xml
 autocmd BufNewFile,BufRead *.ypp setfiletype yacc
 autocmd BufNewFile,BufRead *.asm set filetype=asm_ca65
+autocmd BufNewFile,BufRead *.lox set filetype=lox
 
 " fswitch
 autocmd BufEnter *.hpp let b:fswitchdst = "cpp"
