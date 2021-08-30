@@ -69,5 +69,3 @@ command Insert1 Typer ~/fnm/swaprows
 command Insert2 Typer ~/fnm/checkfact
 command Insert3 Typer ~/fnm/detfact
 command Insert4 Typer ~/fnm/fourier
-
-
