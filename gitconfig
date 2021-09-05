@@ -1,0 +1,23 @@
+[user]
+	name = chrisisnotarudeguy
+    email = christian.ricci2000@gmail.com
+
+[alias]
+        brt = "!git for-each-ref refs/heads --color=always --sort -committerdate --format='%(HEAD)%(color:reset);%(color:yellow)%(refname:short)%(color:reset);%(contents:subject);%(color:green)(%(committerdate:relative))%(color:blue);<%(authorname)>' | column -t -s ';'"
+	lga = log --pretty=fmt --date=short --graph --all
+	lg = log --pretty=fmt --date=short --graph
+	la = log --pretty=fmt --date=short --all
+	ll = log --pretty=fmt --date=short
+	lf = log --pretty=fuller --stat
+	diffc = diff --cached
+	br = branch -vv
+	brr = branch -vva
+[filesystem "AdoptOpenJDK|11.0.6|/dev/sda5"]
+	timestampResolution = 38000 nanoseconds
+	minRacyThreshold = 4555 microseconds
+[pull]
+	rebase = false
+[init]
+	defaultBranch = master
+[pretty]
+	fmt = %C(auto)%h %C(magenta)%ad %C(cyan)%an%C(auto)%d %s

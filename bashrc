@@ -29,7 +29,6 @@ export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:ls' # Ignore the ls command as well
 [[ -d "$HOME/.bin/melonds" ]] && PATH="$HOME/.bin/melonds":$PATH
 [[ -d "${HOME}/.man" ]] && MANPATH="${HOME}/.man:${MANPATH}"
 [[ -d "${HOME}/.info" ]] && INFOPATH="${HOME}/.info:${INFOPATH}"
-[[ -f "${HOME}/.cargo/env" ]] && source "$HOME/.cargo/env"
 [[ -f "$HOME/.bash/aliases" ]] && . "$HOME/.bash/aliases"
 [[ -f "$HOME/.bash/functions" ]] && . "$HOME/.bash/functions"
 export PATH
