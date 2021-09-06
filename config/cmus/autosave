@@ -1,6 +1,6 @@
 set aaa_mode=artist
 set altformat_current= %F 
-set altformat_playlist= %f%= %d 
+set altformat_playlist= %F%= %d 
 set altformat_title=%f
 set altformat_trackwin= %f%= %d 
 set auto_expand_albums_follow=true
@@ -58,10 +58,9 @@ set dsp.ao.wav_counter=1
 set dsp.ao.wav_dir=/home/chris
 set dsp.jack.resampling_quality=2
 set dsp.jack.server_name=
-set dsp.oss.device=
 set follow=false
 set format_current= %a - %l -%3n. %t%= %y 
-set format_playlist= %-21%a %3n. %t%= %y %d %{?X!=0?%3X ?    }
+set format_playlist= %F%= %d
 set format_playlist_va= %-21%A %3n. %t (%a)%= %y %d %{?X!=0?%3X ?    }
 set format_statusline= %{status} %{?show_playback_position?%{position} %{?duration?/ %{duration} }?%{?duration?%{duration} }}- %{total} %{?bpm>0?at %{bpm} BPM }%{?volume>=0?vol: %{?lvolume!=rvolume?%{lvolume},%{rvolume} ?%{volume} }}%{?stream?buf: %{buffer} }%{?show_current_bitrate & bitrate>=0? %{bitrate} kbps }%=%{?repeat_current?repeat current?%{?play_library?%{playlist_mode} from %{?play_sorted?sorted }library?playlist}} | %1{continue}%1{follow}%1{repeat}%1{shuffle} 
 set format_title=%a - %l - %t (%y)
@@ -89,8 +88,6 @@ set lib_add_filter=
 set lib_sort=albumartist date album discnumber tracknumber title filename play_count
 set mixer.alsa.channel=
 set mixer.alsa.device=
-set mixer.oss.channel=PCM
-set mixer.oss.device=
 set mixer.pulse.restore_volume=1
 set mouse=false
 set mpris=true
