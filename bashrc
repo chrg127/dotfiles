@@ -63,6 +63,7 @@ else
     echo "WARNING: SHELL/OS NOT SUPPORTED!"
 fi
 
-if [[ $(command -v cowsay > /dev/null && command -v fortune > /dev/null) -eq 0 ]]; then
-    fortune -e fortunes | cowsay -f moofasa
-fi
+# uncomment for moofasa
+# if [[ $(command -v cowsay > /dev/null && command -v fortune > /dev/null) -eq 0 ]]; then
+#     fortune -e fortunes | cowsay -f moofasa
+# fi

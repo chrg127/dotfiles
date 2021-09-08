@@ -24,10 +24,23 @@ syn match loxBraces display "[{}]"
 
 syn keyword loxSpecialValue nil
 
-syn match loxNumber '\d\+'
-syn match loxNumber '\d\+\.\d*'
-syn match loxNumber '-\d\+'
-syn match loxNumber '-\d\+\.\d*'
+syn match loxNumbers display transparent "\<\d\|\.\d" contains=loxNumber,loxFloat
+" syn match loxNumber '\d\+'
+" syn match loxNumber '\d\+\.\d*'
+" syn match loxNumber '-\d\+'
+" syn match loxNumber '-\d\+\.\d*'
+
+syn match loxNumber display contained "\d\+\(u\=l\{0,2}\|ll\=u\)\>"
+" hex number
+" syn match loxNumber display contained "0x\x\+\(u\=l\{0,2}\|ll\=u\)\>"
+" float
+syn match loxFloat display contained "\d\+"
+"floating point number, with dot, optional exponent
+syn match loxFloat display contained "\d\+\.\d*\(e[-+]\=\d\+\)\="
+"floating point number, starting with a dot, optional exponent
+" syn match loxFloat display contained "\.\d\+\(e[-+]\=\d\+\)\=[fl]\=\>"
+"floating point number, without dot, with exponent
+" syn match loxFloat display contained "\d\+e[-+]\=\d\+[fl]\=\>"
 
 syn region loxString start='"' end='"'
 
@@ -44,6 +57,7 @@ hi def link loxKeyword          Keyword
 hi def link loxSpecialValue     Constant
 hi def link loxString           String
 hi def link loxNumber           Number
+hi def link loxFloat            Number
 hi def link loxComment          Comment
 hi def link loxTodo             Todo
 hi def link loxFunction         Function
