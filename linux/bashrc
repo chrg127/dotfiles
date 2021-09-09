@@ -36,15 +36,21 @@ export PATH
 # misc
 # don't wait for job termination notification
 set -o notify
+
 # check the window size after each command and, if necessary, update the values of LINES and COLUMNS.
 shopt -s checkwinsize
+
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
 # forgot
 # xhost +local:root > /dev/null 2>&1
-# stty susp undef
+
 # set CTRL-Z to be equal to 'fg'
+# yes, both of these are needed
+stty susp undef
 bind '"\C-z":"fg\015"'
+
 export GCC_COLORS='error=01;91:warning=01;95:note=01;96:caret=01;92:locus=01:quote=01'
 export VISUAL=vim
 export EDITOR="$VISUAL"
