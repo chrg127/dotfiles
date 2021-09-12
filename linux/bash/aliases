@@ -12,6 +12,7 @@ alias egrep='egrep --color=auto'
 alias cp='cp -i'
 alias df='df -h'
 alias du='du -h'
+alias mv='mv -i'
 alias less='less -r' # raw control characters
 alias whence='type -a' # where, of a sort
 alias ..='cd ..'
