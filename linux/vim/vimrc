@@ -42,11 +42,10 @@ set encoding=UTF-8
 set exrc            " read current dir's .vimrc
 set secure          " secure local .vimrc by disabling some commands
 set directory=~/.cache/vim/swap//   " set a cache directory for swap files
-"set linebreak       " set to break lines at specific column.
 set clipboard+=unnamedplus
 set suffixes=".bak,~,.o,.swp,.obj,.d,.class" " ignore these file extensions when matching
 set wildignore=*.o,*.d,*.class
-"set textwidth=0
+" set textwidth=0
 runtime ftplugin/man.vim " enable :Man command
 
 " language specific settings
@@ -87,10 +86,8 @@ let g:dirvish_mode = ':sort ,^.*[\/], | :silent keeppatterns g@\v/\.[^\/]+/?$@d 
 " ===== colors =====
 " colorscheme palenight
 colorscheme dosboxblack
-" let g:gruvbox_contrast_dark = 'hard'
-" let g:gruvbox_italic = 1
-" let g:gruvbox_underline = 1
-" colorscheme gruvbox
+let g:gruvbox_bold = 0
+colorscheme gruvbox8
 
 " ===== custom functions =====
 function! s:StripTrailingWhitespace()
