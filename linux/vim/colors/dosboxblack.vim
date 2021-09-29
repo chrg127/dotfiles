@@ -72,3 +72,7 @@ hi User1 guifg=#d04863 guibg=#1a1a1a ctermfg=168 ctermbg=234
 hi User2 guifg=#00baa8 guibg=#1a1a1a ctermfg=37 ctermbg=234
 hi User3 guifg=#f5fef8 guibg=#1a1a1a ctermfg=255 ctermbg=234
 hi User4 guifg=#000000 guibg=#8f8f8f gui=NONE cterm=NONE ctermfg=232 ctermbg=245
+hi link User5 PMenuSel
+hi link User6 DiffChange
+hi link User7 DiffAdd
+hi link User8 DiffDelete

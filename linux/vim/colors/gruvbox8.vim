@@ -112,8 +112,8 @@ if s:t_Co >= 256
     hi Statement ctermfg=203 ctermbg=NONE cterm=NONE
     hi StorageClass ctermfg=208 ctermbg=NONE cterm=NONE
     hi Special ctermfg=208 ctermbg=NONE cterm=italic
-    hi String ctermfg=142 ctermbg=NONE cterm=italic
-    hi Structure ctermfg=107 ctermbg=NONE cterm=NONE
+    hi String ctermfg=175 ctermbg=NONE cterm=italic
+    hi Structure ctermfg=214 ctermbg=NONE cterm=NONE
     hi Todo ctermfg=fg ctermbg=235 cterm=bold,italic
     hi Type ctermfg=214 ctermbg=NONE cterm=NONE
     hi Typedef ctermfg=214 ctermbg=NONE cterm=NONE
@@ -143,7 +143,11 @@ if s:t_Co >= 256
     hi User1 ctermfg=203 ctermbg=239
     hi User2 ctermfg=107 ctermbg=239 cterm=bold
     hi User3 ctermfg=109 ctermbg=239 cterm=bold
-    hi User4 ctermfg=235 ctermbg=243
+    hi User4 ctermfg=235 ctermbg=102
+    hi User5 ctermfg=235 ctermbg=137
+    hi User6 ctermfg=235 ctermbg=208
+    hi User7 ctermfg=235 ctermbg=109
+    hi User8 ctermfg=235 ctermbg=214
 
     if !(get(g:, 'gruvbox_plugin_hi_groups', 0) || get(g:, 'gruvbox_filetype_hi_groups', 0))
       finish

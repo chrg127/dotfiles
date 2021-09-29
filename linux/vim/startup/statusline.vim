@@ -5,12 +5,13 @@ let g:currentmode={
     \ 'cv'      : 'Vim Ex',    'ce' : 'Ex',          'r'  : 'Prompt',        'rm' : 'Di piu',
     \ 'r?'      : 'Conferma',  '!'  : 'Shell',       't'  : 'Terminale',
     \}
+
 let g:mode_colors={
-    \ 'n'       : 'PMenuSel',   'no' : 'PMenuSel',    'v'  : 'DiffChange',    'V'  : 'DiffChange',
-    \ "\<c-v>"  : 'DiffChange', 's'  : 'DiffDelete',  'S'  : 'DiffDelete',    '^S' : 'DiffDelete',
-    \ 'i'       : 'DiffAdd',    'R'  : 'DiffDelete',  'Rv' : 'DiffDelete',    'c'  : 'PMenuSel'  ,
-    \ 'cv'      : 'PMenuSel',   'ce' : 'PMenuSel',    'r'  : 'PMenuSel',      'rm' : 'PMenuSel'  ,
-    \ 'r?'      : 'PMenuSel',   '!'  : 'PMenuSel',    't'  : 'PMenuSel',
+    \ 'n'       : 'User5', 'no' : 'User5',  'v'  : 'User6',    'V'  : 'User6',
+    \ "\<c-v>"  : 'User6', 's'  : 'User8',  'S'  : 'User8',    '^S' : 'User8',
+    \ 'i'       : 'User7', 'R'  : 'User8',  'Rv' : 'User8',    'c'  : 'User5',
+    \ 'cv'      : 'User5', 'ce' : 'User5',  'r'  : 'User5',    'rm' : 'User5',
+    \ 'r?'      : 'User5', '!'  : 'User5',  't'  : 'User5',
     \}
 
 function! Status(winnum)
@@ -46,7 +47,7 @@ function! Status(winnum)
         let stat .= active ? gutentags#statusline('[', ']') . ' ' : ''
         let stat .= filetype ==# '' ? 'normal text ' : filetype . ' '
         let stat .= WebDevIconsGetFileTypeSymbol(bufname(bufnum)) . '  '
-        let stat .= active ? '%#PMenuSel#' : '%4*'
+        let stat .= active ? '%#User5#' : '%4*'
         let stat .= ' %l, %v :: %L '
     endif
     return stat
