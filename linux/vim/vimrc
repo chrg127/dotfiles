@@ -154,6 +154,7 @@ autocmd BufNewFile,BufRead *.ui setfiletype xml
 autocmd BufNewFile,BufRead *.ypp setfiletype yacc
 autocmd BufNewFile,BufRead *.asm set filetype=asm_ca65
 autocmd BufNewFile,BufRead *.lox set filetype=lox
+autocmd! BufNewFile,BufRead *.vert,*.tesc,*.tese,*.glsl,*.geom,*.frag,*.comp set filetype=glsl
 
 " fswitch
 autocmd BufEnter *.hpp let b:fswitchdst = "cpp"
@@ -221,8 +222,9 @@ nnoremap <silent> <leader>ol :FSSplitRight<cr>
 " shortcut for nerdtree
 nnoremap <leader>n :NERDTreeToggle<CR> :RefreshStatus<CR>
 
+
+
 " ===== other stuff ====
 source ~/.vim/startup/statusline.vim
 " source ~/.vim/startup/startscreen.vim
 source ~/.vim/startup/typer.vim
-
