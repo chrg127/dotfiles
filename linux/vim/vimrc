@@ -86,9 +86,9 @@ let g:dirvish_mode = ':sort ,^.*[\/], | :silent keeppatterns g@\v/\.[^\/]+/?$@d 
 " ===== colors =====
 " colorscheme palenight
 colorscheme dosboxblack
-let g:gruvbox_bold = 0
-let g:gruvbox_italicize_strings = 0
-colorscheme gruvbox8
+" let g:gruvbox_bold = 0
+" let g:gruvbox_italicize_strings = 0
+" colorscheme gruvbox8
 
 " ===== custom functions =====
 function! s:StripTrailingWhitespace()

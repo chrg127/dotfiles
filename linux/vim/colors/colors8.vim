@@ -70,3 +70,7 @@ hi User1 ctermfg=Red ctermbg=DarkGrey
 hi User2 ctermfg=DarkGreen ctermbg=DarkGrey
 hi User3 ctermfg=Blue ctermbg=Grey
 hi User4 ctermfg=Black ctermbg=Grey
+hi link User5 PMenuSel
+hi link User6 DiffChange
+hi link User7 DiffAdd
+hi link User8 DiffDelete
