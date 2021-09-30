@@ -66,8 +66,8 @@ hi SpecialChar ctermfg=Cyan
 hi PreProc ctermfg=Cyan
 hi! link Directory Number
 hi! link SpecialKey PreProc
-hi User1 ctermfg=Red ctermbg=DarkGrey
-hi User2 ctermfg=DarkGreen ctermbg=DarkGrey
+hi User1 ctermfg=Red ctermbg=Grey
+hi User2 ctermfg=DarkGreen ctermbg=Grey
 hi User3 ctermfg=Blue ctermbg=Grey
 hi User4 ctermfg=Black ctermbg=Grey
 hi link User5 PMenuSel
