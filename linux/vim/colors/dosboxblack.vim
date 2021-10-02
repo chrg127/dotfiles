@@ -20,7 +20,7 @@ hi DiffText gui=NONE guifg=NONE guibg=#333333 term=reverse cterm=NONE ctermbg=23
 hi Directory gui=NONE guifg=#8f8f8f guibg=NONE ctermfg=245
 hi Error gui=NONE guifg=NONE guibg=#250909 ctermbg=52
 hi ErrorMsg gui=NONE guifg=NONE guibg=#250909 ctermbg=52
-hi FoldColumn gui=NONE guifg=#616161 guibg=NONE ctermfg=241
+hi FoldColumn gui=NONE guifg=#616161 guibg=NONE ctermfg=0
 hi Folded gui=NONE guifg=#707070 guibg=#1a1a1a ctermfg=242 ctermbg=234
 hi Ignore gui=NONE guifg=NONE guibg=NONE
 hi IncSearch gui=NONE guifg=#f7ce82 guibg=#000000 ctermfg=222 ctermbg=232
@@ -68,6 +68,7 @@ hi SpecialChar gui=NONE guifg=#89ddff guibg=NONE cterm=NONE ctermfg=117
 hi PreProc gui=NONE guifg=NONE guibg=NONE
 hi! link Directory Number
 hi! link SpecialKey PreProc
+hi! link qfLineNr Statement
 hi User1 guifg=#d04863 guibg=#1a1a1a ctermfg=168 ctermbg=234
 hi User2 guifg=#00baa8 guibg=#1a1a1a ctermfg=37 ctermbg=234
 hi User3 guifg=#f5fef8 guibg=#1a1a1a ctermfg=255 ctermbg=234
