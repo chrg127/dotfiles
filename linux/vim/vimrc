@@ -89,8 +89,9 @@ let g:gruvbox_italicize_strings = 0
 if &t_Co ==# 8
     colorscheme colors8
 else
-    " colorscheme palenight
     colorscheme dosboxblack
+    " colorscheme moonfly
+    " colorscheme palenight
     " colorscheme gruvbox8
 endif
 
