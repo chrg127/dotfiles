@@ -16,3 +16,6 @@
 [submodule "vim/bundle/UltiSnips"]
 	path = vim/bundle/UltiSnips
 	url = https://github.com/sirver/UltiSnips
+[submodule "linux/vim/bundle/vim-surround"]
+	path = linux/vim/bundle/vim-surround
+	url = https://github.com/tpope/vim-surround
