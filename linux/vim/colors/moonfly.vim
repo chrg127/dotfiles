@@ -232,7 +232,7 @@ exec 'highlight VisualNOS ctermbg=' . s:grey0.term . ' ctermfg=fg cterm=none gui
 exec 'highlight VisualInDiff ctermbg=' . s:grey0.term . ' ctermfg=' . s:white.term . ' guibg=' . s:grey0.hex . ' guifg=' . s:white.hex
 
 " Errors, warnings and whitespace-eol
-exec 'highlight Error ctermbg=bg ctermfg=' . s:red.term . ' guibg=bg guifg=' . s:red.hex
+exec 'highlight Error ctermfg=fg ctermbg=' . s:red.term . ' guifg=fg guibg=' . s:red.hex
 exec 'highlight ErrorMsg ctermbg=bg ctermfg=' . s:red.term . ' guibg=bg guifg=' . s:red.hex
 exec 'highlight WarningMsg ctermbg=bg ctermfg=' . s:orange.term . ' guibg=bg guifg=' . s:orange.hex
 
