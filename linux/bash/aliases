@@ -34,10 +34,10 @@ alias easyrpg="easyrpg-player --window"
 if command -v xdg-open &> /dev/null; then
     alias open="xdg-open"
 fi
+alias ip="ip -c"
 
 # os-specific aliases
 if [[ $(expr substr $(uname -s) 1 5) == "Linux" ]]; then
-    alias lunarmagic="wine /home/chri/SMWHacking/lunar-magic/Lunar\ Magic.exe"
     alias youtube-dl="youtube-dl -o '%(title)s.%(ext)s'"
     alias mp3-dl="youtube-dl -x --audio-format mp3 --audio-quality 0 -o '%(title)s.%(ext)s'"
     alias ogg-dl="youtube-dl -x --audio-format vorbis --audio-quality 0 -o '%(title)s.%(ext)s'"
