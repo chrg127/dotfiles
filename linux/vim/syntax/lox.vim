@@ -13,11 +13,12 @@ syn keyword loxKeyword
     \ print return super this true var while
 
 syn match loxOperator "\(<<\|>>\|[-+*/%&^|<>!=]\)="
-syn match loxOperator "[.!~*&%<>^|=,+-]"
+syn match loxOperator "[\[\]?:.!~*&%<>^|=,+-]"
 syn match loxOperator "/[^/*=]"me=e-1
 syn match loxOperator "/$"
-syn keyword loxOperator and
-syn keyword loxOperator or
+syn keyword loxOperator and or operator
+
+syn keyword loxInclude include
 
 syn match loxDelimiter "[();\\]"
 syn match loxBraces display "[{}]"
@@ -64,6 +65,7 @@ hi def link loxFunction         Function
 hi def link loxOperator         Operator
 hi def link loxDelimiter        Delimiter
 hi def link loxBraces           Delimiter
+hi def link loxInclude          PreProc
 
 let b:current_syntax = "lox"
 
