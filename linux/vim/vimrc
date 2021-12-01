@@ -45,7 +45,8 @@ set directory=~/.cache/vim/swap//   " set a cache directory for swap files
 set clipboard+=unnamedplus
 set suffixes=".bak,~,.o,.swp,.obj,.d,.class" " ignore these file extensions when matching
 set wildignore=*.o,*.d,*.class
-" set textwidth=0
+set undofile
+set undodir=~/.cache/vim/undo
 runtime ftplugin/man.vim " enable :Man command
 
 " language specific settings
@@ -217,6 +218,9 @@ nnoremap <leader>b :ls<CR>:b<space>
 
 " quick switch to last buffer
 nnoremap <leader>q :b#<CR>
+
+" open links (not working)
+" nnoremap gX :silent :execute "!xdg-open" expand('%:p:h') . "/" . expand("<cfile>") " &"<cr>
 
 " shortcuts for fswitch
 nnoremap <silent> <leader>ok :FSSplitAbove<cr>
