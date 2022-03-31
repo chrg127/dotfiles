@@ -1,2 +1,17 @@
 set disassembly intel
-set print pretty 1
+set print pretty on
+set print array on
+set print array-indexes on
+set print object on
+set print demangle on
+set demangle-style gnu-v3
+set print sevenbit-strings off
+set follow-fork-mode child
+set detach-on-fork off
+
+#python
+
+#from qt import register_qt_printers
+#register_qt_printers (None)
+
+#end

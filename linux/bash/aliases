@@ -19,6 +19,7 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias py='python3'
+alias python='python3'
 alias doc="cd ~/Documenti"
 alias dl="cd ~/Scaricati"
 alias h="cd ~"
