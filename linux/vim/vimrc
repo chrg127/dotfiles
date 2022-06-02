@@ -47,6 +47,9 @@ set suffixes=".bak,~,.o,.swp,.obj,.d,.class" " ignore these file extensions when
 set wildignore=*.o,*.d,*.class
 set undofile
 set undodir=~/.cache/vim/undo
+set grepprg=grep\ -rInH
+set grepformat=%f:%l:%m
+set path=.,/usr/local/include,/usr/include,/usr/include/c++/11
 runtime ftplugin/man.vim " enable :Man command
 
 " language specific settings
@@ -105,17 +108,6 @@ function! s:StripTrailingWhitespace()
         normal 'yz<CR>
         normal `z
     endif
-endfunction
-
-function! s:ShowASM()
-    if &filetype != 'cpp' && &filetype != 'c'
-        return
-    endif
-    let filename = expand("%r")
-    let tmpfile = "/tmp/disassembled_" . expand("%:r") . ".s"
-    execute "!g++ -std=c++20 -S -O3 -masm=intel -fno-asynchronous-unwind-tables " . filename . " -o " . tmpfile
-    execute "split" . tmpfile
-    normal gg
 endfunction
 
 function! s:CppMan(str)
@@ -231,6 +223,9 @@ nnoremap <silent> <leader>ol :FSSplitRight<cr>
 " shortcut for nerdtree
 nnoremap <leader>n :NERDTreeToggle<CR> :RefreshStatus<CR>
 
+" keep selection after indention
+vnoremap < <gv
+vnoremap > >gv
 
 
 " ===== other stuff ====

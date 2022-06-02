@@ -1,5 +1,5 @@
 setlocal commentstring=//\ %s
-setlocal textwidth=80
+" setlocal textwidth=80
 set makeprg=make\ EXTRA_CFLAGS=fdiagnostics-color=always
 let &errorformat = '%E%f:%l:%c: fatal error: %m,' .
                  \ '%E%f:%l:%c: error: %m,' .

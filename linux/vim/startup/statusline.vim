@@ -46,7 +46,9 @@ function! Status(winnum)
         let stat .= '%w%<%='
         let stat .= active ? gutentags#statusline('[', ']') . ' ' : ''
         let stat .= filetype ==# '' ? 'normal text ' : filetype . ' '
-        let stat .= WebDevIconsGetFileTypeSymbol(bufname(bufnum)) . '  '
+        let stat .= WebDevIconsGetFileTypeSymbol(bufname(bufnum)) . ' :: '
+        let stat .= getbufvar(bufnum, '&encoding') . ', ' . getbufvar(bufnum, '&fileformat') . ' '
+        let stat .= WebDevIconsGetFileFormatSymbol(bufname(bufnum)) . '  '
         let stat .= active ? '%#User5#' : '%4*'
         let stat .= ' %l, %v :: %L '
     endif

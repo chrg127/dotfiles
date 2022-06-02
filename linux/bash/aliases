@@ -40,9 +40,9 @@ alias ip="ip -c"
 # os-specific aliases
 if [[ $(expr substr $(uname -s) 1 5) == "Linux" ]]; then
     alias youtube-dl="youtube-dl -o '%(title)s.%(ext)s'"
-    alias mp3-dl="youtube-dl -x --audio-format mp3 --audio-quality 0 -o '%(title)s.%(ext)s'"
-    alias ogg-dl="youtube-dl -x --audio-format vorbis --audio-quality 0 -o '%(title)s.%(ext)s'"
-    alias pl-dl="youtube-dl -x --audio-format vorbis --audio-quality 0 -o '%(playlist_index)s. %(title)s.%(ext)s'"
+    alias mp3-dl="yt-dlp -x --audio-format mp3 --audio-quality 0 -o '%(title)s.%(ext)s'"
+    alias ogg-dl="yt-dlp -x --audio-format vorbis --audio-quality 0 -o '%(title)s.%(ext)s'"
+    alias pl-dl="yt-dlp -x --audio-format vorbis --audio-quality 0 -o '%(playlist_index)s. %(title)s.%(ext)s'"
 elif [[ $(expr substr $(uname -s) 1 4) == "MSYS" ]]; then
     alias winhome="cd /c/Users/chri"
     alias winprog="cd /c/Users/chri/Principale/programming"
