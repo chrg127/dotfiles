@@ -1,18 +1,19 @@
 # if not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-# completion
-# define to avoid stripping description in --option=description of './configure --help'
-COMP_CONFIGURE_HINTS=1
-# define to avoid flattening internal contents of tar files
-COMP_TAR_INTERNAL_PATHS=1
+
+
+
+### completion
 # source bash_completion (second one is for MSYS2)
 [[ -r /usr/share/bash-completion/bash_completion ]] && . /usr/share/bash-completion/bash_completion
 [[ -f /etc/bash_completion ]] && . /etc/bash_completion
 # completion for sudo
 complete -cf sudo
 
-# history
+
+
+### history
 shopt -s histappend
 # don't put duplicate lines or lines starting with space in the history.
 export HISTCONTROL=ignoreboth
@@ -22,6 +23,9 @@ export HISTFILESIZE=2000
 # The '&' is a special pattern which suppresses duplicate entries.
 export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:ls' # Ignore the ls command as well
 
+
+
+### PATH
 [[ -d "$HOME/.bin" ]] && PATH="$HOME/.bin:$PATH"
 [[ -d "$HOME/.local/bin" ]] && PATH="$HOME/.local/bin:$PATH"
 [[ -d "$HOME/.bin/aseprite" ]] && PATH="$HOME/.bin/aseprite:$PATH"
@@ -34,7 +38,7 @@ export PATH
 
 
 
-# aliases
+### aliases
 alias ls='ls -h --color=auto --group-directories-first'
 alias ll='ls -alF --group-directories-first'
 alias la='ls -A'
@@ -64,7 +68,7 @@ alias bc="bc -q"
 alias gdb="gdb -q"
 alias gcc-asm="gcc -std=c17 -S -Wall -Wextra -masm=intel -fno-asynchronous-unwind-tables"
 alias g++-asm="g++ -std=c++20 -S -Wall -Wextra -masm=intel -fno-asynchronous-unwind-tables -fno-exceptions -fno-rtti"
-# add an "alert" alias for long running commands.  Use like so: sleep 10; alert
+# add an "alert" alias for long running commands. Use like so: sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 alias easyrpg="easyrpg-player --window"
 if command -v xdg-open &> /dev/null; then
@@ -78,7 +82,8 @@ alias pl-dl="yt-dlp -x --audio-format vorbis --audio-quality 0 -o '%(playlist_in
 
 
 
-# functions
+### functions
+
 # change and list directory
 cdl() {
     cd "$1" && ls
@@ -93,15 +98,6 @@ mkcdir() {
         cd "$1";
     fi
 }
-
-PS1_BLACK='\[\033[01;90m\]'
-PS1_RED='\[\033[01;91m\]'
-PS1_GREEN='\[\033[01;92m\]'
-PS1_YELLOW='\[\033[01;93m\]'
-PS1_BLUE='\[\033[01;94m\]'
-PS1_PURPLE='\[\033[01;95m\]'
-PS1_CYAN='\[\033[01;96m\]'
-PS1_WHITE='\[\033[01;97m\]'
 
 # functions for outputting text in the prompt.
 # using "echo" is a hack.
@@ -131,6 +127,14 @@ function ps1_git {
 
 function draw_prompt {
     local ERRCODE="$?"
+    PS1_BLACK='\[\033[01;90m\]'
+    PS1_RED='\[\033[01;91m\]'
+    PS1_GREEN='\[\033[01;92m\]'
+    PS1_YELLOW='\[\033[01;93m\]'
+    PS1_BLUE='\[\033[01;94m\]'
+    PS1_PURPLE='\[\033[01;95m\]'
+    PS1_CYAN='\[\033[01;96m\]'
+    PS1_WHITE='\[\033[01;97m\]'
     PS1=""
     PS1+=$PS1_CYAN'\u@\h ' # user@host
     PS1+=$PS1_BLUE'\w '    # directory
@@ -151,7 +155,7 @@ colors() {
     printf "Color escapes are %s\n" '\e[${value};...;${value}m'
     printf "Values 30..37 are \e[33mforeground colors\e[m\n"
     printf "Values 40..47 are \e[43mbackground colors\e[m\n"
-    printf "Value  1 gives a  \e[1mbold-faced look\e[m\n\n"
+    printf "Value 1 gives a \e[1mbold-faced look\e[m\n\n"
 
     # foreground colors
     for fgc in {30..37}; do
@@ -233,7 +237,8 @@ bin2hex() {
 
 
 
-# misc
+### misc
+
 # don't wait for job termination notification
 set -o notify
 
@@ -243,14 +248,14 @@ shopt -s checkwinsize
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# forgot
-# xhost +local:root > /dev/null 2>&1
-
-# set CTRL-Z to be equal to 'fg'
-# yes, both of these are needed
+# set CTRL-Z to be equal to 'fg'. yes, both of these are needed
 stty susp undef
 bind '"\C-z":"fg\015"'
 
+# define to avoid stripping description in --option=description of './configure --help'
+COMP_CONFIGURE_HINTS=1
+# define to avoid flattening internal contents of tar files
+COMP_TAR_INTERNAL_PATHS=1
 export GCC_COLORS='error=01;91:warning=01;95:note=01;96:caret=01;92:locus=01:quote=01'
 export VISUAL=vim
 export EDITOR="$VISUAL"
@@ -258,18 +263,5 @@ export PROMPT_DIRTRIM=2
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
 export PASSWORD_STORE_ENABLE_EXTENSIONS=true
 eval "$(dircolors ${HOME}/.dircolors)"
+# define for a custom prompt
 PROMPT_COMMAND=draw_prompt
-
-# OSNAME=$(expr substr $(uname -s) 1 10)
-# if [[ "$OSNAME" == "MSYS_NT-10" || "$OSNAME" == "MINGW64_NT" || "$OSNAME" == "MINGW32_NT" ]]; then
-#     eval "$(dircolors /etc/DIR_COLORS)"
-#     export PATH="/c/Users/chri/Path:$PATH"
-# elif [[ "$OSNAME" == "Linux" ]]; then
-# else
-#     echo "WARNING: SHELL/OS NOT SUPPORTED!"
-# fi
-
-# uncomment for moofasa
-# if [[ $(command -v cowsay > /dev/null && command -v fortune > /dev/null) -eq 0 ]]; then
-#     fortune -e fortunes | cowsay -f moofasa
-# fi
