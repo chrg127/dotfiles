@@ -77,3 +77,4 @@ hi link User5 PMenuSel
 hi link User6 DiffChange
 hi link User7 DiffAdd
 hi link User8 DiffDelete
+hi User9 ctermbg=239 ctermfg=255

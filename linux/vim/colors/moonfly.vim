@@ -964,3 +964,4 @@ hi User5 guifg=#080808 guibg=#80a0ff ctermfg=232 ctermbg=4
 hi link User6 IncSearch
 hi link User7 DiffAdd
 hi link User8 Search
+hi link User9 StatusLine
