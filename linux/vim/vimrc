@@ -88,14 +88,8 @@ let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 let g:dirvish_mode = ':sort ,^.*[\/], | :silent keeppatterns g@\v/\.[^\/]+/?$@d _'
 
 " ===== colors =====
-let g:gruvbox_bold = 0
-let g:gruvbox_italicize_strings = 0
-if &t_Co ==# 8
-    colorscheme colors8
-else
-    " this should be a symlink
-    source ~/.vim/startup/color_chooser.vim
-endif
+" this should be a symlink
+source ~/.vim/startup/color_chooser.vim
 
 " ===== custom functions =====
 function! s:StripTrailingWhitespace()
