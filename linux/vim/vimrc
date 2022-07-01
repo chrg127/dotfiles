@@ -219,6 +219,10 @@ nnoremap <leader>n :NERDTreeToggle<CR> :RefreshStatus<CR>
 vnoremap < <gv
 vnoremap > >gv
 
+" no ex mode
+noremap Q <Nop>
+
+
 
 " ===== other stuff ====
 source ~/.vim/startup/statusline.vim
