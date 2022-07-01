@@ -20,7 +20,7 @@ Color=8,8,8
 Color=208,72,99
 
 [Color1Faint]
-Color=37,9,9
+Color=208,72,99
 
 [Color1Intense]
 Color=208,72,99
@@ -29,7 +29,7 @@ Color=208,72,99
 Color=0,168,0
 
 [Color2Faint]
-Color=9,37,9
+Color=0,168,0
 
 [Color2Intense]
 Color=0,168,0
@@ -38,7 +38,7 @@ Color=0,168,0
 Color=247,206,130
 
 [Color3Faint]
-Color=101,94,0
+Color=247,206,130
 
 [Color3Intense]
 Color=247,206,130
@@ -47,7 +47,7 @@ Color=247,206,130
 Color=124,128,248
 
 [Color4Faint]
-Color=0,0,101
+Color=124,128,248
 
 [Color4Intense]
 Color=124,128,248
@@ -56,7 +56,7 @@ Color=124,128,248
 Color=174,0,134
 
 [Color5Faint]
-Color=101,0,101
+Color=174,0,134
 
 [Color5Intense]
 Color=174,0,134
@@ -65,7 +65,7 @@ Color=174,0,134
 Color=137,221,255
 
 [Color6Faint]
-Color=63,182,166
+Color=137,221,255
 
 [Color6Intense]
 Color=137,221,255
@@ -74,7 +74,7 @@ Color=137,221,255
 Color=245,254,248
 
 [Color7Faint]
-Color=97,97,97
+Color=245,254,248
 
 [Color7Intense]
 Color=245,254,248
@@ -89,8 +89,11 @@ Color=177,178,185
 Color=177,178,185
 
 [General]
+Anchor=0.5,0.5
 Blur=false
 ColorRandomization=false
 Description=DOS
+FillStyle=Tile
 Opacity=1
 Wallpaper=
+WallpaperOpacity=1
