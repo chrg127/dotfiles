@@ -25,15 +25,37 @@ export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:ls' # Ignore the ls command as well
 
 
 
-### PATH
-[[ -d "$HOME/.bin" ]] && PATH="$HOME/.bin:$PATH"
+### env vars
+
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_CACHE_HOME="$HOME/.cache"
+export ANDROID_HOME="$XDG_DATA_HOME/android"
+export HISTFILE="$XDG_STATE_HOME/bash/history"
+export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
+export KDEHOME="$XDG_CONFIG_HOME/kde"
+export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
+export MYSQL_HISTFILE="$XDG_DATA_HOME/mysql_history"
+export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"
+export GCC_COLORS='error=01;91:warning=01;95:note=01;96:caret=01;92:locus=01:quote=01'
+export VISUAL=vim
+export EDITOR="$VISUAL"
+export PROMPT_DIRTRIM=2
+export PASSWORD_STORE_ENABLE_EXTENSIONS=true
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME/pass"
+export PYTHONSTARTUP="${XDG_CONFIG_HOME}/python/pythonrc"
+export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
+export VIMINIT="set nocp | source ${XDG_CONFIG_HOME:-$HOME/.config}/vim/vimrc"
+# export VIMINIT="if has(\"nvim\") | so ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/init.vim | else | set nocp | so ${XDG_CONFIG_HOME:-$HOME/.config}/vim/vimrc | endif"
+
 [[ -d "$HOME/.local/bin" ]] && PATH="$HOME/.local/bin:$PATH"
-[[ -d "$HOME/.bin/aseprite" ]] && PATH="$HOME/.bin/aseprite:$PATH"
-[[ -d "$HOME/.bin/clion/bin" ]] && PATH="$HOME/.bin/clion/bin":$PATH
-[[ -d "$HOME/.bin/melonds" ]] && PATH="$HOME/.bin/melonds":$PATH
+[[ -d "$HOME/.local/bin/aseprite" ]] && PATH="$HOME/.local/bin/aseprite:$PATH"
+[[ -d "$HOME/.local/bin/clion/bin" ]] && PATH="$HOME/.local/bin/clion/bin":$PATH
+[[ -d "$HOME/.local/bin/melonds" ]] && PATH="$HOME/.local/bin/melonds":$PATH
 [[ -d "${HOME}/.man" ]] && MANPATH="${HOME}/.man:${MANPATH}"
 [[ -d "${HOME}/.info" ]] && INFOPATH="${HOME}/.info:${INFOPATH}"
-[[ -f "$HOME/.config/bash/functions" ]] && . "$HOME/.bash/functions"
 export PATH
 
 
@@ -65,7 +87,7 @@ alias h="cd ~"
 alias gits="git status"
 alias unixtime="date +%s"
 alias bc="bc -q"
-alias gdb="gdb -q"
+alias gdb="gdb -q -n -x $XDG_CONFIG_HOME/gdb/init"
 alias gcc-asm="gcc -std=c17 -S -Wall -Wextra -masm=intel -fno-asynchronous-unwind-tables"
 alias g++-asm="g++ -std=c++20 -S -Wall -Wextra -masm=intel -fno-asynchronous-unwind-tables -fno-exceptions -fno-rtti"
 # add an "alert" alias for long running commands. Use like so: sleep 10; alert
@@ -79,6 +101,8 @@ alias youtube-dl="youtube-dl -o '%(title)s.%(ext)s'"
 alias mp3-dl="yt-dlp -x --audio-format mp3 --audio-quality 0 -o '%(title)s.%(ext)s'"
 alias ogg-dl="yt-dlp -x --audio-format vorbis --audio-quality 0 -o '%(title)s.%(ext)s'"
 alias pl-dl="yt-dlp -x --audio-format vorbis --audio-quality 0 -o '%(playlist_index)s. %(title)s.%(ext)s'"
+alias units="units --history \"$XDG_DATA_HOME/units_history\""
+alias wget="wget --hsts-file=\"$XDG_DATA_HOME/wget-hsts\""
 
 
 
@@ -237,6 +261,9 @@ bin2hex() {
 
 
 
+
+
+
 ### misc
 
 # don't wait for job termination notification
@@ -256,12 +283,7 @@ bind '"\C-z":"fg\015"'
 COMP_CONFIGURE_HINTS=1
 # define to avoid flattening internal contents of tar files
 COMP_TAR_INTERNAL_PATHS=1
-export GCC_COLORS='error=01;91:warning=01;95:note=01;96:caret=01;92:locus=01:quote=01'
-export VISUAL=vim
-export EDITOR="$VISUAL"
-export PROMPT_DIRTRIM=2
-export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
-export PASSWORD_STORE_ENABLE_EXTENSIONS=true
-eval "$(dircolors ${HOME}/.dircolors)"
+# dircolors stuff
+# eval "$(dircolors ${HOME}/.dircolors)"
 # define for a custom prompt
 PROMPT_COMMAND=draw_prompt
