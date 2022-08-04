@@ -49,6 +49,8 @@ export PYTHONSTARTUP="${XDG_CONFIG_HOME}/python/pythonrc"
 export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 export VIMINIT="set nocp | source ${XDG_CONFIG_HOME:-$HOME/.config}/vim/vimrc"
 # export VIMINIT="if has(\"nvim\") | so ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/init.vim | else | set nocp | so ${XDG_CONFIG_HOME:-$HOME/.config}/vim/vimrc | endif"
+export TEXMFVAR="$XDG_CACHE_HOME"/texlive/texmf-var
+export WINEPREFIX="$XDG_DATA_HOME"/wine
 
 [[ -d "$HOME/.local/bin" ]] && PATH="$HOME/.local/bin:$PATH"
 [[ -d "$HOME/.local/bin/aseprite" ]] && PATH="$HOME/.local/bin/aseprite:$PATH"
