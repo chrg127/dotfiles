@@ -14,7 +14,6 @@ set runtimepath+=$XDG_CONFIG_HOME/vim/after
 set packpath^=$XDG_DATA_HOME/vim,$XDG_CONFIG_HOME/vim
 set packpath+=$XDG_CONFIG_HOME/vim/after,$XDG_DATA_HOME/vim/after
 
-let g:netrw_home = $XDG_DATA_HOME."/vim"
 call mkdir($XDG_DATA_HOME."/vim/spell", 'p', 0700)
 
 set backupdir=$XDG_CACHE_HOME/vim/backup | call mkdir(&backupdir, 'p', 0700)
@@ -93,7 +92,7 @@ let java_highlight_java_io=1
 let NERDTreeDirArrows=1
 " gutentags
 let g:gutentags_add_default_project_roots = 0
-let g:gutentags_project_root = ['.git', '.hg', '.svn', 'Makefile']
+let g:gutentags_project_root = ['.git', '.hg', '.svn', 'Makefile', 'CMakeLists.txt']
 let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/')
 command! -nargs=0 GutentagsClearCache call system('rm ' . g:gutentags_cache_dir . '/*')
 let g:gutentags_generate_on_new = 1

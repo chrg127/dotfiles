@@ -17,8 +17,8 @@ complete -cf sudo
 shopt -s histappend
 # don't put duplicate lines or lines starting with space in the history.
 export HISTCONTROL=ignoreboth
-export HISTSIZE=1000
-export HISTFILESIZE=2000
+export HISTSIZE=10000
+export HISTFILESIZE=10000
 # HISTIGNORE is a colon-delimited list of patterns which should be excluded.
 # The '&' is a special pattern which suppresses duplicate entries.
 export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:ls' # Ignore the ls command as well
@@ -35,7 +35,6 @@ export ANDROID_HOME="$XDG_DATA_HOME/android"
 export HISTFILE="$XDG_STATE_HOME/bash/history"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
-export KDEHOME="$XDG_CONFIG_HOME/kde"
 export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
 export MYSQL_HISTFILE="$XDG_DATA_HOME/mysql_history"
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"
@@ -287,3 +286,5 @@ COMP_TAR_INTERNAL_PATHS=1
 # eval "$(dircolors ${HOME}/.dircolors)"
 # define for a custom prompt
 PROMPT_COMMAND=draw_prompt
+
+[ -s "/home/chrg/.jabba/jabba.sh" ] && source "/home/chrg/.jabba/jabba.sh"
