@@ -38,7 +38,10 @@ export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
 export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
 export MYSQL_HISTFILE="$XDG_DATA_HOME/mysql_history"
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"
-export GCC_COLORS='error=01;91:warning=01;95:note=01;96:caret=01;92:locus=01:quote=01'
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:range1=32:range2=34:locus=01:'\
+'quote=01:path=01;36:fixit-insert=32:fixit-delete=31:'\
+'diff-filename=01:diff-hunk=32:diff-delete=31:diff-insert=32:'\
+'type-diff=01;32'
 export VISUAL=vim
 export EDITOR="$VISUAL"
 export PROMPT_DIRTRIM=2

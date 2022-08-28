@@ -17,16 +17,16 @@ Color=24,24,24
 Color=8,8,8
 
 [Color1]
-Color=215,95,135
+Color=135,0,0
 
 [Color1Faint]
-Color=208,72,99
+Color=215,95,135
 
 [Color1Intense]
 Color=215,95,135
 
 [Color2]
-Color=0,175,0
+Color=0,135,0
 
 [Color2Faint]
 Color=0,175,0
@@ -35,7 +35,7 @@ Color=0,175,0
 Color=0,175,0
 
 [Color3]
-Color=255,215,135
+Color=255,175,0
 
 [Color3Faint]
 Color=255,215,135
@@ -44,7 +44,7 @@ Color=255,215,135
 Color=255,215,135
 
 [Color4]
-Color=135,135,255
+Color=95,95,255
 
 [Color4Faint]
 Color=135,135,255
@@ -53,7 +53,7 @@ Color=135,135,255
 Color=135,135,255
 
 [Color5]
-Color=215,0,215
+Color=175,0,215
 
 [Color5Faint]
 Color=215,0,215
@@ -62,7 +62,7 @@ Color=215,0,215
 Color=215,0,215
 
 [Color6]
-Color=95,215,255
+Color=0,175,255
 
 [Color6Faint]
 Color=95,215,255
@@ -71,7 +71,7 @@ Color=95,215,255
 Color=95,215,255
 
 [Color7]
-Color=238,238,238
+Color=178,178,178
 
 [Color7Faint]
 Color=238,238,238
