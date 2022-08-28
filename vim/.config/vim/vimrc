@@ -252,4 +252,3 @@ noremap Q <Nop>
 " ===== other stuff ====
 source ~/.config/vim/startup/statusline.vim
 " source ~/.vim/startup/startscreen.vim
-source ~/.config/vim/startup/typer.vim

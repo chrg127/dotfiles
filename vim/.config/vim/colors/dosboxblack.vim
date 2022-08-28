@@ -12,8 +12,8 @@ if &t_Co ==# 8
     hi Constant ctermfg=Magenta
     "hi Cursor gui=reverse guifg=NONE guibg=NONE
     hi CursorColumn ctermbg=DarkGrey
-    hi CursorLine ctermbg=DarkGrey
-    hi CursorLineNr ctermfg=White ctermbg=DarkGrey
+    hi CursorLine cterm=NONE ctermbg=DarkGrey
+    hi CursorLineNr cterm=NONE ctermfg=White ctermbg=DarkGrey
     hi DiffAdd ctermfg=Black ctermbg=Cyan
     hi DiffChange ctermfg=Black ctermbg=Yellow
     hi DiffDelete ctermfg=Black ctermbg=Red
@@ -80,61 +80,60 @@ if &t_Co ==# 8
 else
 
     hi Boolean ctermfg=255
-    hi ColorColumn ctermbg=234
+    hi ColorColumn ctermbg=236
     hi Comment ctermfg=168
-    hi Conceal ctermfg=243
+    hi Conceal ctermfg=245 ctermbg=239
     hi Conditional ctermfg=255
     hi Constant ctermfg=164
-    hi CursorColumn ctermbg=234
-    hi CursorLine term=NONE cterm=NONE ctermbg=235
-    hi CursorLineNr term=NONE cterm=NONE ctermfg=255 ctermbg=234
+    hi CursorColumn ctermbg=236
+    hi CursorLine term=NONE cterm=NONE ctermbg=236
+    hi CursorLineNr term=NONE cterm=NONE ctermfg=255 ctermbg=236
     hi DiffAdd ctermfg=232 ctermbg=37
     hi DiffChange ctermfg=232 ctermbg=222
     hi DiffDelete ctermfg=232 ctermbg=168
     hi DiffText term=reverse cterm=NONE ctermbg=236
     hi Directory ctermfg=245
-    hi Error ctermbg=52
-    hi ErrorMsg ctermbg=52
-    hi FoldColumn ctermfg=0
-    hi Folded ctermfg=242 ctermbg=234
-    hi Ignore ctermfg=0
+    hi Error ctermbg=88
+    hi ErrorMsg ctermbg=88
+    hi FoldColumn ctermfg=232
+    hi Folded ctermfg=245 ctermbg=236
+    hi Ignore ctermfg=232
     hi IncSearch ctermfg=222 ctermbg=232
-    hi LineNr ctermfg=241
+    hi LineNr ctermfg=245
     hi MatchParen ctermbg=222
     hi ModeMsg term=bold cterm=bold
-    hi NonText ctermfg=241
+    hi NonText ctermfg=245
     hi Normal ctermfg=249 ctermbg=232
     hi Number ctermfg=105
-    hi Pmenu ctermbg=234 ctermfg=249
-    hi PmenuSbar ctermbg=235
+    hi Pmenu ctermbg=236 ctermfg=249
+    hi PmenuSbar ctermbg=239
+    hi PmenuThumb ctermbg=245
     hi PmenuSel ctermfg=232 ctermbg=105
-    hi PmenuThumb ctermbg=239
-    hi Question term=standout ctermfg=121
+    hi Question term=standout ctermfg=37
     hi Search ctermfg=232 ctermbg=222
-    hi SignColumn term=NONE ctermfg=241 ctermbg=232
+    hi SignColumn term=NONE ctermfg=245 ctermbg=232
     hi Special ctermfg=34
-    hi SpecialKey ctermfg=241
-    hi SpellBad term=underline cterm=underline ctermbg=52
-    hi SpellCap term=reverse ctermbg=12
-    hi SpellLocal ctermbg=22
-    hi SpellRare ctermbg=235
+    hi SpellBad term=underline cterm=underline ctermbg=88
+    hi SpellCap term=reverse ctermbg=105
+    hi SpellLocal ctermbg=28
+    hi SpellRare ctermbg=236
     hi Statement term=NONE ctermfg=255
     hi Operator term=NONE ctermfg=37
-    hi StatusLine cterm=reverse ctermfg=234 ctermbg=249
-    hi StatusLineNC ctermfg=242 ctermbg=235
-    hi StorageClass ctermfg=254
+    hi StatusLine cterm=reverse ctermfg=236 ctermbg=249
+    hi StatusLineNC ctermfg=245 ctermbg=236
+    hi StorageClass ctermfg=255
     hi String ctermfg=168
-    hi TabLine term=NONE cterm=NONE ctermfg=254 ctermbg=236
-    hi TabLineFill ctermfg=234 ctermbg=245
-    hi TabLineSel ctermfg=254 ctermbg=239
-    hi Title ctermfg=105
-    hi Todo term=standout ctermfg=0 ctermbg=11
-    hi Type ctermfg=254
+    hi TabLine term=NONE cterm=NONE ctermfg=255 ctermbg=239
+    hi TabLineFill ctermfg=236 ctermbg=245
+    hi TabLineSel ctermfg=232 ctermbg=105
+    hi Title ctermfg=222
+    hi Todo term=standout ctermfg=0 ctermbg=222
+    hi Type ctermfg=255
     hi Underlined term=underline cterm=underline ctermfg=81
-    hi VertSplit ctermfg=234 ctermbg=249
-    hi Visual ctermbg=236
+    hi VertSplit ctermfg=236 ctermbg=255
+    hi Visual ctermbg=239
     hi VisualNOS term=bold,underline cterm=bold,underline
-    hi WarningMsg ctermbg=52
+    hi WarningMsg ctermbg=88
     hi WildMenu ctermbg=239
     hi Identifier cterm=NONE ctermfg=117
     hi SpecialChar cterm=NONE ctermfg=117
@@ -142,9 +141,9 @@ else
     hi! link Directory Number
     hi! link SpecialKey PreProc
     hi! link qfLineNr Statement
-    hi User1 ctermfg=168 ctermbg=234
-    hi User2 ctermfg=37 ctermbg=234
-    hi User3 ctermfg=255 ctermbg=234
+    hi User1 ctermfg=168 ctermbg=236
+    hi User2 ctermfg=37 ctermbg=236
+    hi User3 ctermfg=255 ctermbg=236
     hi User4 cterm=NONE ctermfg=232 ctermbg=245
     hi link User5 PMenuSel
     hi link User6 DiffChange
