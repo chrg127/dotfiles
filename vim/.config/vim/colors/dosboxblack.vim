@@ -3,6 +3,23 @@ syntax reset
 set notermguicolors
 let g:colors_name = "dosboxblack"
 
+" colorscheme:
+"               light               dark
+" black         232     #080808
+" red           168     #d75f87     88      #870000
+" green         34      #00af00     28      #008700
+" yellow        222     #ffd787     214     #ffaf00
+" blue/purple   105     #8787ff     63      #5f5fff
+" fucsia        164     #d700d7     128     #af00d7
+" cyan          117     #87d7ff     39      #00afff
+" white         255     #eeeeee     249     #b2b2b2
+"
+" water green     37      #00afaf
+" other cyan      81      #5fd7ff
+" gray1           235     #262626
+" gray2           239     #4e4e4e
+" gray3           245     #8a8a8a
+
 if &t_Co ==# 8
     hi Boolean ctermfg=White
     hi ColorColumn ctermbg=DarkGrey
@@ -80,23 +97,23 @@ if &t_Co ==# 8
 else
 
     hi Boolean ctermfg=255
-    hi ColorColumn ctermbg=236
+    hi ColorColumn ctermbg=235
     hi Comment ctermfg=168
     hi Conceal ctermfg=245 ctermbg=239
     hi Conditional ctermfg=255
     hi Constant ctermfg=164
-    hi CursorColumn ctermbg=236
-    hi CursorLine term=NONE cterm=NONE ctermbg=236
-    hi CursorLineNr term=NONE cterm=NONE ctermfg=255 ctermbg=236
+    hi CursorColumn ctermbg=235
+    hi CursorLine term=NONE cterm=NONE ctermbg=235
+    hi CursorLineNr term=NONE cterm=NONE ctermfg=255 ctermbg=235
     hi DiffAdd ctermfg=232 ctermbg=37
     hi DiffChange ctermfg=232 ctermbg=222
     hi DiffDelete ctermfg=232 ctermbg=168
-    hi DiffText term=reverse cterm=NONE ctermbg=236
+    hi DiffText term=reverse cterm=NONE ctermbg=235
     hi Directory ctermfg=245
     hi Error ctermbg=88
     hi ErrorMsg ctermbg=88
     hi FoldColumn ctermfg=232
-    hi Folded ctermfg=245 ctermbg=236
+    hi Folded ctermfg=245 ctermbg=235
     hi Ignore ctermfg=232
     hi IncSearch ctermfg=222 ctermbg=232
     hi LineNr ctermfg=245
@@ -105,7 +122,7 @@ else
     hi NonText ctermfg=245
     hi Normal ctermfg=249 ctermbg=232
     hi Number ctermfg=105
-    hi Pmenu ctermbg=236 ctermfg=249
+    hi Pmenu ctermbg=235 ctermfg=249
     hi PmenuSbar ctermbg=239
     hi PmenuThumb ctermbg=245
     hi PmenuSel ctermfg=232 ctermbg=105
@@ -116,40 +133,38 @@ else
     hi SpellBad term=underline cterm=underline ctermbg=88
     hi SpellCap term=reverse ctermbg=105
     hi SpellLocal ctermbg=28
-    hi SpellRare ctermbg=236
+    hi SpellRare ctermbg=235
     hi Statement term=NONE ctermfg=255
     hi Operator term=NONE ctermfg=37
-    hi StatusLine cterm=reverse ctermfg=236 ctermbg=249
-    hi StatusLineNC ctermfg=245 ctermbg=236
+    hi StatusLine cterm=reverse ctermfg=235 ctermbg=249
+    hi StatusLineNC ctermfg=245 ctermbg=235
     hi StorageClass ctermfg=255
     hi String ctermfg=168
     hi TabLine term=NONE cterm=NONE ctermfg=255 ctermbg=239
-    hi TabLineFill ctermfg=236 ctermbg=245
+    hi TabLineFill ctermfg=235 ctermbg=245
     hi TabLineSel ctermfg=232 ctermbg=105
     hi Title ctermfg=222
-    hi Todo term=standout ctermfg=0 ctermbg=222
+    hi Todo term=standout ctermfg=232 ctermbg=222
     hi Type ctermfg=255
     hi Underlined term=underline cterm=underline ctermfg=81
-    hi VertSplit ctermfg=236 ctermbg=255
+    hi VertSplit ctermfg=235 ctermbg=255
     hi Visual ctermbg=239
     hi VisualNOS term=bold,underline cterm=bold,underline
     hi WarningMsg ctermbg=88
-    hi WildMenu ctermbg=239
+    hi WildMenu ctermbg=239 ctermfg=255
     hi Identifier cterm=NONE ctermfg=117
     hi SpecialChar cterm=NONE ctermfg=117
     hi PreProc term=underline ctermfg=81
     hi! link Directory Number
     hi! link SpecialKey PreProc
     hi! link qfLineNr Statement
-    hi User1 ctermfg=168 ctermbg=236
-    hi User2 ctermfg=37 ctermbg=236
-    hi User3 ctermfg=255 ctermbg=236
+    hi User1 ctermfg=168 ctermbg=235
+    hi User2 ctermfg=37 ctermbg=235
+    hi User3 ctermfg=255 ctermbg=235
     hi User4 cterm=NONE ctermfg=232 ctermbg=245
     hi link User5 PMenuSel
     hi link User6 DiffChange
     hi link User7 DiffAdd
     hi link User8 DiffDelete
     hi User9 ctermbg=239 ctermfg=255
-    " hi Cursor
-    " hi lCursor
 endif

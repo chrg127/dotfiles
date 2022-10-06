@@ -5,8 +5,8 @@ red             168     #d75f87
 green           34      #00af00
 yellow          222     #ffd787
 blue/purple     105     #8787ff
-fucsia         164     #d700d7
-cyan            81      #5fd7ff
+fucsia          164     #d700d7
+cyan            117     #87d7ff
 white           255     #eeeeee
 
 dark red        88      #870000
@@ -18,7 +18,7 @@ dark cyan       39      #00afff
 dark white      249     #b2b2b2
 
 water green     37      #00afaf
-light cyan      117     #87d7ff
-gray1           236     #303030
+other cyan      81      #5fd7ff
+gray1           235     #262626
 gray2           239     #4e4e4e
 gray3           245     #8a8a8a
