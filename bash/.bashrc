@@ -283,13 +283,18 @@ shopt -s checkwinsize
 stty susp undef
 bind '"\C-z":"fg\015"'
 
+# run jabba script if present
+[ -s "/home/chrg/.jabba/jabba.sh" ] && source "/home/chrg/.jabba/jabba.sh"
+
 # define to avoid stripping description in --option=description of './configure --help'
 COMP_CONFIGURE_HINTS=1
+
 # define to avoid flattening internal contents of tar files
 COMP_TAR_INTERNAL_PATHS=1
+
 # dircolors stuff
 # eval "$(dircolors ${HOME}/.dircolors)"
+
 # define for a custom prompt
 PROMPT_COMMAND=draw_prompt
 
-[ -s "/home/chrg/.jabba/jabba.sh" ] && source "/home/chrg/.jabba/jabba.sh"
