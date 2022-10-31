@@ -3,7 +3,7 @@
     email = christian.ricci2000@gmail.com
 
 [alias]
-        brt = "!git for-each-ref refs/heads --color=always --sort -committerdate --format='%(HEAD)%(color:reset);%(color:yellow)%(refname:short)%(color:reset);%(contents:subject);%(color:green)(%(committerdate:relative))%(color:blue);<%(authorname)>' | column -t -s ';'"
+    brt = "!git for-each-ref refs/heads --color=always --sort -committerdate --format='%(HEAD)%(color:reset);%(color:yellow)%(refname:short)%(color:reset);%(contents:subject);%(color:green)(%(committerdate:relative))%(color:blue);<%(authorname)>' | column -t -s ';'"
 	lga = log --pretty=fmt --date=short --graph --all
 	lg = log --pretty=fmt --date=short --graph
 	la = log --pretty=fmt --date=short --all
@@ -20,4 +20,21 @@
 [init]
 	defaultBranch = master
 [pretty]
-	fmt = %C(auto)%h %C(magenta)%ad %C(cyan)%an%C(auto)%d %s
+    fmt = %C(auto)%h %C(magenta)%ad %C(cyan)%an%C(auto)%d %s
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    interactive = auto
+    ui = auto
+    pager = true
+[color "status"]
+    added = brightgreen
+    changed = brightred
+    untracked = brightmagenta
+[color "diff"]
+    new = brightgreen
+    old = brightred
+[color "branch"]
+    current = brightgreen
+    remote = brightyellow

@@ -2,7 +2,7 @@
 AntiAliasFonts=true
 BoldIntense=true
 ColorScheme=DOS
-Font=SauceCodePro Nerd Font,10,-1,5,50,0,0,0,0,0
+Font=SauceCodePro Nerd Font Mono,10,-1,5,50,0,0,0,0,0
 TabColor=128,128,255
 UseFontLineChararacters=true
 
@@ -28,3 +28,4 @@ ScrollBarPosition=2
 
 [Terminal Features]
 BlinkingCursorEnabled=true
+VerticalLine=false

@@ -14,7 +14,6 @@ set runtimepath+=$XDG_CONFIG_HOME/vim/after
 set packpath^=$XDG_DATA_HOME/vim,$XDG_CONFIG_HOME/vim
 set packpath+=$XDG_CONFIG_HOME/vim/after,$XDG_DATA_HOME/vim/after
 
-let g:netrw_home = $XDG_DATA_HOME."/vim"
 call mkdir($XDG_DATA_HOME."/vim/spell", 'p', 0700)
 
 set backupdir=$XDG_CACHE_HOME/vim/backup | call mkdir(&backupdir, 'p', 0700)
@@ -26,50 +25,48 @@ if !has('nvim') " Neovim has its own special location
   set viminfofile=$XDG_CACHE_HOME/vim/viminfo
 endif
 
-" load pathogen
-execute pathogen#infect()
-
 " ===== settings =====
+
 syntax on
 filetype plugin indent on
-
 set nocompatible
-set showcmd         " Show (partial) command in status line.
-set noshowmode      " Already have it in statusline
-set ruler           " Show line and column number
-set relativenumber  " left column displays relative numbers lines
-set number          " now with current line number instead of 0
-set laststatus=2    " Always display the status line
-set autoread        " Read open files when changed in the background
-set autowrite       " Automatically save before commands like :next and :make
-set hlsearch        " Highlight searches
-set ignorecase      " Do case insensitive matching
-set incsearch       " Incremental search
-set smartcase       " Do smart case matching
-set tabstop=4       " Tab = 4 spaces
-set expandtab       " Insert spaces instead of tabs
-set shiftwidth=4    " Indent with 4 spaces
-set splitright      " Splits
-set foldmethod=indent   " Folding
-set foldnestmax=10  " max nesting of folds
-set nofoldenable    " open all folds automatically
+set showcmd           " Show (partial) command in status line.
+set cmdheight=1       " one (1) line
+set noshowmode        " Already have it in statusline
+set ruler             " Show line and column number
+set relativenumber    " left column displays relative numbers lines
+set number            " now with current line number instead of 0
+set laststatus=2      " Always display the status line
+set autoread          " Read open files when changed in the background
+set autowrite         " Automatically save before commands like :next and :make
+set hlsearch          " Highlight searches
+set ignorecase        " Do case insensitive matching
+set incsearch         " Incremental search
+set smartcase         " Do smart case matching
+set tabstop=4         " Tab = 4 spaces
+set expandtab         " Insert spaces instead of tabs
+set shiftwidth=4      " Indent with 4 spaces
+set splitright        " Splits
+set foldmethod=indent " Folding
+set foldnestmax=10    " max nesting of folds
+set nofoldenable      " open all folds automatically
 set foldlevel=2
-if (&diff ==# 0)    " cursorline with diff is shit
+if (&diff ==# 0)      " cursorline with diff is shit
     set cursorline
     autocmd WinEnter * setlocal cursorline
     autocmd WinLeave * setlocal nocursorline
 endif
-set wildmenu        " Enhanced command completion
-set hidden          " Hide buffers when they are abandoned
-set showmatch       " Show matching bracket
-set mouse=a         " Enable mouse usage (all modes)
-set history=200     " Keep 200 lines of command history
-set ttimeoutlen=5   " Time to wait for a key sequence to complete. Keep low.
+set wildmenu          " Enhanced command completion
+set hidden            " Hide buffers when they are abandoned
+set showmatch         " Show matching bracket
+set mouse=a           " Enable mouse usage (all modes)
+set history=200       " Keep 200 lines of command history
+set ttimeoutlen=5     " Time to wait for a key sequence to complete. Keep low.
 set ffs=unix,dos
 set encoding=UTF-8
-set exrc            " read current dir's .vimrc
-set secure          " secure local .vimrc by disabling some commands
-set directory=~/.cache/vim/swap//   " set a cache directory for swap files
+set exrc              " read current dir's .vimrc
+set secure            " secure local .vimrc by disabling some commands
+set directory=~/.cache/vim/swap// " set a cache directory for swap files
 set clipboard+=unnamedplus
 set suffixes=".bak,~,.o,.swp,.obj,.d,.class" " ignore these file extensions when matching
 set wildignore=*.o,*.d,*.class
@@ -78,7 +75,9 @@ set undodir=~/.cache/vim/undo
 set grepprg=grep\ -rInH
 set grepformat=%f:%l:%m
 set path=.,/usr/local/include,/usr/include,/usr/include/c++/11
+set noerrorbells
 runtime ftplugin/man.vim " enable :Man command
+set cpoptions+=J
 
 " language specific settings
 let c_gnu = 1
@@ -89,13 +88,20 @@ let c_ansi_constants = 1
 let java_highlight_java_lang_ids=1
 let java_highlight_java_io=1
 
-" plugin specific settings
-let NERDTreeDirArrows=1
+" ===== plugins =====
+" disable netrw
+let loaded_netrwPlugin = 1
+
+" load pathogen
+execute pathogen#infect()
+
+" nerdtree
+let NERDTreeMinimalUI=1
+
 " gutentags
 let g:gutentags_add_default_project_roots = 0
-let g:gutentags_project_root = ['.git', '.hg', '.svn', 'Makefile']
+let g:gutentags_project_root = ['.git', '.hg', '.svn', 'Makefile', 'CMakeLists.txt']
 let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/')
-command! -nargs=0 GutentagsClearCache call system('rm ' . g:gutentags_cache_dir . '/*')
 let g:gutentags_generate_on_new = 1
 let g:gutentags_generate_on_missing = 1
 let g:gutentags_generate_on_write = 1
@@ -106,14 +112,11 @@ let g:gutentags_ctags_exclude=[
             \ 'compiled', 'docs', 'example', 'bundle', 'vendor', '.md',
             \ '.json',
             \ ]
-" disable netrw
-let loaded_netrwPlugin = 1
+
 " ultisnips
 let g:UltiSnipsExpandTrigger = '<tab>'
 let g:UltiSnipsJumpForwardTrigger = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
-" dirvish
-let g:dirvish_mode = ':sort ,^.*[\/], | :silent keeppatterns g@\v/\.[^\/]+/?$@d _'
 
 " ===== colors =====
 " this should be a symlink
@@ -153,9 +156,6 @@ autocmd InsertEnter * match Error /\s\+\%#\@<!$/
 autocmd InsertLeave * match Error /\s\+$/
 command! StripTrailingWhitespace :call s:StripTrailingWhitespace()
 
-" for ShowASM function
-command! ShowASM :call s:ShowASM()
-
 " open quickfix list after commands like :make
 autocmd QuickFixCmdPost * copen | RefreshStatus
 
@@ -181,6 +181,8 @@ autocmd BufEnter *.cpp let b:fswitchdst = "hpp"
 " nerdtree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
+" gutentags
+command! -nargs=0 GutentagsClearCache call system('rm ' . g:gutentags_cache_dir . '/*')
 
 
 " ===== mappings =====
@@ -201,12 +203,6 @@ nnoremap <Right> :vertical resize -2<CR>
 nnoremap <S-Down> ddp
 nnoremap <S-Up> ddkP
 
-" <ctrl> is bad for me
-nnoremap <Leader>k <C-w>k
-nnoremap <Leader>j <C-w>j
-nnoremap <Leader>h <C-w>h
-nnoremap <Leader>l <C-w>l
-
 " autoclosing brackets
 inoremap (<CR> (<CR>)<Esc>O
 inoremap {<CR> {<CR>}<Esc>O
@@ -215,10 +211,6 @@ inoremap {, {<CR>},<Esc>O
 inoremap [<CR> [<CR>]<Esc>O
 inoremap [; [<CR>];<Esc>O
 inoremap [, [<CR>],<Esc>O
-
-" copy and paste with system clipboard
-xnoremap <leader>y "+y
-xnoremap <leader>p "+p
 
 " better :split, :vsplit and :edit
 noremap <leader>s :sp **/
@@ -233,6 +225,12 @@ nnoremap <leader>q :b#<CR>
 
 " open links (not working)
 " nnoremap gX :silent :execute "!xdg-open" expand('%:p:h') . "/" . expand("<cfile>") " &"<cr>
+
+" window navigation
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
 
 " shortcuts for fswitch
 nnoremap <silent> <leader>ok :FSSplitAbove<cr>
@@ -255,4 +253,3 @@ noremap Q <Nop>
 " ===== other stuff ====
 source ~/.config/vim/startup/statusline.vim
 " source ~/.vim/startup/startscreen.vim
-source ~/.config/vim/startup/typer.vim

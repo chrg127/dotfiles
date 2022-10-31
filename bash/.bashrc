@@ -17,8 +17,8 @@ complete -cf sudo
 shopt -s histappend
 # don't put duplicate lines or lines starting with space in the history.
 export HISTCONTROL=ignoreboth
-export HISTSIZE=1000
-export HISTFILESIZE=2000
+export HISTSIZE=10000
+export HISTFILESIZE=10000
 # HISTIGNORE is a colon-delimited list of patterns which should be excluded.
 # The '&' is a special pattern which suppresses duplicate entries.
 export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:ls' # Ignore the ls command as well
@@ -35,11 +35,13 @@ export ANDROID_HOME="$XDG_DATA_HOME/android"
 export HISTFILE="$XDG_STATE_HOME/bash/history"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
-export KDEHOME="$XDG_CONFIG_HOME/kde"
 export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
 export MYSQL_HISTFILE="$XDG_DATA_HOME/mysql_history"
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"
-export GCC_COLORS='error=01;91:warning=01;95:note=01;96:caret=01;92:locus=01:quote=01'
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:range1=32:range2=34:locus=01:'\
+'quote=01:path=01;36:fixit-insert=32:fixit-delete=31:'\
+'diff-filename=01:diff-hunk=32:diff-delete=31:diff-insert=32:'\
+'type-diff=01;32'
 export VISUAL=vim
 export EDITOR="$VISUAL"
 export PROMPT_DIRTRIM=2
@@ -281,11 +283,18 @@ shopt -s checkwinsize
 stty susp undef
 bind '"\C-z":"fg\015"'
 
+# run jabba script if present
+[ -s "/home/chrg/.jabba/jabba.sh" ] && source "/home/chrg/.jabba/jabba.sh"
+
 # define to avoid stripping description in --option=description of './configure --help'
 COMP_CONFIGURE_HINTS=1
+
 # define to avoid flattening internal contents of tar files
 COMP_TAR_INTERNAL_PATHS=1
+
 # dircolors stuff
 # eval "$(dircolors ${HOME}/.dircolors)"
+
 # define for a custom prompt
 PROMPT_COMMAND=draw_prompt
+

@@ -19,3 +19,12 @@
 [submodule "linux/vim/bundle/vim-surround"]
 	path = linux/vim/bundle/vim-surround
 	url = https://github.com/tpope/vim-surround
+[submodule "vim/.config/vim/bundle/tabular"]
+	path = vim/.config/vim/bundle/tabular
+	url = https://github.com/godlygeek/tabular
+[submodule "vim/.config/vim/bundle/vim-rsi"]
+	path = vim/.config/vim/bundle/vim-rsi
+	url = https://github.com/tpope/vim-rsi
+[submodule "vim/.config/vim/bundle/vim-system-copy"]
+	path = vim/.config/vim/bundle/vim-system-copy
+	url = https://github.com/christoomey/vim-system-copy
