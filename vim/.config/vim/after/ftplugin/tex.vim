@@ -1,3 +1,3 @@
-setlocal spell
-set spelllang=en_gb
+" setlocal spell
+" set spelllang=it_it
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
