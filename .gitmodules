@@ -28,3 +28,6 @@
 [submodule "vim/.config/vim/bundle/vim-system-copy"]
 	path = vim/.config/vim/bundle/vim-system-copy
 	url = https://github.com/christoomey/vim-system-copy
+[submodule "vim/.config/vim/bundle/vimtex"]
+	path = vim/.config/vim/bundle/vimtex
+	url = https://github.com/lervag/vimtex
