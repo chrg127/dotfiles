@@ -75,9 +75,10 @@ set undodir=~/.cache/vim/undo
 set grepprg=grep\ -rInH
 set grepformat=%f:%l:%m
 set path=.,/usr/local/include,/usr/include,/usr/include/c++/11
-set noerrorbells
-runtime ftplugin/man.vim " enable :Man command
-set cpoptions+=J
+set noerrorbells            " disable bells
+runtime ftplugin/man.vim    " enable :Man command
+set cpoptions+=J            " compatible options, sets something about sentences
+set conceallevel=1          " affects concealing attributes, mostly for vimtex
 
 " language specific settings
 let c_gnu = 1
@@ -117,6 +118,21 @@ let g:gutentags_ctags_exclude=[
 let g:UltiSnipsExpandTrigger = '<tab>'
 let g:UltiSnipsJumpForwardTrigger = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+
+" vimtex
+let g:tex_flavor = 'latex'
+let g:vimtex_view_general_viewer = 'okular'
+let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
+let g:vimtex_quickfix_mode = 0
+let g:tex_conceal='abdmg'
+let g:vimtex_compiler_latexmk = {
+            \ 'options' : [
+            \   '-shell-escape',
+            \   '-bibtex',
+            \ ],
+            \}
+
+
 
 " ===== colors =====
 " this should be a symlink
