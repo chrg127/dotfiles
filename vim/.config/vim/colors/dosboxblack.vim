@@ -99,7 +99,7 @@ else
     hi Boolean ctermfg=255
     hi ColorColumn ctermbg=235
     hi Comment ctermfg=168
-    hi Conceal ctermfg=245 ctermbg=239
+    hi Conceal ctermfg=249 ctermbg=232
     hi Conditional ctermfg=255
     hi Constant ctermfg=164
     hi CursorColumn ctermbg=235
