@@ -8,6 +8,15 @@ snippet verb "\verb||"
 \verb|$1|
 endsnippet
 
+snippet fig "figure"
+\begin{figure}[h]
+    \centering
+    \includegraphics[$1]{$2}
+    \caption{$3}
+    \label{$4}
+\end{figure}$5
+endsnippet
+
 snippet simple
 \documentclass[a4paper,12pt]{report}
 \usepackage{graphicx} 		% images
