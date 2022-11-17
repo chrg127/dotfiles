@@ -118,6 +118,7 @@ let g:gutentags_ctags_exclude=[
 let g:UltiSnipsExpandTrigger = '<tab>'
 let g:UltiSnipsJumpForwardTrigger = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+" let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/vim/snippets']
 
 " vimtex
 let g:tex_flavor = 'latex'
