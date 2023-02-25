@@ -2,7 +2,7 @@
 AntiAliasFonts=true
 BoldIntense=true
 ColorScheme=DOS
-Font=SauceCodePro Nerd Font Mono,10,-1,5,50,0,0,0,0,0
+Font=Hack,10,-1,5,50,0,0,0,0,0
 TabColor=128,128,255
 UseFontLineChararacters=true
 
@@ -14,9 +14,9 @@ DimWhenInactive=false
 Name=DOS
 Parent=FALLBACK/
 TerminalCenter=true
-TerminalColumns=80
+TerminalColumns=120
 TerminalMargin=15
-TerminalRows=24
+TerminalRows=36
 
 [Keyboard]
 KeyBindings=default
