@@ -97,14 +97,11 @@ alias g++-asm="g++ -std=c++20 -S -Wall -Wextra -masm=intel -fno-asynchronous-unw
 # add an "alert" alias for long running commands. Use like so: sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 alias easyrpg="easyrpg-player --window"
-if command -v xdg-open &> /dev/null; then
-    alias open="xdg-open"
-fi
 alias ip="ip -c"
 alias youtube-dl="youtube-dl -o '%(title)s.%(ext)s'"
 alias mp3-dl="yt-dlp -x --audio-format mp3 --audio-quality 0 -o '%(title)s.%(ext)s'"
-alias ogg-dl="yt-dlp -x --audio-format vorbis --audio-quality 0 -o '%(title)s.%(ext)s'"
-alias pl-dl="yt-dlp -x --audio-format vorbis --audio-quality 0 -o '%(playlist_index)s. %(title)s.%(ext)s'"
+alias mus-dl="yt-dlp -x --audio-quality 0 -o '%(title)s.%(ext)s'"
+alias pl-dl="yt-dlp -x --audio-quality 0 -o '%(playlist_index)s. %(title)s.%(ext)s'"
 alias units="units --history \"$XDG_DATA_HOME/units_history\""
 alias wget="wget --hsts-file=\"$XDG_DATA_HOME/wget-hsts\""
 
@@ -117,8 +114,13 @@ cdl() {
     cd "$1" && ls
 }
 
+# xdg-open but quiet
+open() {
+    xdg-open "$1" 2> /dev/null
+}
+
 # make directory and change into it
-mkcdir() {
+ccd() {
     mkdir "$@";
     if [ "$1" = "-p" ]; then
         cd "$2";
