@@ -147,6 +147,8 @@ let g:vimtex_quickfix_ignore_filters = [
       \ 'Package hyperref Warning: Token not allowed in a PDF string',
       \]
 
+" vim-system-copy
+let g:system_copy_silent = 1
 
 
 
