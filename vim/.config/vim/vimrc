@@ -210,7 +210,8 @@ autocmd! BufNewFile,BufRead *.vert,*.tesc,*.tese,*.glsl,*.geom,*.frag,*.comp set
 
 " fswitch
 autocmd BufEnter *.hpp let b:fswitchdst = "cpp"
-autocmd BufEnter *.cpp let b:fswitchdst = "hpp"
+autocmd BufEnter *.cpp let b:fswitchdst = "hpp,h"
+autocmd BufEnter *.c let b:fswitchdst = "h"
 
 " nerdtree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif

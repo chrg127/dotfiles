@@ -160,6 +160,13 @@ table.insert(shortcuts, {
     action = wezterm.action.SplitVertical { domain = CurrentPaneDomain }
 })
 
+wezterm.on(
+    "format-tab-title",
+    function(tab, tabs, panes, config, hover, max_width)
+        return ' ' .. tab.active_pane.title .. ' '
+    end
+)
+
 return {
     font = wezterm.font('Hack'),
     font_size = 9.8,

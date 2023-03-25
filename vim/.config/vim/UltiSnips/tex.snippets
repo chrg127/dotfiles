@@ -86,14 +86,14 @@ snippet td "superscript" iA
 endsnippet
 
 # // => \frac{}{}
-snippet // "Fraction"
-\\frac{$1}{$2}$0
-endsnippet
+# snippet // "Fraction"
+# \\frac{$1}{$2}$0
+# endsnippet
 
 # 3/ => \frac{3}{}
-snippet '((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)/' "Fraction" wrA
-\\frac{`!p snip.rv = match.group(1)`}{$1}$0
-endsnippet
+# snippet '((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)/' "Fraction" wrA
+# \\frac{`!p snip.rv = match.group(1)`}{$1}$0
+# endsnippet
 
 # snippet / "Fraction" iA
 # \\frac{${VISUAL}}{$1}$0

@@ -104,7 +104,7 @@ alias mus-dl="yt-dlp -x --audio-quality 0 -o '%(title)s.%(ext)s'"
 alias pl-dl="yt-dlp -x --audio-quality 0 -o '%(playlist_index)s. %(title)s.%(ext)s'"
 alias units="units --history \"$XDG_DATA_HOME/units_history\""
 alias wget="wget --hsts-file=\"$XDG_DATA_HOME/wget-hsts\""
-
+alias dosbox="dosbox -conf $XDG_CONFIG_HOME/dosbox/dosbox.conf"
 
 
 ### functions
