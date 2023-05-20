@@ -168,9 +168,29 @@ wezterm.on(
 )
 
 return {
-    font = wezterm.font('Hack'),
-    font_size = 9.8,
+    font = wezterm.font("Ttyp0", {weight="Regular", stretch="Normal", style="Normal"}), -- /home/chrg/.local/share/fonts/t0-11-uni.pcf.gz, FontConfig pixel_sizes=[11]
+    font_size = 13,
+    --font = wezterm.font('Hack'),
+    --font_size = 9.8,
     keys = shortcuts,
+    hide_tab_bar_if_only_one_tab = true,
+
+    window_padding = {
+        left = 16, right = 16, top = 16, bottom = 16,
+    },
+
+    force_reverse_video_cursor = true,
+    scrollback_lines = 3500,
+    -- enable_scroll_bar = true,
+    use_fancy_tab_bar = false,
+    default_cursor_style = 'BlinkingBlock',
+    cursor_blink_rate = 1000,
+    cursor_blink_ease_in = "Constant",
+    cursor_blink_ease_out = "Constant",
+    initial_cols = 120,
+    initial_rows = 36,
+    -- line_height = 1.0,
+
     colors = {
         foreground      = '#b2b2b2',
         background      = '#080808',
@@ -240,21 +260,4 @@ return {
             },
         },
     },
-    hide_tab_bar_if_only_one_tab = true,
-
-    window_padding = {
-        left = 16, right = 16, top = 16, bottom = 16,
-    },
-
-    force_reverse_video_cursor = true,
-    scrollback_lines = 3500,
-    -- enable_scroll_bar = true,
-    use_fancy_tab_bar = false,
-    default_cursor_style = 'BlinkingBlock',
-    cursor_blink_rate = 1000,
-    cursor_blink_ease_in = "Constant",
-    cursor_blink_ease_out = "Constant",
-    initial_cols = 120,
-    initial_rows = 36,
-    line_height = 1.0
 }
