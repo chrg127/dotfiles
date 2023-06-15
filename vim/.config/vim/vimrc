@@ -95,7 +95,7 @@ let java_highlight_java_io=1
 let loaded_netrwPlugin = 1
 
 " load pathogen
-execute pathogen#infect()
+execute pathogen#infect('plugins/{}')
 
 " nerdtree
 let NERDTreeMinimalUI=1
