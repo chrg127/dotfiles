@@ -1,1 +1,0 @@
-color default_statusline
