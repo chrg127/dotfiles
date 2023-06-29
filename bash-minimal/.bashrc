@@ -31,21 +31,26 @@ alias pl-dl="\yt-dlp -o '%(playlist_index)s. %(title)s.%(ext)s' -x --audio-forma
 alias python='python3'
 alias bc="bc -q"
 
-export HISTCONTROL=ignoreboth
-export HISTSIZE=1000
-export HISTFILESIZE=2000
-export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:ls'
-export GCC_COLORS='error=01;91:warning=01;95:note=01;96:caret=01;92:locus=01:quote=01'
-export VISUAL=vim
-export EDITOR="$VISUAL"
-export PROMPT_DIRTRIM=2
-export PATH="~/.local/bin:${PATH}"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CACHE_HOME="$HOME/.cache"
 export HISTFILE="$XDG_STATE_HOME/bash/history"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+export HISTCONTROL=ignoreboth
+export HISTSIZE=1000
+export HISTFILESIZE=2000
+export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:ls'
+export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
+export GCC_COLORS='error=01;91:warning=01;95:note=01;96:caret=01;92:locus=01:quote=01'
+export VISUAL=vim
+export EDITOR="$VISUAL"
+export PROMPT_DIRTRIM=2
+export PATH="~/.local/bin:${PATH}"
+export PASSWORD_STORE_ENABLE_EXTENSIONS=true
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME/pass"
+export PYTHONSTARTUP="${XDG_CONFIG_HOME}/python/pythonrc"
+export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 
 stty susp undef
 bind '"\C-z":"fg\015"'
