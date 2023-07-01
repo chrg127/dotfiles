@@ -3,10 +3,7 @@
 complete -cf sudo
 
 shopt -s histappend
-export HISTCONTROL=ignoreboth
-export HISTSIZE=1000
-export HISTFILESIZE=2000
-export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:ls'
+shopt -s checkwinsize
 
 alias ls='ls -h --color=auto --group-directories-first'
 alias ll='ls -alF --group-directories-first'
@@ -27,12 +24,38 @@ alias ....='cd ../../..'
 alias h="cd ~"
 alias unixtime="date +%s"
 alias gdb="gdb -q"
+alias py="python"
+alias yt-dlp="yt-dlp -o '%(title)s.%(ext)s'"
+alias mus-dl='yt-dlp -x --audio-quality 0'
+alias pl-dl="\yt-dlp -o '%(playlist_index)s. %(title)s.%(ext)s' -x --audio-format vorbis --audio-quality 0"
+alias python='python3'
+alias bc="bc -q"
 
-[[ -f "$HOME/.bash/aliases" ]] && . "$HOME/.bash/aliases"
-[[ -f "$HOME/.bash/functions" ]] && . "$HOME/.bash/functions"
-shopt -s checkwinsize
-
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_CACHE_HOME="$HOME/.cache"
+export HISTFILE="$XDG_STATE_HOME/bash/history"
+export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+export HISTCONTROL=ignoreboth
+export HISTSIZE=1000
+export HISTFILESIZE=2000
+export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:ls'
+export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
 export GCC_COLORS='error=01;91:warning=01;95:note=01;96:caret=01;92:locus=01:quote=01'
 export VISUAL=vim
 export EDITOR="$VISUAL"
 export PROMPT_DIRTRIM=2
+export PATH="~/.local/bin:${PATH}"
+export PASSWORD_STORE_ENABLE_EXTENSIONS=true
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME/pass"
+export PYTHONSTARTUP="${XDG_CONFIG_HOME}/python/pythonrc"
+export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
+
+stty susp undef
+bind '"\C-z":"fg\015"'
+
+if [[ $(echo $PREFIX | grep -o "com.termux") ]]; then
+    export PS1='\[\e[1;34m\]\w\[\e[m\] \[\e[1;32m\]\$\[\e[m\] '
+    alias sd="cd ~/storage/shared"
+fi

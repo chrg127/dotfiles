@@ -79,7 +79,7 @@ set noerrorbells            " disable bells
 runtime ftplugin/man.vim    " enable :Man command
 set cpoptions+=J            " compatible options, sets something about sentences
 set conceallevel=1          " affects concealing attributes, mostly for vimtex
-set formatoptions+=/        " no continuation of comments
+" set formatoptions+=/        " no continuation of comments
 set completeopt+=menuone
 set signcolumn=yes
 
