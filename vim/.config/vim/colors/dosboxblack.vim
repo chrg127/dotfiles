@@ -161,10 +161,10 @@ else
     hi User1 ctermfg=168 ctermbg=235
     hi User2 ctermfg=37 ctermbg=235
     hi User3 ctermfg=255 ctermbg=235
-    hi User4 cterm=NONE ctermfg=232 ctermbg=245
-    hi link User5 PMenuSel
-    hi link User6 DiffChange
-    hi link User7 DiffAdd
-    hi link User8 DiffDelete
+    hi User4 ctermfg=232 ctermbg=245 cterm=bold
+    hi User5 ctermfg=232 ctermbg=105 cterm=bold
+    hi User6 ctermfg=232 ctermbg=222 cterm=bold
+    hi User7 ctermfg=232 ctermbg=37  cterm=bold
+    hi User8 ctermfg=232 ctermbg=168 cterm=bold
     hi User9 ctermbg=239 ctermfg=255
 endif

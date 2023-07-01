@@ -160,18 +160,63 @@ table.insert(shortcuts, {
     action = wezterm.action.SplitVertical { domain = CurrentPaneDomain }
 })
 
+-- Equivalent to POSIX basename(3)
+-- Given "/foo/bar" returns "bar"
+-- Given "c:\\foo\\bar" returns "bar"
+function basename(s)
+  return string.gsub(s, '(.*[/\\])(.*)', '%2')
+end
+
+function tab_title(tab)
+    local title = tab.tab_title
+    if title and #title > 0 then
+        return title
+    end
+    local t2 = basename(tab.active_pane.foreground_process_name)
+    if t2 == 'vim.gtk3' then
+        t2 = 'vim'
+    end
+    return t2
+end
+
 wezterm.on(
     "format-tab-title",
     function(tab, tabs, panes, config, hover, max_width)
-        return ' ' .. tab.active_pane.title .. ' '
+        local SOLID_LEFT_ARROW = wezterm.nerdfonts.pl_right_hard_divider
+        local SOLID_RIGHT_ARROW = wezterm.nerdfonts.pl_left_hard_divider
+
+        local edge_background = '#080808'
+        local background = '#8a8a8a'
+        local foreground = '#080808'
+
+        if tab.is_active then
+            background = '#d75f87'
+            foreground = '#080808'
+        elseif hover then
+            background = '#b2b2b2'
+            foreground = '#080808'
+        end
+
+        local edge_foreground = background
+        local title = tab_title(tab)
+
+        return {
+            { Background = { Color = edge_background } },
+            { Foreground = { Color = edge_foreground } },
+            { Text = ' ░▒▓' },
+            { Background = { Color = background } },
+            { Foreground = { Color = foreground } },
+            { Text = ' ' .. title .. ' ' },
+        }
     end
 )
 
 return {
-    font = wezterm.font("Ttyp0", {weight="Regular", stretch="Normal", style="Normal"}), -- /home/chrg/.local/share/fonts/t0-11-uni.pcf.gz, FontConfig pixel_sizes=[11]
+    -- /home/chrg/.local/share/fonts/t0-11-uni.pcf.gz, FontConfig pixel_sizes=[11]
+    font = wezterm.font("Ttyp0", {weight="Regular", stretch="Normal", style="Normal"}),
     font_size = 13,
-    --font = wezterm.font('Hack'),
-    --font_size = 9.8,
+    -- font = wezterm.font('Hack'),
+    -- font_size = 9.8,
     keys = shortcuts,
     hide_tab_bar_if_only_one_tab = true,
 
@@ -183,6 +228,7 @@ return {
     scrollback_lines = 3500,
     -- enable_scroll_bar = true,
     use_fancy_tab_bar = false,
+    show_new_tab_button_in_tab_bar = false,
     default_cursor_style = 'BlinkingBlock',
     cursor_blink_rate = 1000,
     cursor_blink_ease_in = "Constant",
@@ -190,6 +236,7 @@ return {
     initial_cols = 120,
     initial_rows = 36,
     -- line_height = 1.0,
+    -- custom_block_glyphs = false,
 
     colors = {
         foreground      = '#b2b2b2',
@@ -200,7 +247,7 @@ return {
         selection_fg    = '#080808',
         selection_bg    = '#b2b2b2',
         scrollbar_thumb = '#b2b2b2',    -- The color of the scrollbar "thumb"; the portion that represents the current viewport
-        split = '#b2b2b2',          -- The color of the split lines between panes
+        split = '#b2b2b2',              -- The color of the split lines between panes
 
         brights = {
             '#080808', '#d75f87', '#00af00', '#ffd787',
