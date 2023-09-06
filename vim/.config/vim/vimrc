@@ -52,9 +52,9 @@ set foldnestmax=10    " max nesting of folds
 set nofoldenable      " open all folds automatically
 set foldlevel=2
 if (&diff ==# 0)      " cursorline with diff is shit
-    set cursorline
-    autocmd WinEnter * setlocal cursorline
-    autocmd WinLeave * setlocal nocursorline
+set cursorline
+autocmd WinEnter * setlocal cursorline
+autocmd WinLeave * setlocal nocursorline
 endif
 set wildmenu          " Enhanced command completion
 set hidden            " Hide buffers when they are abandoned
@@ -139,7 +139,6 @@ let g:vimtex_compiler_latexmk = {
             \   '-synctex=1',
             \ ],
             \}
-
 let g:vimtex_quickfix_open_on_warning = 0
 " Filter out some compilation warning messages from QuickFix display
 let g:vimtex_quickfix_ignore_filters = [
@@ -153,8 +152,6 @@ let g:vimtex_quickfix_ignore_filters = [
 
 " vim-system-copy
 let g:system_copy_silent = 1
-
-" VimCompletesMe
 
 " vim-lsp
 let g:lsp_diagnostics_enabled = 0   " disable diagnostic support
@@ -171,7 +168,7 @@ endif
 
 function! s:on_lsp_buffer_enabled() abort
     setlocal omnifunc=lsp#complete
-    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+    " if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
     nmap <buffer> gd <plug>(lsp-definition)
     nmap <buffer> gs <plug>(lsp-document-symbol-search)
     nmap <buffer> gS <plug>(lsp-workspace-symbol-search)

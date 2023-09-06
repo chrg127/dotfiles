@@ -99,7 +99,7 @@ alias g++-asm="g++ -std=c++20 -S -Wall -Wextra -masm=intel -fno-asynchronous-unw
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 alias easyrpg="easyrpg-player --window"
 alias ip="ip -c"
-alias youtube-dl="youtube-dl -o '%(title)s.%(ext)s'"
+alias yt-dlp="yt-dlp_linux -o '%(title)s.%(ext)s'"
 alias mp3-dl="yt-dlp -x --audio-format mp3 --audio-quality 0 -o '%(title)s.%(ext)s'"
 alias mus-dl="yt-dlp -x --audio-quality 0 -o '%(title)s.%(ext)s'"
 alias pl-dl="yt-dlp -x --audio-quality 0 -o '%(playlist_index)s. %(title)s.%(ext)s'"
