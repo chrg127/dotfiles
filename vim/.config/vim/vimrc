@@ -21,7 +21,7 @@ set directory=$XDG_CACHE_HOME/vim/swap   | call mkdir(&directory, 'p', 0700)
 set undodir=$XDG_CACHE_HOME/vim/undo     | call mkdir(&undodir,   'p', 0700)
 set viewdir=$XDG_CACHE_HOME/vim/view     | call mkdir(&viewdir,   'p', 0700)
 
-if !has('nvim') " Neovim has its own special location
+if !has('nvim') " neovim has its own special location
   set viminfofile=$XDG_CACHE_HOME/vim/viminfo
 endif
 
@@ -29,70 +29,67 @@ endif
 
 syntax on
 filetype plugin indent on
-set nocompatible
-set showcmd           " Show (partial) command in status line.
-set cmdheight=1       " one (1) line
-set noshowmode        " Already have it in statusline
-set ruler             " Show line and column number
-set relativenumber    " left column displays relative numbers lines
-set number            " now with current line number instead of 0
-set laststatus=2      " Always display the status line
-set autoread          " Read open files when changed in the background
-set autowrite         " Automatically save before commands like :next and :make
-set hlsearch          " Highlight searches
-set ignorecase        " Do case insensitive matching
-set incsearch         " Incremental search
-set smartcase         " Do smart case matching
-set tabstop=4         " Tab = 4 spaces
-set expandtab         " Insert spaces instead of tabs
-set shiftwidth=4      " Indent with 4 spaces
-set splitright        " Splits
-set foldmethod=indent " Folding
-set foldnestmax=10    " max nesting of folds
-set nofoldenable      " open all folds automatically
+
+let mapleader = ","         " set <Leader>
+set nocompatible            " disable compatibility with vi
+set showcmd                 " Show (partial) command in status line.
+set cmdheight=1             " set number of screen lines to use for command line
+set noshowmode              " Already have it in statusline
+set relativenumber          " left column displays relative numbers lines
+set number                  " now with current line number instead of 0
+set laststatus=2            " Always display the status line
+set autoread                " Read open files when changed in the background
+set autowrite               " Automatically save before commands like :next and :make
+set hlsearch                " Highlight searches
+set ignorecase              " Do case insensitive matching
+set incsearch               " Incremental search
+set smartcase               " Do smart case matching
+set tabstop=4               " Tab = 4 spaces
+set expandtab               " Insert spaces instead of tabs
+set shiftwidth=4            " Indent with 4 spaces
+set splitright              " Splits
+set foldmethod=indent       " Folding
+set foldnestmax=10          " max nesting of folds
+set nofoldenable            " open all folds automatically
 set foldlevel=2
-if (&diff ==# 0)      " cursorline with diff is shit
-set cursorline
-autocmd WinEnter * setlocal cursorline
-autocmd WinLeave * setlocal nocursorline
-endif
-set wildmenu          " Enhanced command completion
-set hidden            " Hide buffers when they are abandoned
-set showmatch         " Show matching bracket
-set mouse=a           " Enable mouse usage (all modes)
-set history=200       " Keep 200 lines of command history
-set ttimeoutlen=5     " Time to wait for a key sequence to complete. Keep low.
+set wildmenu                " Enhanced command completion
+set hidden                  " hide buffers when they are abandoned, don't unload
+set showmatch               " Show matching bracket
+set mouse=a                 " Enable mouse usage (all modes)
+set history=200             " Keep 200 lines of command history
+set ttimeoutlen=5           " Time to wait for a key sequence to complete. Keep low.
 set ffs=unix,dos
 set encoding=UTF-8
-set exrc              " read current dir's .vimrc
-set secure            " secure local .vimrc by disabling some commands
-set directory=~/.cache/vim/swap// " set a cache directory for swap files
-set clipboard+=unnamedplus
-set suffixes=".bak,~,.o,.swp,.obj,.d,.class" " ignore these file extensions when matching
-set wildignore=*.o,*.d,*.class
-set undofile
-set undodir=~/.cache/vim/undo
+set exrc                    " read current dir's .vimrc
+set secure                  " secure local .vimrc by disabling some commands
+set undofile                " read previous undo history when loading a file
 set grepprg=grep\ -rInH
 set grepformat=%f:%l:%m
-set path=.,/usr/local/include,/usr/include,/usr/include/c++/11,/usr/include/x86_64-linux-gnu
 set noerrorbells            " disable bells
-runtime ftplugin/man.vim    " enable :Man command
 set cpoptions+=J            " compatible options, sets something about sentences
 set conceallevel=1          " affects concealing attributes, mostly for vimtex
-" set formatoptions+=/        " no continuation of comments
-set completeopt+=menuone
-set signcolumn=yes
+set formatoptions+=/        " no continuation of comments
+set completeopt+=menuone    " when completing, open popup even with only one item
+set signcolumn=yes          " always draw the sign column (used by lsp plugins)
+runtime ftplugin/man.vim    " enable :Man command
 
-" language specific settings
-let c_gnu = 1
-let c_space_errors = 1
-let c_curly_error = 1
-let c_ansi_typedefs = 1
-let c_ansi_constants = 1
-let java_highlight_java_lang_ids=1
-let java_highlight_java_io=1
+" copies selection to the system clipboard. IMPORTANT: uses ^ so that
+" items are prepended rather than appended.
+set clipboard^=unnamed,unnamedplus
+
+" ignore these file extensions when matching
+set suffixes=".bak,~,.o,.swp,.obj,.d,.class"
+set wildignore=*.o,*.d,*.class
+
+" sets up cursorline unless we are diffing
+if (&diff ==# 0)
+    set cursorline
+    autocmd WinEnter * setlocal cursorline
+    autocmd WinLeave * setlocal nocursorline
+endif
 
 " ===== plugins =====
+
 " disable netrw
 let loaded_netrwPlugin = 1
 
@@ -101,6 +98,8 @@ execute pathogen#infect('plugins/{}')
 
 " nerdtree
 let NERDTreeMinimalUI=1
+autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+nnoremap <leader>n :NERDTreeToggle<CR> :RefreshStatus<CR>
 
 " gutentags
 let g:gutentags_add_default_project_roots = 0
@@ -119,6 +118,8 @@ let g:gutentags_ctags_exclude=[
             \ '.json',
             \ ]
 
+command! -nargs=0 GutentagsClearCache call system('rm ' . g:gutentags_cache_dir . '/*')
+
 " ultisnips
 let g:UltiSnipsExpandTrigger = '<C-j>'
 let g:UltiSnipsJumpForwardTrigger = '<C-j>'
@@ -130,9 +131,11 @@ let g:tex_flavor = 'latex'
 let g:vimtex_view_general_viewer = 'okular'
 let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 let g:vimtex_quickfix_mode = 0
+let g:vimtex_quickfix_open_on_warning = 0
 let g:tex_conceal='abdmg'
 " \   '-shell-escape',
 " \   '-bibtex',
+
 let g:vimtex_compiler_latexmk = {
             \ 'options' : [
             \   '-verbose',
@@ -141,7 +144,7 @@ let g:vimtex_compiler_latexmk = {
             \   '-synctex=1',
             \ ],
             \}
-let g:vimtex_quickfix_open_on_warning = 0
+
 " Filter out some compilation warning messages from QuickFix display
 let g:vimtex_quickfix_ignore_filters = [
       \ 'Underfull \\hbox',
@@ -158,6 +161,7 @@ let g:system_copy_silent = 1
 " vim-lsp
 let g:lsp_diagnostics_enabled = 0   " disable diagnostic support
 let g:lsp_document_code_action_signs_enabled = 0
+" let g:lsp_hover_ui = 'preview'
 hi lspReference ctermfg=red guifg=red ctermbg=green guibg=green
 
 if executable('clangd')
@@ -186,50 +190,25 @@ augroup lsp_install
     autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
 
-
+" fswitch
+autocmd BufEnter *.hpp let b:fswitchdst = "cpp"
+autocmd BufEnter *.cpp let b:fswitchdst = "hpp,h"
+autocmd BufEnter *.c let b:fswitchdst = "h"
+nnoremap <silent> <leader>ok :FSSplitAbove<cr>
+nnoremap <silent> <leader>oj :FSSplitBelow<cr>
+nnoremap <silent> <leader>oh :FSSplitLeft<cr>
+nnoremap <silent> <leader>ol :FSSplitRight<cr>
 
 " ===== colors =====
 color dosboxblack
 
-" ===== custom functions =====
-function! s:StripTrailingWhitespace()
-    if !&binary && &filetype != 'diff'
-        normal mz
-        normal Hmy
-        %s/\s\+$//e
-        normal 'yz<CR>
-        normal `z
-    endif
-endfunction
-
-function! s:CppMan(str)
-    execute '!cppman ' . a:str
-endfunction
-
-function! s:ClangFormat(first, last)
-    let l:winview = winsaveview()
-    execute a:first . "," . a:last . "!clang-format --style=WebKit"
-    call winrestview(l:winview)
-endfunction
-
-
-
-" ===== custom commands and autocmds =====
+" ===== other =====
 
 " jump to the last position when reopening a file
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
-" highlight extra whitespace
-autocmd BufWinEnter * match Error /\s\+$/
-autocmd InsertEnter * match Error /\s\+\%#\@<!$/
-autocmd InsertLeave * match Error /\s\+$/
-command! StripTrailingWhitespace :call s:StripTrailingWhitespace()
-
 " open quickfix list after commands like :make
 autocmd QuickFixCmdPost * copen | RefreshStatus
-
-command! -nargs=1 CppMan :call s:CppMan(<f-args>)
-command! -range=% ClangFormat call <sid>ClangFormat (<line1>, <line2>)
 
 " filetypes
 autocmd BufNewFile,BufRead *.qbs setfiletype qbs
@@ -239,26 +218,29 @@ autocmd BufNewFile,BufRead *.qrc setfiletype xml
 autocmd BufNewFile,BufRead *.ts setfiletype xml
 autocmd BufNewFile,BufRead *.ui setfiletype xml
 autocmd BufNewFile,BufRead *.ypp setfiletype yacc
-autocmd BufNewFile,BufRead *.asm set filetype=asm_ca65
 autocmd BufNewFile,BufRead *.lox set filetype=lox
-autocmd! BufNewFile,BufRead *.vert,*.tesc,*.tese,*.glsl,*.geom,*.frag,*.comp set filetype=glsl
+autocmd BufNewFile,BufRead *.vert,*.tesc,*.tese,*.glsl,*.geom,*.frag,*.comp set filetype=glsl
 
-" fswitch
-autocmd BufEnter *.hpp let b:fswitchdst = "cpp"
-autocmd BufEnter *.cpp let b:fswitchdst = "hpp,h"
-autocmd BufEnter *.c let b:fswitchdst = "h"
+" whitespace support. provides a command to strip whitespace and highlights
+" extra whitespace present in the buffer
+function! s:StripTrailingWhitespace()
+    if !&binary && &filetype != 'diff'
+        normal mz
+        normal Hmy
+        %s/\s\+$//e
+        normal 'yz<CR>
+        normal `z
+    endif
+endfunction
+command! StripTrailingWhitespace :call s:StripTrailingWhitespace()
 
-" nerdtree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd BufWinEnter * match Error /\s\+$/
+autocmd InsertEnter * match Error /\s\+\%#\@<!$/
+autocmd InsertLeave * match Error /\s\+$/
 
-" gutentags
-command! -nargs=0 GutentagsClearCache call system('rm ' . g:gutentags_cache_dir . '/*')
 
 
 " ===== mappings =====
-
-" set <Leader>
-let mapleader = ","
 
 " obvious
 noremap Y y$
@@ -287,7 +269,7 @@ noremap <leader>s :sp **/
 noremap <leader>v :vsp **/
 nnoremap <leader>e :e **/
 
-" switch buffers using ,b
+" using ,b will show all buffers before choosing one
 nnoremap <leader>b :ls<CR>:b<space>
 
 " quick switch to last buffer
@@ -302,20 +284,11 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" shortcuts for fswitch
-nnoremap <silent> <leader>ok :FSSplitAbove<cr>
-nnoremap <silent> <leader>oj :FSSplitBelow<cr>
-nnoremap <silent> <leader>oh :FSSplitLeft<cr>
-nnoremap <silent> <leader>ol :FSSplitRight<cr>
-
-" shortcut for nerdtree
-nnoremap <leader>n :NERDTreeToggle<CR> :RefreshStatus<CR>
-
 " keep selection after indention
 vnoremap < <gv
 vnoremap > >gv
 
-" no ex mode
+" disable ex mode
 noremap Q <Nop>
 
 
@@ -388,5 +361,5 @@ command! RefreshStatus :call <SID>RefreshStatus()
 
 augroup status
     autocmd!
-    autocmd VimEnter,VimLeave,WinEnter,WinLeave,BufWinEnter,BufWinLeave * :RefreshStatus
+    autocmd VimEnter,VimLeave,WinEnter,WinLeave,BufWinEnter,BufWinLeave,BufEnter,BufLeave * :RefreshStatus
 augroup END
