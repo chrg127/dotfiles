@@ -2,8 +2,8 @@
 AntiAliasFonts=true
 BoldIntense=true
 ColorScheme=DOS
-Font=Ac437 IBM BIOS,10,-1,5,50,0,0,0,0,0
-TabColor=128,128,255
+Font=Hack,10,-1,5,50,0,0,0,0,0
+TabColor=invalid
 UseFontLineChararacters=true
 
 [Cursor Options]
@@ -14,9 +14,9 @@ DimWhenInactive=false
 Name=DOS
 Parent=FALLBACK/
 TerminalCenter=true
-TerminalColumns=120
+TerminalColumns=80
 TerminalMargin=15
-TerminalRows=36
+TerminalRows=24
 
 [Keyboard]
 KeyBindings=default
