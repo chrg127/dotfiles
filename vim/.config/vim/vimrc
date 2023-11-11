@@ -21,7 +21,7 @@ set directory=$XDG_CACHE_HOME/vim/swap   | call mkdir(&directory, 'p', 0700)
 set undodir=$XDG_CACHE_HOME/vim/undo     | call mkdir(&undodir,   'p', 0700)
 set viewdir=$XDG_CACHE_HOME/vim/view     | call mkdir(&viewdir,   'p', 0700)
 
-if !has('nvim') " neovim has its own special location
+if !has('nvim')
   set viminfofile=$XDG_CACHE_HOME/vim/viminfo
 endif
 
@@ -68,10 +68,13 @@ set grepformat=%f:%l:%m
 set noerrorbells            " disable bells
 set cpoptions+=J            " compatible options, sets something about sentences
 set conceallevel=1          " affects concealing attributes, mostly for vimtex
-set formatoptions+=/        " no continuation of comments
+if v:version >= 900
+    set formatoptions+=/        " no continuation of comments
+endif
 set completeopt+=menuone    " when completing, open popup even with only one item
-set signcolumn=yes          " always draw the sign column (used by lsp plugins)
+" set signcolumn=yes          " always draw the sign column (used by lsp plugins)
 runtime ftplugin/man.vim    " enable :Man command
+set modelineexpr            " for stuff with nerdtree
 
 " copies selection to the system clipboard. IMPORTANT: uses ^ so that
 " items are prepended rather than appended.
@@ -102,23 +105,23 @@ autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 nnoremap <leader>n :NERDTreeToggle<CR> :RefreshStatus<CR>
 
 " gutentags
-let g:gutentags_add_default_project_roots = 0
-" .tagmarker is a custom thing to let me have tags on projects without
-" version control
-let g:gutentags_project_root = ['.git', '.hg', '.svn', '.tagmarker']
-let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/')
-let g:gutentags_generate_on_new = 1
-let g:gutentags_generate_on_missing = 1
-let g:gutentags_generate_on_write = 1
-let g:gutentags_generate_on_empty_buffer = 0
-let g:gutentags_ctags_extra_args=[ '--tag-relative=yes', '--fields=+S', ]
-let g:gutentags_ctags_exclude=[
-            \ 'build', 'dist', 'bin', 'cache', 'debug', 'release',
-            \ 'compiled', 'docs', 'example', 'bundle', 'vendor', '.md',
-            \ '.json',
-            \ ]
+" i used to use this for tag handling before switching to an lsp plugin
+" i'm still keeping this for future purposes
 
-command! -nargs=0 GutentagsClearCache call system('rm ' . g:gutentags_cache_dir . '/*')
+" let g:gutentags_add_default_project_roots = 0
+" let g:gutentags_project_root = ['.git', '.hg', '.svn' ]
+" let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/')
+" let g:gutentags_generate_on_new = 1
+" let g:gutentags_generate_on_missing = 1
+" let g:gutentags_generate_on_write = 1
+" let g:gutentags_generate_on_empty_buffer = 0
+" let g:gutentags_ctags_extra_args=[ '--tag-relative=yes', '--fields=+S', ]
+" let g:gutentags_ctags_exclude=[
+"             \ 'build', 'dist', 'bin', 'cache', 'debug', 'release',
+"             \ 'compiled', 'docs', 'example', 'bundle', 'vendor', '.md',
+"             \ '.json',
+"             \ ]
+" command! -nargs=0 GutentagsClearCache call system('rm ' . g:gutentags_cache_dir . '/*')
 
 " ultisnips
 let g:UltiSnipsExpandTrigger = '<C-j>'
@@ -159,29 +162,33 @@ let g:vimtex_quickfix_ignore_filters = [
 let g:system_copy_silent = 1
 
 " vim-lsp
-let g:lsp_diagnostics_enabled = 0   " disable diagnostic support
-let g:lsp_document_code_action_signs_enabled = 0
-" let g:lsp_hover_ui = 'preview'
+let g:lsp_use_native_client = 1
+let g:lsp_semantic_enabled = 0                      " disable semantic highlighting
+let g:lsp_format_sync_timeout = 1000
+let g:lsp_diagnostics_enabled = 0                   " disable diagnostics (they seem to always be erroneous?)
+let g:lsp_document_code_action_signs_enabled = 0    " disable code actions
+let g:lsp_peek_alignment = 'top'
+let g:lsp_show_workspace_edits = 1                  " enables showing workspace edits in location list
+let g:lsp_log_file = expand($XDG_CACHE_HOME . '/vim/lsp.log')
 hi lspReference ctermfg=red guifg=red ctermbg=green guibg=green
 
 if executable('clangd')
     autocmd User lsp_setup call lsp#register_server({
-                \ 'name': 'clangd',
-                \ 'cmd': {server_info->['clangd', '-background-index']},
-                \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+                \ 'name'      : 'clangd',
+                \ 'cmd'       : {server_info->['clangd', '-background-index']},
+                \ 'allowlist' : ['c', 'cpp', 'C', 'cc', 'hh', 'h', 'objc', 'objcpp'],
                 \ })
 endif
 
 function! s:on_lsp_buffer_enabled() abort
     setlocal omnifunc=lsp#complete
-    " if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+    setlocal tagfunc=lsp#tagfunc
     nmap <buffer> gd <plug>(lsp-definition)
     nmap <buffer> gs <plug>(lsp-document-symbol-search)
     nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
     nmap <buffer> gr <plug>(lsp-references)
     nmap <buffer> gi <plug>(lsp-implementation)
-    nmap <buffer> gt <plug>(lsp-type-definition)
-    nmap <buffer> <leader>rn <plug>(lsp-rename)
+    nmap <buffer> <leader>cw <plug>(lsp-rename)
     nmap <buffer> K <plug>(lsp-hover)
 endfunction
 
@@ -198,6 +205,10 @@ nnoremap <silent> <leader>ok :FSSplitAbove<cr>
 nnoremap <silent> <leader>oj :FSSplitBelow<cr>
 nnoremap <silent> <leader>oh :FSSplitLeft<cr>
 nnoremap <silent> <leader>ol :FSSplitRight<cr>
+
+" VimCompletesMe
+
+autocmd FileType c,cpp let b:vcm_tab_complete = "omni"
 
 " ===== colors =====
 color dosboxblack
@@ -328,6 +339,10 @@ function! Status(winnum)
             let stat.='dirvish: ' . bufname(bufnum) . ' '
         elseif filetype ==# 'startscreen'
             let stat.='start screen'
+        elseif filetype ==# 'lsp-quickpick'
+            let stat.='quickpick'
+        elseif filetype ==# 'lsp-quickpick-filter'
+            let stat.='search'
         else
             let stat.='???'
         endif
@@ -340,7 +355,6 @@ function! Status(winnum)
         let stat .= getbufvar(bufnum, '&modified') ? '%2* [+] %#StatusLine#' : ''
         let stat .= getbufvar(bufnum, '&readonly') || !getbufvar(bufnum, '&modifiable') ? '%1*  %#StatusLine#'   : ''
         let stat .= '%w%<%='
-        let stat .= active ? gutentags#statusline('[', ']') . ' ' : ''
         let stat .= filetype ==# '' ? 'normal text ' : filetype . ' '
         let stat .= active ? '%#User9# ' : '%#StatusLine# '
         let stat .= getbufvar(bufnum, '&encoding') . ' :: ' . getbufvar(bufnum, '&fileformat') . ' '
@@ -362,4 +376,5 @@ command! RefreshStatus :call <SID>RefreshStatus()
 augroup status
     autocmd!
     autocmd VimEnter,VimLeave,WinEnter,WinLeave,BufWinEnter,BufWinLeave,BufEnter,BufLeave * :RefreshStatus
+    autocmd User lsp_float_opened,lsp_float_closed,lsp_progress_updated :RefreshStatus
 augroup END

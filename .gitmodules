@@ -25,9 +25,6 @@
 [submodule "vim/.config/vim/bundle/vim-rsi"]
 	path = vim/.config/vim/plugins/vim-rsi
 	url = https://github.com/tpope/vim-rsi
-[submodule "vim/.config/vim/bundle/vim-system-copy"]
-	path = vim/.config/vim/plugins/vim-system-copy
-	url = https://github.com/christoomey/vim-system-copy
 [submodule "vim/.config/vim/bundle/vimtex"]
 	path = vim/.config/vim/plugins/vimtex
 	url = https://github.com/lervag/vimtex
@@ -40,3 +37,6 @@
 [submodule "vim/.config/vim/plugins/VimCompletesMe"]
 	path = vim/.config/vim/plugins/VimCompletesMe
 	url = https://github.com/vim-scripts/VimCompletesMe
+[submodule "vim/.config/vim/plugins/vim-lsp-ultisnips"]
+	path = vim/.config/vim/plugins/vim-lsp-ultisnips
+	url = https://github.com/thomasfaingnaert/vim-lsp-ultisnips
