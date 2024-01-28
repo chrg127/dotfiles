@@ -34,6 +34,7 @@ filetype plugin indent on
 let mapleader = ","         " set <Leader>
 set nocompatible            " disable compatibility with vi
 set showcmd                 " Show (partial) command in status line.
+set ruler
 set cmdheight=1             " set number of screen lines to use for command line
 set noshowmode              " Already have it in statusline
 set relativenumber          " left column displays relative numbers lines
@@ -75,7 +76,7 @@ endif
 set completeopt+=menuone    " when completing, open popup even with only one item
 " set signcolumn=yes          " always draw the sign column (used by lsp plugins)
 runtime ftplugin/man.vim    " enable :Man command
-set modelineexpr            " for stuff with nerdtree
+" set modelineexpr            " for stuff with nerdtree
 
 " copies selection to the system clipboard. IMPORTANT: uses ^ so that
 " items are prepended rather than appended.
@@ -170,7 +171,9 @@ let g:lsp_diagnostics_enabled = 0                   " disable diagnostics (they 
 let g:lsp_document_code_action_signs_enabled = 0    " disable code actions
 let g:lsp_peek_alignment = 'top'
 let g:lsp_show_workspace_edits = 1                  " enables showing workspace edits in location list
-let g:lsp_log_file = expand($XDG_CACHE_HOME . '/vim/lsp.log')
+" defines log file for lsp server. note that this will slow down vim.
+" let g:lsp_log_file = expand($XDG_CACHE_HOME . '/vim/lsp.log')
+
 hi lspReference ctermfg=red guifg=red ctermbg=green guibg=green
 
 if executable('clangd')
@@ -376,6 +379,6 @@ command! RefreshStatus :call <SID>RefreshStatus()
 
 augroup status
     autocmd!
-    autocmd VimEnter,VimLeave,WinEnter,WinLeave,BufWinEnter,BufWinLeave,BufEnter,BufLeave * :RefreshStatus
-    autocmd User lsp_float_opened,lsp_float_closed,lsp_progress_updated :RefreshStatus
+    autocmd VimEnter,VimLeave,WinEnter,WinLeave,BufWinEnter,BufWinLeave * :RefreshStatus
+"     autocmd User lsp_float_opened,lsp_float_closed,lsp_progress_updated :RefreshStatus
 augroup END
