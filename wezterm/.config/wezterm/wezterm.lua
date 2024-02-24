@@ -1,144 +1,111 @@
 local wezterm = require 'wezterm'
-local act     = wezterm.action
 
+local act     = wezterm.action
 local shortcuts = {}
 
-function disable(k, m) table.insert(shortcuts, { key = k, mods = m, action = wezterm.action.DisableDefaultAssignment, }) end
+function disable_all(keys)
+    for _, v in ipairs(keys) do
+        table.insert(shortcuts, {
+            key = v[1],
+            mods = v[2],
+            action = wezterm.action.DisableDefaultAssignment,
+        })
+    end
+end
 
 -- keys to disable
-disable("!", "CTRL")
-disable("!", "CTRL|SHIFT")
-disable("\"", "ALT|CTRL")
-disable("\"", "SHIFT|ALT|CTRL")
-disable("#", "CTRL")
-disable("#", "CTRL|SHIFT")
-disable("$", "CTRL")
-disable("$", "CTRL|SHIFT")
-disable("%", "CTRL")
-disable("%", "CTRL|SHIFT")
-disable("%", "ALT|CTRL")
-disable("%", "SHIFT|ALT|CTRL")
-disable("&", "CTRL")
-disable("&", "CTRL|SHIFT")
-disable("'", "SHIFT|ALT|CTRL")
-disable("(", "CTRL")
-disable("(", "CTRL|SHIFT")
-disable(")", "CTRL")
-disable(")", "CTRL|SHIFT")
-disable("*", "CTRL")
-disable("*", "CTRL|SHIFT")
--- disable("+", "CTRL")
-disable("+", "CTRL|SHIFT")
--- disable("-", "CTRL")
-disable("-", "CTRL|SHIFT")
-disable("-", "SUPER")
-disable("0", "CTRL")
-disable("0", "SHIFT|CTRL")
-disable("0", "SUPER")
-disable("1", "SHIFT|CTRL")
-disable("1", "SUPER")
-disable("2", "SHIFT|CTRL")
-disable("2", "SUPER")
-disable("3", "SHIFT|CTRL")
-disable("3", "SUPER")
-disable("4", "SHIFT|CTRL")
-disable("4", "SUPER")
-disable("5", "SHIFT|CTRL")
-disable("5", "SHIFT | ALT | CTRL")
-disable("5", "SUPER")
-disable("6", "SHIFT|CTRL")
-disable("6", "SUPER")
-disable("7", "SHIFT|CTRL")
-disable("7", "SUPER")
-disable("8", "SHIFT|CTRL")
-disable("8", "SUPER")
-disable("9", "SHIFT|CTRL")
-disable("9", "SUPER")
-disable("=", "CTRL")
-disable("=", "SHIFT | CTRL")
-disable("=", "SUPER")
-disable("@", "CTRL")
-disable("@", "CTRL|SHIFT")
--- disable("C", "CTRL")
--- disable("C", "SHIFT | CTRL")
--- disable("F", "CTRL")
--- disable("F", "SHIFT | CTRL")
--- disable("K", "CTRL")
--- disable("K", "SHIFT | CTRL")
--- disable("L", "CTRL")
--- disable("L", "SHIFT | CTRL")
--- disable("M", "CTRL")
--- disable("M", "SHIFT | CTRL")
--- disable("N", "CTRL")
--- disable("N", "SHIFT | CTRL")
--- disable("P", "CTRL")
--- disable("P", "SHIFT | CTRL")
--- disable("R", "CTRL")
--- disable("R", "SHIFT | CTRL")
--- disable("T", "CTRL")
--- disable("T", "SHIFT | CTRL")
-disable("U", "CTRL")
-disable("U", "SHIFT | CTRL")
--- disable("V", "CTRL")
--- disable("V", "SHIFT | CTRL")
--- disable("W", "CTRL")
--- disable("W", "SHIFT | CTRL")
--- disable("X", "CTRL")
--- disable("X", "SHIFT | CTRL")
--- disable("Z", "CTRL")
--- disable("Z", "SHIFT | CTRL")
-disable("[", "SHIFT | SUPER")
-disable("]", "SHIFT | SUPER")
-disable("^", "CTRL")
-disable("^", "SHIFT | CTRL")
-disable("_", "CTRL")
-disable("_", "SHIFT | CTRL")
--- disable("c", "SHIFT | CTRL")
--- disable("c", "SUPER")
--- disable("f", "SHIFT | CTRL")
--- disable("f", "SUPER")
--- disable("k", "SHIFT | CTRL")
--- disable("k", "SUPER")
--- disable("l", "SHIFT | CTRL")
--- disable("m", "SHIFT | CTRL")
--- disable("m", "SUPER")
--- disable("n", "SHIFT | CTRL")
--- disable("n", "SUPER")
--- disable("p", "SHIFT | CTRL")
--- disable("r", "SHIFT | CTRL")
--- disable("r", "SUPER")
--- disable("t", "SHIFT | CTRL")
--- disable("t", "SUPER")
-disable("u", "SHIFT | CTRL")
--- disable("v", "SHIFT | CTRL")
--- disable("v", "SUPER")
--- disable("w", "SHIFT | CTRL")
--- disable("w", "SUPER")
--- disable("x", "SHIFT | CTRL")
--- disable("z", "SHIFT | CTRL")
-disable("{", "SUPER")
-disable("{", "SHIFT | SUPER")
-disable("}", "SUPER")
-disable("}", "SHIFT | SUPER")
--- disable("Space (Physical)", "SHIFT|CTRL") --           ->   QuickSelect
--- disable("PageUp", "SHIFT") --                             ->   ScrollByPage(NotNan(-1.0))
-disable("PageUp", "CTRL") --                              ->   ActivateTabRelative(-1)
-disable("PageUp", "SHIFT | CTRL") --                      ->   MoveTabRelative(-1)
--- disable("PageDown", "SHIFT") --                           ->   ScrollByPage(NotNan(1.0))
-disable("PageDown", "CTRL") --                            ->   ActivateTabRelative(1)
-disable("PageDown", "SHIFT | CTRL") --                    ->   MoveTabRelative(1)
--- disable("LeftArrow", "SHIFT | CTRL") --                   ->   ActivatePaneDirection(Left)
--- disable("LeftArrow", "SHIFT | ALT | CTRL") --             ->   AdjustPaneSize(Left, 1)
--- disable("RightArrow", "SHIFT | CTRL") --                  ->   ActivatePaneDirection(Right)
--- disable("RightArrow", "SHIFT | ALT | CTRL") --            ->   AdjustPaneSize(Right, 1)
--- disable("UpArrow", "SHIFT | CTRL") --                     ->   ActivatePaneDirection(Up)
--- disable("UpArrow", "SHIFT | ALT | CTRL") --               ->   AdjustPaneSize(Up, 1)
--- disable("DownArrow", "SHIFT | CTRL") --                   ->   ActivatePaneDirection(Down)
--- disable("DownArrow", "SHIFT | ALT | CTRL") --             ->   AdjustPaneSize(Down, 1)
-disable("Insert", "SHIFT") --                             ->   PasteFrom(PrimarySelection)
-disable("Insert", "CTRL") --                              ->   CopyTo(PrimarySelection)
--- disable("Copy", "") --               ->   CopyTo(Clipboard)
--- disable("Paste", "") --             ->   PasteFrom(Clipboard)
+disable_all({
+    { "!", "CTRL" },
+    { "!", "CTRL|SHIFT" },
+    { "\"", "ALT|CTRL" },
+    { "\"", "SHIFT|ALT|CTRL" },
+    { "#", "CTRL" },
+    { "#", "CTRL|SHIFT" },
+    { "$", "CTRL" },
+    { "$", "CTRL|SHIFT" },
+    { "%", "CTRL" },
+    { "%", "CTRL|SHIFT" },
+    { "%", "ALT|CTRL" },
+    { "%", "SHIFT|ALT|CTRL" },
+    { "&", "CTRL" },
+    { "&", "CTRL|SHIFT" },
+    { "'", "SHIFT|ALT|CTRL" },
+    { "(", "CTRL" },
+    { "(", "CTRL|SHIFT" },
+    { ")", "CTRL" },
+    { ")", "CTRL|SHIFT" },
+    { "*", "CTRL" },
+    { "*", "CTRL|SHIFT" },
+    { "+", "CTRL|SHIFT" },
+    { "-", "CTRL|SHIFT" },
+    { "-", "SUPER" },
+    { "0", "CTRL" },
+    { "0", "SHIFT|CTRL" },
+    { "0", "SUPER" },
+    { "1", "SHIFT|CTRL" },
+    { "1", "SUPER" },
+    { "2", "SHIFT|CTRL" },
+    { "2", "SUPER" },
+    { "3", "SHIFT|CTRL" },
+    { "3", "SUPER" },
+    { "4", "SHIFT|CTRL" },
+    { "4", "SUPER" },
+    { "5", "SHIFT|CTRL" },
+    { "5", "SHIFT | ALT | CTRL" },
+    { "5", "SUPER" },
+    { "6", "SHIFT|CTRL" },
+    { "6", "SUPER" },
+    { "7", "SHIFT|CTRL" },
+    { "7", "SUPER" },
+    { "8", "SHIFT|CTRL" },
+    { "8", "SUPER" },
+    { "9", "SHIFT|CTRL" },
+    { "9", "SUPER" },
+    { "=", "CTRL" },
+    { "=", "SHIFT | CTRL" },
+    { "=", "SUPER" },
+    { "@", "CTRL" },
+    { "@", "CTRL|SHIFT" },
+    { "U", "CTRL" },
+    { "U", "SHIFT | CTRL" },
+    { "[", "SHIFT | SUPER" },
+    { "]", "SHIFT | SUPER" },
+    { "^", "CTRL" },
+    { "^", "SHIFT | CTRL" },
+    { "_", "CTRL" },
+    { "_", "SHIFT | CTRL" },
+    { "u", "SHIFT | CTRL" },
+    { "{", "SUPER" },
+    { "{", "SHIFT | SUPER" },
+    { "}", "SUPER" },
+    { "}", "SHIFT | SUPER" },
+    { "PageUp", "CTRL" },           -- ActivateTabRelative(-1 },
+    { "PageUp", "SHIFT | CTRL" },   -- MoveTabRelative(-1 }
+    { "PageDown", "CTRL" },         -- ActivateTabRelative(1 }
+    { "PageDown", "SHIFT | CTRL" }, -- MoveTabRelative(1 }
+    { "Insert", "SHIFT" },          -- PasteFrom(PrimarySelection }
+    { "Insert", "CTRL" },           -- CopyTo(PrimarySelection  }
+    { "K", "CTRL" },                -- ClearScrollback(ScrollbackOnly)
+    { "K", "CTRL|SHIFT" },          -- ClearScrollback(ScrollbackOnly)
+    { "L", "CTRL" },                -- ShowDebugOverlay
+    { "L", "CTRL|SHIFT" },          -- ShowDebugOverlay
+    { "M", "CTRL" },                -- Hide
+    { "M", "CTRL|SHIFT" },          -- Hide
+    { "c", "SUPER" },               -- CopyTo(Clipboard)
+    { "f", "SUPER" },               -- Search(CurrentSelectionOrEmptyString)
+    { "k", "SUPER" },               -- ClearScrollback(ScrollbackOnly)
+    { "m", "SUPER" },               -- Hide
+    { "PageUp", "SHIFT", },         -- ScrollByPage(NotNan(-1.0))
+    { "PageDown", "SHIFT", },       -- ScrollByPage(NotNan(1.0))
+    { "LeftArrow", "SHIFT|CTRL" },      -- ActivatePaneDirection(Left)
+    { "LeftArrow", "SHIFT|ALT|CTRL" },  -- AdjustPaneSize(Left, 1)
+    { "RightArrow", "SHIFT|CTRL" },     -- ActivatePaneDirection(Right)
+    { "RightArrow", "SHIFT|ALT|CTRL" }, -- AdjustPaneSize(Right, 1)
+    { "UpArrow", "SHIFT|CTRL" },        -- ActivatePaneDirection(Up)
+    { "UpArrow", "SHIFT|ALT|CTRL" },    -- AdjustPaneSize(Up, 1)
+    { "DownArrow", "SHIFT|CTRL" },      -- ActivatePaneDirection(Down)
+    { "DownArrow", "SHIFT|ALT|CTRL" },  -- AdjustPaneSize(Down, 1)
+})
 
 for i = 1, 8 do
     table.insert(shortcuts, {
@@ -148,17 +115,18 @@ for i = 1, 8 do
     })
 end
 
-table.insert(shortcuts, {
-    key = "(",
-    mods = "CTRL|SHIFT",
-    action = wezterm.action.SplitHorizontal { domain = CurrentPaneDomain }
-})
-
-table.insert(shortcuts, {
-    key = ")",
-    mods = "CTRL|SHIFT",
-    action = wezterm.action.SplitVertical { domain = CurrentPaneDomain }
-})
+table.insert(shortcuts, { key = "(", mods = "CTRL|SHIFT", action = wezterm.action.SplitHorizontal { domain = CurrentPaneDomain } })
+table.insert(shortcuts, { key = ")", mods = "CTRL|SHIFT", action = wezterm.action.SplitVertical   { domain = CurrentPaneDomain } })
+table.insert(shortcuts, { key = "D", mods = "CTRL|SHIFT", action = wezterm.action.ShowDebugOverlay })
+table.insert(shortcuts, { key = 'D', mods = "CTRL",       action = wezterm.action.ShowDebugOverlay })
+table.insert(shortcuts, { key = 'L', mods = "CTRL|SHIFT", action = wezterm.action.ActivatePaneDirection 'Right' })
+table.insert(shortcuts, { key = 'L', mods = "CTRL",       action = wezterm.action.ActivatePaneDirection 'Right' })
+table.insert(shortcuts, { key = 'H', mods = "CTRL|SHIFT", action = wezterm.action.ActivatePaneDirection 'Left' })
+table.insert(shortcuts, { key = 'H', mods = "CTRL",       action = wezterm.action.ActivatePaneDirection 'Left' })
+table.insert(shortcuts, { key = 'K', mods = "CTRL|SHIFT", action = wezterm.action.ActivatePaneDirection 'Up' })
+table.insert(shortcuts, { key = 'K', mods = "CTRL",       action = wezterm.action.ActivatePaneDirection 'Up' })
+table.insert(shortcuts, { key = 'J', mods = "CTRL|SHIFT", action = wezterm.action.ActivatePaneDirection 'Down' })
+table.insert(shortcuts, { key = 'J', mods = "CTRL",       action = wezterm.action.ActivatePaneDirection 'Down' })
 
 -- Equivalent to POSIX basename(3)
 -- Given "/foo/bar" returns "bar"
@@ -173,10 +141,7 @@ function tab_title(tab)
         return title
     end
     local t2 = basename(tab.active_pane.foreground_process_name)
-    if t2 == 'vim.gtk3' then
-        t2 = 'vim'
-    end
-    return t2
+    return t2 == 'vim.gtk3' and 'vim' or t2
 end
 
 wezterm.on(
@@ -212,7 +177,6 @@ wezterm.on(
 )
 
 return {
-    -- /home/chrg/.local/share/fonts/t0-11-uni.pcf.gz, FontConfig pixel_sizes=[11]
     font = wezterm.font("Ttyp0", {weight="Regular", stretch="Normal", style="Normal"}),
     font_size = 13,
     -- font = wezterm.font('Hack'),
@@ -233,8 +197,8 @@ return {
     cursor_blink_rate = 1000,
     cursor_blink_ease_in = "Constant",
     cursor_blink_ease_out = "Constant",
-    initial_cols = 120,
-    initial_rows = 36,
+    initial_cols = 100,
+    initial_rows = 30,
     -- line_height = 1.0,
     -- custom_block_glyphs = false,
 
