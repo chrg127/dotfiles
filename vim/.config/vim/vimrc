@@ -310,11 +310,11 @@ noremap Q <Nop>
 
 " ===== status line ====
 let g:currentmode={
-    \ 'n'       : 'Normale',   'no' : 'N·Attesa',    'v'  : 'Visuale',       'V'  : 'V·Riga',
-    \ "\<c-v>"  : 'V·Blocco',  's'  : 'Selezione',   'S'  : 'S·Riga',        '^S' : 'S·Blocco',
-    \ 'i'       : 'Inserisci', 'R'  : 'Sostituisci', 'Rv' : 'V·Sostituisci', 'c'  : 'Comando',
-    \ 'cv'      : 'Vim Ex',    'ce' : 'Ex',          'r'  : 'Prompt',        'rm' : 'Di piu',
-    \ 'r?'      : 'Conferma',  '!'  : 'Shell',       't'  : 'Terminale',
+    \ 'n'       : '  Normale  ', 'no' : ' N·Attesa  ', 'v'  : '  Visuale  ', 'V'  : '  V·Riga   ',
+    \ "\<c-v>"  : ' V·Blocco  ', 's'  : ' Selezione ', 'S'  : '  S·Riga   ', '^S' : ' S·Blocco  ',
+    \ 'i'       : ' Inserisci ', 'R'  : 'Sostituisci', 'Rv' : '  V·Sost   ', 'c'  : '  Comando  ',
+    \ 'cv'      : '  Vim Ex   ', 'ce' : '    Ex     ', 'r'  : '  Prompt   ', 'rm' : '  Di più   ',
+    \ 'r?'      : ' Conferma  ', '!'  : '   Shell   ', 't'  : ' Terminale ',
     \}
 
 let g:mode_colors={
