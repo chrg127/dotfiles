@@ -301,3 +301,5 @@ COMP_TAR_INTERNAL_PATHS=1
 # define for a custom prompt
 PROMPT_COMMAND=draw_prompt
 
+# enable core dumps
+ulimit -c unlimited
