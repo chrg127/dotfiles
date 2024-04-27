@@ -140,16 +140,20 @@ function tab_title(tab)
     if title and #title > 0 then
         return title
     end
-    local t2 = basename(tab.active_pane.foreground_process_name)
-    return t2 == 'vim.gtk3' and 'vim' or t2
+    title = basename(tab.active_pane.foreground_process_name)
+    if title ~= "" then
+        return title == 'vim.gtk3' and 'vim' or title
+    end
+    title = tab.active_pane.title
+    if title ~= nil then
+        return title
+    end
+    return ""
 end
 
 wezterm.on(
     "format-tab-title",
     function(tab, tabs, panes, config, hover, max_width)
-        local SOLID_LEFT_ARROW = wezterm.nerdfonts.pl_right_hard_divider
-        local SOLID_RIGHT_ARROW = wezterm.nerdfonts.pl_left_hard_divider
-
         local edge_background = '#080808'
         local background = '#8a8a8a'
         local foreground = '#080808'
@@ -177,7 +181,7 @@ wezterm.on(
 )
 
 return {
-    font = wezterm.font("Ttyp0", {weight="Regular", stretch="Normal", style="Normal"}),
+    font = wezterm.font("Greybeard 18px", {weight="Medium", stretch="Normal", style="Normal"}),
     font_size = 13,
     -- font = wezterm.font('Hack'),
     -- font_size = 9.8,
