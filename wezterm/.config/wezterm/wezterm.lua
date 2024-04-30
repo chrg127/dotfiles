@@ -250,10 +250,10 @@ return {
         cursor_fg       = curr_scheme.fg,
         cursor_bg       = curr_scheme.bg,
         cursor_border   = curr_scheme.bg,
-        selection_fg    = curr_scheme.fg,
-        selection_bg    = curr_scheme.bg,
+        selection_fg    = curr_scheme.bg,
+        selection_bg    = curr_scheme.fg,
         scrollbar_thumb = curr_scheme.bg, -- The color of the scrollbar "thumb"; the portion that represents the current viewport
-        split           = curr_scheme.bg, -- The color of the split lines between panes
+        split           = curr_scheme.fg, -- The color of the split lines between panes
 
         brights = {
             curr_scheme.bg,   curr_scheme.red,    curr_scheme.green, curr_scheme.yellow,
