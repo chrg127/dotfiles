@@ -1,6 +1,36 @@
 local wezterm = require 'wezterm'
 
-local act     = wezterm.action
+local act = wezterm.action
+
+local colorscheme = {
+    white = {
+        red    = "#d75f87",
+        green  = "#00af00",
+        yellow = "#ffaf00",
+        blue   = "#8787ff",
+        fucsia = "#d700d7",
+        cyan   = "#0087d7",
+        bg     = "#eeeeee",
+        fg     = "#1c1c1c",
+        gray2  = "#4e4e4e",
+        gray3  = "#9e9e9e"
+    },
+    black = {
+        red     = "#d75f87",
+        green   = "#00af00",
+        yellow  = "#ffd787",
+        blue    = "#8787ff",
+        fucsia  = "#d700d7",
+        cyan    = "#87d7ff",
+        bg      = "#080808",
+        fg      = "#b2b2b2",
+        gray2   = "#4e4e4e",
+        gray3   = "#8a8a8a"
+    },
+}
+
+local curr_scheme = colorscheme.black
+
 local shortcuts = {}
 
 function disable_all(keys)
@@ -128,6 +158,14 @@ table.insert(shortcuts, { key = 'K', mods = "CTRL",       action = wezterm.actio
 table.insert(shortcuts, { key = 'J', mods = "CTRL|SHIFT", action = wezterm.action.ActivatePaneDirection 'Down' })
 table.insert(shortcuts, { key = 'J', mods = "CTRL",       action = wezterm.action.ActivatePaneDirection 'Down' })
 
+table.insert(shortcuts, {
+    key = 'g',
+    mods = "CTRL|SHIFT",
+    action = wezterm.action_callback(function ()
+        curr_scheme = curr_scheme == colorscheme.black and colorscheme.white or colorscheme.black
+    end)
+})
+
 -- Equivalent to POSIX basename(3)
 -- Given "/foo/bar" returns "bar"
 -- Given "c:\\foo\\bar" returns "bar"
@@ -154,16 +192,16 @@ end
 wezterm.on(
     "format-tab-title",
     function(tab, tabs, panes, config, hover, max_width)
-        local edge_background = '#080808'
-        local background = '#8a8a8a'
-        local foreground = '#080808'
+        local edge_background = curr_scheme.bg
+        local background = curr_scheme.gray3
+        local foreground = curr_scheme.bg
 
         if tab.is_active then
-            background = '#d75f87'
-            foreground = '#080808'
+            background = curr_scheme.red
+            foreground = curr_scheme.bg
         elseif hover then
-            background = '#b2b2b2'
-            foreground = '#080808'
+            background = curr_scheme.fg
+            foreground = curr_scheme.bg
         end
 
         local edge_foreground = background
@@ -207,30 +245,25 @@ return {
     -- custom_block_glyphs = false,
 
     colors = {
-        foreground      = '#b2b2b2',
-        background      = '#080808',
-        cursor_fg       = '#080808',
-        cursor_bg       = '#b2b2b2',
-        cursor_border   = '#b2b2b2',
-        selection_fg    = '#080808',
-        selection_bg    = '#b2b2b2',
-        scrollbar_thumb = '#b2b2b2',    -- The color of the scrollbar "thumb"; the portion that represents the current viewport
-        split = '#b2b2b2',              -- The color of the split lines between panes
+        foreground      = curr_scheme.fg,
+        background      = curr_scheme.bg,
+        cursor_fg       = curr_scheme.fg,
+        cursor_bg       = curr_scheme.bg,
+        cursor_border   = curr_scheme.bg,
+        selection_fg    = curr_scheme.fg,
+        selection_bg    = curr_scheme.bg,
+        scrollbar_thumb = curr_scheme.bg, -- The color of the scrollbar "thumb"; the portion that represents the current viewport
+        split           = curr_scheme.bg, -- The color of the split lines between panes
 
         brights = {
-            '#080808', '#d75f87', '#00af00', '#ffd787',
-            '#8787ff', '#d700d7', '#87d7ff', '#eeeeee',
+            curr_scheme.bg,   curr_scheme.red,    curr_scheme.green, curr_scheme.yellow,
+            curr_scheme.blue, curr_scheme.fucsia, curr_scheme.cyan,  curr_scheme.fg,
         },
 
         ansi = {
-            '#080808', '#d75f87', '#00af00', '#ffd787',
-            '#8787ff', '#d700d7', '#87d7ff', '#eeeeee',
+            curr_scheme.bg,   curr_scheme.red,    curr_scheme.green, curr_scheme.yellow,
+            curr_scheme.blue, curr_scheme.fucsia, curr_scheme.cyan,  curr_scheme.fg,
         },
-
-        -- ansi = {
-        --     '#080808', '#870000', '#008700', '#ffaf00',
-        --     '#5f5fff', '#af00d7', '#00afff', '#b2b2b2'
-        -- },
 
         -- When the IME, a dead key or a leader key are being processed and are effectively
         -- holding input pending the result of input composition, change the cursor
@@ -240,39 +273,7 @@ return {
         tab_bar = {
             -- The color of the strip that goes along the top of the window
             -- (does not apply when fancy tab bar is in use)
-            background = '#080808',
-
-            -- The active tab is the one that has focus in the window
-            active_tab = {
-                bg_color = '#d75f87',
-                fg_color = '#080808',
-                intensity = 'Bold', -- Half, Normal or Bold
-                underline = 'None', -- None, Single or Double
-                -- italic = true,
-                -- strikethrough = false,
-            },
-
-            -- Inactive tabs are the tabs that do not have focus
-            inactive_tab = {
-                bg_color = '#8a8a8a',
-                fg_color = '#080808',
-            },
-
-            inactive_tab_hover = {
-                bg_color = '#b2b2b2',
-                fg_color = '#080808',
-            },
-
-            -- The new tab button that let you create new tabs
-            new_tab = {
-                bg_color = '#4e4e4e',
-                fg_color = '#080808',
-            },
-
-            new_tab_hover = {
-                bg_color = '#b2b2b2',
-                fg_color = '#080808',
-            },
+            background = curr_scheme.bg,
         },
     },
 }

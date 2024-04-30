@@ -109,7 +109,7 @@ else
     hi DiffChange ctermfg=232 ctermbg=222
     hi DiffDelete ctermfg=232 ctermbg=168
     hi DiffText term=reverse cterm=NONE ctermbg=235
-    hi Directory ctermfg=245
+    hi Directory ctermfg=105
     hi Error ctermbg=88
     hi ErrorMsg ctermbg=88
     hi FoldColumn ctermfg=232
@@ -126,7 +126,7 @@ else
     hi PmenuSbar ctermbg=239
     hi PmenuThumb ctermbg=245
     hi PmenuSel ctermfg=232 ctermbg=105
-    hi Question term=standout ctermfg=37
+    hi Question cterm=standout term=standout ctermfg=37
     hi Search ctermfg=232 ctermbg=222
     hi SignColumn term=NONE ctermfg=245 ctermbg=232
     hi Special ctermfg=34
@@ -155,7 +155,6 @@ else
     hi Identifier cterm=NONE ctermfg=117
     hi SpecialChar cterm=NONE ctermfg=117
     hi PreProc term=underline ctermfg=81
-    hi! link Directory Number
     hi! link SpecialKey PreProc
     hi! link qfLineNr Statement
     hi User1 ctermfg=168 ctermbg=235
