@@ -2,34 +2,83 @@ local wezterm = require 'wezterm'
 
 local act = wezterm.action
 
-local colorscheme = {
-    white = {
-        red    = "#d75f87",
-        green  = "#00af00",
-        yellow = "#ffaf00",
-        blue   = "#8787ff",
-        fucsia = "#d700d7",
-        cyan   = "#0087d7",
-        bg     = "#eeeeee",
-        fg     = "#1c1c1c",
-        gray2  = "#4e4e4e",
-        gray3  = "#9e9e9e"
+local my_colorschemes = {
+    WhiteScheme = {
+        ansi = {
+            "#eeeeee",
+            "#d75f87",
+            "#00af00",
+            "#ffaf00",
+            "#8787ff",
+            "#d700d7",
+            "#0087d7",
+            "#1c1c1c",
+        },
+        brights = {
+            "#eeeeee",
+            "#d75f87",
+            "#00af00",
+            "#ffaf00",
+            "#8787ff",
+            "#d700d7",
+            "#0087d7",
+            "#1c1c1c",
+        },
+
+        background    = "#eeeeee",
+        foreground    = "#1c1c1c",
+        cursor_bg     = "#1c1c1c",
+        cursor_fg     = "#eeeeee",
+        cursor_border = "#1c1c1c",
+        selection_bg  = "#1c1c1c",
+        selection_fg  = "#eeeeee",
+
+        scrollbar_thumb = "#f00808",
+        split           = "#1c1c1c",
+        tab_bar = { background = "#eeeeee" },
     },
-    black = {
-        red     = "#d75f87",
-        green   = "#00af00",
-        yellow  = "#ffd787",
-        blue    = "#8787ff",
-        fucsia  = "#d700d7",
-        cyan    = "#87d7ff",
-        bg      = "#080808",
-        fg      = "#b2b2b2",
-        gray2   = "#4e4e4e",
-        gray3   = "#8a8a8a"
+    BlackScheme = {
+        ansi = {
+            "#080808",
+            "#d75f87",
+            "#00af00",
+            "#ffd787",
+            "#8787ff",
+            "#d700d7",
+            "#87d7ff",
+            "#b2b2b2",
+        },
+        brights = {
+            "#080808",
+            "#d75f87",
+            "#00af00",
+            "#ffd787",
+            "#8787ff",
+            "#d700d7",
+            "#87d7ff",
+            "#eeeeee",
+        },
+
+        background    = "#080808",
+        foreground    = "#b2b2b2",
+        cursor_bg     = "#080808",
+        cursor_fg     = "#b2b2b2",
+        cursor_border = "#b2b2b2",
+        selection_bg  = "#b2b2b2",
+        selection_fg  = "#080808",
+
+        -- The color of the scrollbar "thumb"; the portion that represents the current viewport
+        scrollbar_thumb = "#f00808",
+        -- The color of the split lines between panes
+        split           = "#b2b2b2",
+
+        -- The color of the strip that goes along the top of the window
+        -- (does not apply when fancy tab bar is in use)
+        tab_bar = { background = "#080808" },
     },
 }
 
-local curr_scheme = colorscheme.black
+local curr_scheme = 'BlackScheme'
 
 local shortcuts = {}
 
@@ -161,10 +210,15 @@ table.insert(shortcuts, { key = 'J', mods = "CTRL",       action = wezterm.actio
 table.insert(shortcuts, {
     key = 'g',
     mods = "CTRL|SHIFT",
-    action = wezterm.action_callback(function ()
-        curr_scheme = curr_scheme == colorscheme.black and colorscheme.white or colorscheme.black
-    end)
+    action = wezterm.action.EmitEvent('change-colorscheme')
 })
+
+wezterm.on('change-colorscheme', function (window, pane)
+    local curr_scheme = window:effective_config().color_scheme
+    local overrides = window:get_config_overrides() or {}
+    overrides.color_scheme = curr_scheme == 'BlackScheme' and 'WhiteScheme' or 'BlackScheme'
+    window:set_config_overrides(overrides)
+end)
 
 -- Equivalent to POSIX basename(3)
 -- Given "/foo/bar" returns "bar"
@@ -192,16 +246,17 @@ end
 wezterm.on(
     "format-tab-title",
     function(tab, tabs, panes, config, hover, max_width)
-        local edge_background = curr_scheme.bg
-        local background = curr_scheme.gray3
-        local foreground = curr_scheme.bg
+        local curr_scheme = config.color_schemes[config.color_scheme]
+        local edge_background = curr_scheme.background
+        local background = curr_scheme.ansi[8]
+        local foreground = curr_scheme.background
 
         if tab.is_active then
-            background = curr_scheme.red
-            foreground = curr_scheme.bg
+            background = curr_scheme.ansi[2]
+            foreground = curr_scheme.background
         elseif hover then
-            background = curr_scheme.fg
-            foreground = curr_scheme.bg
+            background = curr_scheme.foreground
+            foreground = curr_scheme.background
         end
 
         local edge_foreground = background
@@ -244,36 +299,13 @@ return {
     -- line_height = 1.0,
     -- custom_block_glyphs = false,
 
+    color_schemes = my_colorschemes,
+    color_scheme = curr_scheme,
+
     colors = {
-        foreground      = curr_scheme.fg,
-        background      = curr_scheme.bg,
-        cursor_fg       = curr_scheme.fg,
-        cursor_bg       = curr_scheme.bg,
-        cursor_border   = curr_scheme.bg,
-        selection_fg    = curr_scheme.bg,
-        selection_bg    = curr_scheme.fg,
-        scrollbar_thumb = curr_scheme.bg, -- The color of the scrollbar "thumb"; the portion that represents the current viewport
-        split           = curr_scheme.fg, -- The color of the split lines between panes
-
-        brights = {
-            curr_scheme.bg,   curr_scheme.red,    curr_scheme.green, curr_scheme.yellow,
-            curr_scheme.blue, curr_scheme.fucsia, curr_scheme.cyan,  curr_scheme.fg,
-        },
-
-        ansi = {
-            curr_scheme.bg,   curr_scheme.red,    curr_scheme.green, curr_scheme.yellow,
-            curr_scheme.blue, curr_scheme.fucsia, curr_scheme.cyan,  curr_scheme.fg,
-        },
-
         -- When the IME, a dead key or a leader key are being processed and are effectively
         -- holding input pending the result of input composition, change the cursor
         -- to this color to give a visual cue about the compose state.
         compose_cursor = 'red',
-
-        tab_bar = {
-            -- The color of the strip that goes along the top of the window
-            -- (does not apply when fancy tab bar is in use)
-            background = curr_scheme.bg,
-        },
-    },
+    }
 }
