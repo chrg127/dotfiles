@@ -27,7 +27,7 @@ if &t_Co ==# 8
     hi Conceal ctermfg=Grey
     hi Conditional ctermfg=White
     hi Constant ctermfg=Magenta
-    "hi Cursor gui=reverse guifg=NONE guibg=NONE
+    hi Cursor gui=reverse guifg=NONE guibg=NONE
     hi CursorColumn ctermbg=DarkGrey
     hi CursorLine cterm=NONE ctermbg=DarkGrey
     hi CursorLineNr cterm=NONE ctermfg=White ctermbg=DarkGrey
@@ -126,7 +126,7 @@ else
     hi PmenuSbar ctermbg=239
     hi PmenuThumb ctermbg=245
     hi PmenuSel ctermfg=232 ctermbg=105
-    hi Question cterm=standout term=standout ctermfg=37
+    hi Question ctermbg=232 ctermfg=249
     hi Search ctermfg=232 ctermbg=222
     hi SignColumn term=NONE ctermfg=245 ctermbg=232
     hi Special ctermfg=34
@@ -148,7 +148,7 @@ else
     hi Type ctermfg=255
     hi Underlined term=underline cterm=underline ctermfg=81
     hi VertSplit ctermfg=235 ctermbg=255
-    hi Visual ctermbg=239
+    hi Visual cterm=none ctermfg=none ctermbg=239
     hi VisualNOS term=bold,underline cterm=bold,underline
     hi WarningMsg ctermbg=88
     hi WildMenu ctermbg=239 ctermfg=255

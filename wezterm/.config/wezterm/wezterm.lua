@@ -5,37 +5,33 @@ local act = wezterm.action
 local my_colorschemes = {
     WhiteScheme = {
         ansi = {
-            "#eeeeee",
-            "#d75f87",
-            "#00af00",
-            "#ffaf00",
-            "#8787ff",
-            "#d700d7",
-            "#0087d7",
-            "#1c1c1c",
+            "#e4e4e4", -- 254
+            "#af0000", -- 124
+            "#008700", -- 28
+            "#d78700", -- 172
+            "#5f00ff", -- 57
+            "#af00d7", -- 128
+            "#005fd7", -- 26
+            "#9e9e9e", -- 247
         },
         brights = {
-            "#eeeeee",
-            "#d75f87",
-            "#00af00",
-            "#ffaf00",
-            "#8787ff",
-            "#d700d7",
-            "#0087d7",
-            "#1c1c1c",
+            "#e4e4e4", -- 254
+            "#af0000", -- 124
+            "#008700", -- 28
+            "#d78700", -- 172
+            "#5f00ff", -- 57
+            "#af00d7", -- 128
+            "#005fd7", -- 26
+            "#1c1c1c", -- 234
         },
 
-        background    = "#eeeeee",
+        background    = "#e4e4e4", -- 254
         foreground    = "#1c1c1c",
-        cursor_bg     = "#1c1c1c",
-        cursor_fg     = "#eeeeee",
-        cursor_border = "#1c1c1c",
         selection_bg  = "#1c1c1c",
-        selection_fg  = "#eeeeee",
-
-        scrollbar_thumb = "#f00808",
+        selection_fg  = "#e4e4e4",
+        scrollbar_thumb = "#080808",
         split           = "#1c1c1c",
-        tab_bar = { background = "#eeeeee" },
+        tab_bar = { background = "#e4e4e4" },
     },
     BlackScheme = {
         ansi = {
@@ -61,14 +57,10 @@ local my_colorschemes = {
 
         background    = "#080808",
         foreground    = "#b2b2b2",
-        cursor_bg     = "#080808",
-        cursor_fg     = "#b2b2b2",
-        cursor_border = "#b2b2b2",
         selection_bg  = "#b2b2b2",
         selection_fg  = "#080808",
-
         -- The color of the scrollbar "thumb"; the portion that represents the current viewport
-        scrollbar_thumb = "#f00808",
+        scrollbar_thumb = "#080808",
         -- The color of the split lines between panes
         split           = "#b2b2b2",
 
@@ -255,8 +247,7 @@ wezterm.on(
             background = curr_scheme.ansi[2]
             foreground = curr_scheme.background
         elseif hover then
-            background = curr_scheme.foreground
-            foreground = curr_scheme.background
+            background = curr_scheme.brights[8]
         end
 
         local edge_foreground = background
