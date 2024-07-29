@@ -1,76 +1,27 @@
 local wezterm = require 'wezterm'
+local colorschemes = require 'colors'
+local fonts = require 'fonts'
+
+-- utilities
 
 local act = wezterm.action
 
-local my_colorschemes = {
-    WhiteScheme = {
-        ansi = {
-            "#e4e4e4", -- 254
-            "#af0000", -- 124
-            "#008700", -- 28
-            "#d78700", -- 172
-            "#5f00ff", -- 57
-            "#af00d7", -- 128
-            "#005fd7", -- 26
-            "#9e9e9e", -- 247
-        },
-        brights = {
-            "#e4e4e4", -- 254
-            "#af0000", -- 124
-            "#008700", -- 28
-            "#d78700", -- 172
-            "#5f00ff", -- 57
-            "#af00d7", -- 128
-            "#005fd7", -- 26
-            "#1c1c1c", -- 234
-        },
+function table_map(fn, t)
+    local r = {}
+    for k, v in pairs(t) do
+        table.insert(r, fn(k, v))
+    end
+    return r
+end
 
-        background    = "#e4e4e4", -- 254
-        foreground    = "#1c1c1c",
-        selection_bg  = "#1c1c1c",
-        selection_fg  = "#e4e4e4",
-        scrollbar_thumb = "#080808",
-        split           = "#1c1c1c",
-        tab_bar = { background = "#e4e4e4" },
-    },
-    BlackScheme = {
-        ansi = {
-            "#080808",
-            "#d75f87",
-            "#00af00",
-            "#ffd787",
-            "#8787ff",
-            "#d700d7",
-            "#87d7ff",
-            "#b2b2b2",
-        },
-        brights = {
-            "#080808",
-            "#d75f87",
-            "#00af00",
-            "#ffd787",
-            "#8787ff",
-            "#d700d7",
-            "#87d7ff",
-            "#eeeeee",
-        },
+-- Equivalent to POSIX basename(3)
+-- Given "/foo/bar" returns "bar"
+-- Given "c:\\foo\\bar" returns "bar"
+function basename(s)
+  return string.gsub(s, '(.*[/\\])(.*)', '%2')
+end
 
-        background    = "#080808",
-        foreground    = "#b2b2b2",
-        selection_bg  = "#b2b2b2",
-        selection_fg  = "#080808",
-        -- The color of the scrollbar "thumb"; the portion that represents the current viewport
-        scrollbar_thumb = "#080808",
-        -- The color of the split lines between panes
-        split           = "#b2b2b2",
-
-        -- The color of the strip that goes along the top of the window
-        -- (does not apply when fancy tab bar is in use)
-        tab_bar = { background = "#080808" },
-    },
-}
-
-local curr_scheme = 'BlackScheme'
+-- shortcuts config
 
 local shortcuts = {}
 
@@ -79,7 +30,7 @@ function disable_all(keys)
         table.insert(shortcuts, {
             key = v[1],
             mods = v[2],
-            action = wezterm.action.DisableDefaultAssignment,
+            action = act.DisableDefaultAssignment,
         })
     end
 end
@@ -182,42 +133,64 @@ for i = 1, 8 do
     table.insert(shortcuts, {
         key = tostring(i),
         mods = "ALT",
-        action = wezterm.action.ActivateTab(i-1),
+        action = act.ActivateTab(i-1),
     })
 end
 
-table.insert(shortcuts, { key = "(", mods = "CTRL|SHIFT", action = wezterm.action.SplitHorizontal { domain = CurrentPaneDomain } })
-table.insert(shortcuts, { key = ")", mods = "CTRL|SHIFT", action = wezterm.action.SplitVertical   { domain = CurrentPaneDomain } })
-table.insert(shortcuts, { key = "D", mods = "CTRL|SHIFT", action = wezterm.action.ShowDebugOverlay })
-table.insert(shortcuts, { key = 'D', mods = "CTRL",       action = wezterm.action.ShowDebugOverlay })
-table.insert(shortcuts, { key = 'L', mods = "CTRL|SHIFT", action = wezterm.action.ActivatePaneDirection 'Right' })
-table.insert(shortcuts, { key = 'L', mods = "CTRL",       action = wezterm.action.ActivatePaneDirection 'Right' })
-table.insert(shortcuts, { key = 'H', mods = "CTRL|SHIFT", action = wezterm.action.ActivatePaneDirection 'Left' })
-table.insert(shortcuts, { key = 'H', mods = "CTRL",       action = wezterm.action.ActivatePaneDirection 'Left' })
-table.insert(shortcuts, { key = 'K', mods = "CTRL|SHIFT", action = wezterm.action.ActivatePaneDirection 'Up' })
-table.insert(shortcuts, { key = 'K', mods = "CTRL",       action = wezterm.action.ActivatePaneDirection 'Up' })
-table.insert(shortcuts, { key = 'J', mods = "CTRL|SHIFT", action = wezterm.action.ActivatePaneDirection 'Down' })
-table.insert(shortcuts, { key = 'J', mods = "CTRL",       action = wezterm.action.ActivatePaneDirection 'Down' })
+table.insert(shortcuts, { key = "(", mods = "CTRL|SHIFT", action = act.SplitHorizontal { domain = CurrentPaneDomain } })
+table.insert(shortcuts, { key = ")", mods = "CTRL|SHIFT", action = act.SplitVertical   { domain = CurrentPaneDomain } })
+table.insert(shortcuts, { key = "D", mods = "CTRL|SHIFT", action = act.ShowDebugOverlay })
+table.insert(shortcuts, { key = 'D', mods = "CTRL",       action = act.ShowDebugOverlay })
+table.insert(shortcuts, { key = 'L', mods = "CTRL|SHIFT", action = act.ActivatePaneDirection 'Right' })
+table.insert(shortcuts, { key = 'L', mods = "CTRL",       action = act.ActivatePaneDirection 'Right' })
+table.insert(shortcuts, { key = 'H', mods = "CTRL|SHIFT", action = act.ActivatePaneDirection 'Left' })
+table.insert(shortcuts, { key = 'H', mods = "CTRL",       action = act.ActivatePaneDirection 'Left' })
+table.insert(shortcuts, { key = 'K', mods = "CTRL|SHIFT", action = act.ActivatePaneDirection 'Up' })
+table.insert(shortcuts, { key = 'K', mods = "CTRL",       action = act.ActivatePaneDirection 'Up' })
+table.insert(shortcuts, { key = 'J', mods = "CTRL|SHIFT", action = act.ActivatePaneDirection 'Down' })
+table.insert(shortcuts, { key = 'J', mods = "CTRL",       action = act.ActivatePaneDirection 'Down' })
 
 table.insert(shortcuts, {
     key = 'g',
     mods = "CTRL|SHIFT",
-    action = wezterm.action.EmitEvent('change-colorscheme')
+    action = act.InputSelector({
+        action = wezterm.action_callback(function (window, pane, id, label)
+            local overrides = window:get_config_overrides() or {}
+            overrides.color_scheme = id
+            window:set_config_overrides(overrides)
+        end),
+        title = 'colorscheme',
+        choices = {
+            { id = 'BlackScheme', label = 'Black colorscheme' },
+            { id = 'WhiteScheme', label = 'White colorscheme' },
+        },
+        alphabet = '123456789',
+        description = 'Choose a colorscheme:',
+    })
 })
 
-wezterm.on('change-colorscheme', function (window, pane)
-    local curr_scheme = window:effective_config().color_scheme
-    local overrides = window:get_config_overrides() or {}
-    overrides.color_scheme = curr_scheme == 'BlackScheme' and 'WhiteScheme' or 'BlackScheme'
-    window:set_config_overrides(overrides)
-end)
+local font_choices = table_map(function (name, props)
+    return { id = name, label = props.label }
+end, fonts)
+table.sort(font_choices, function (a, b) return a.id < b.id end)
 
--- Equivalent to POSIX basename(3)
--- Given "/foo/bar" returns "bar"
--- Given "c:\\foo\\bar" returns "bar"
-function basename(s)
-  return string.gsub(s, '(.*[/\\])(.*)', '%2')
-end
+table.insert(shortcuts, {
+    key = 'b',
+    mods = "CTRL|SHIFT",
+    action = act.InputSelector({
+        action = wezterm.action_callback(function (window, pane, id, label)
+            local overrides = window:get_config_overrides() or {}
+            local font = fonts[id]
+            overrides.font = wezterm.font(font.name, font.settings)
+            overrides.font_size = font.size
+            window:set_config_overrides(overrides)
+        end),
+        title = 'font',
+        choices = font_choices,
+        alphabet = '123456789',
+        description = 'Choose a font:',
+    })
+})
 
 function tab_title(tab)
     local title = tab.tab_title
@@ -290,8 +263,8 @@ return {
     -- line_height = 1.0,
     -- custom_block_glyphs = false,
 
-    color_schemes = my_colorschemes,
-    color_scheme = curr_scheme,
+    color_schemes = colorschemes,
+    color_scheme = 'BlackScheme',
 
     colors = {
         -- When the IME, a dead key or a leader key are being processed and are effectively
@@ -300,3 +273,4 @@ return {
         compose_cursor = 'red',
     }
 }
+
