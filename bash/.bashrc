@@ -79,7 +79,7 @@ alias cp='cp -i'
 alias df='df -h'
 alias du='du -h'
 alias mv='mv -i'
-alias less='less -r' # raw control characters
+alias less='less -r -c' # raw control characters, put stuff at top
 alias whence='type -a' # where, of a sort
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -303,3 +303,9 @@ PROMPT_COMMAND=draw_prompt
 
 # enable core dumps
 ulimit -c unlimited
+
+# warn for mail
+if [[ -s /var/spool/mail/$(whoami) ]]; then
+    echo "You have mail."
+fi
+
