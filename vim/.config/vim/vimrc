@@ -160,9 +160,6 @@ let g:vimtex_quickfix_ignore_filters = [
       \ 'Package hyperref Warning: Token not allowed in a PDF string',
       \]
 
-" vim-system-copy
-let g:system_copy_silent = 1
-
 " vim-lsp
 let g:lsp_use_native_client = 1
 let g:lsp_semantic_enabled = 0                      " disable semantic highlighting
@@ -179,7 +176,7 @@ hi lspReference ctermfg=red guifg=red ctermbg=green guibg=green
 if executable('clangd')
     autocmd User lsp_setup call lsp#register_server({
                 \ 'name'      : 'clangd',
-                \ 'cmd'       : {server_info->['clangd', '-background-index']},
+                \ 'cmd'       : {server_info->['clangd', '-background-index', '-header-insertion=never']},
                 \ 'allowlist' : ['c', 'cpp', 'C', 'cc', 'hh', 'h', 'objc', 'objcpp'],
                 \ })
 endif
@@ -211,7 +208,6 @@ nnoremap <silent> <leader>oh :FSSplitLeft<cr>
 nnoremap <silent> <leader>ol :FSSplitRight<cr>
 
 " VimCompletesMe
-
 autocmd FileType c,cpp let b:vcm_tab_complete = "omni"
 
 " ===== colors =====
@@ -381,3 +377,4 @@ augroup status
     autocmd VimEnter,VimLeave,WinEnter,WinLeave,BufWinEnter,BufWinLeave * :RefreshStatus
 "     autocmd User lsp_float_opened,lsp_float_closed,lsp_progress_updated :RefreshStatus
 augroup END
+

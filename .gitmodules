@@ -43,3 +43,6 @@
 [submodule "vim/.config/vim/plugins/vim-vinegar"]
 	path = vim/.config/vim/plugins/vim-vinegar
 	url = https://github.com/tpope/vim-vinegar
+[submodule "vim/.config/vim/plugins/vim-lumen"]
+	path = vim/.config/vim/plugins/vim-lumen
+	url = https://github.com/vimpostor/vim-lumen

@@ -1,7 +1,7 @@
 return {
     WhiteScheme = {
         ansi = {
-            "#e4e4e4", -- 254
+            "#eeeeee", -- 254
             "#af0000", -- 124
             "#008700", -- 28
             "#d78700", -- 172
@@ -11,7 +11,7 @@ return {
             "#9e9e9e", -- 247
         },
         brights = {
-            "#e4e4e4", -- 254
+            "#eeeeee", -- 254
             "#af0000", -- 124
             "#008700", -- 28
             "#d78700", -- 172
@@ -20,7 +20,7 @@ return {
             "#005fd7", -- 26
             "#1c1c1c", -- 234
         },
-        background    = "#e4e4e4", -- 254
+        background    = "#eeeeee", -- 254
         foreground    = "#1c1c1c",
         selection_bg  = "#1c1c1c",
         selection_fg  = "#e4e4e4",

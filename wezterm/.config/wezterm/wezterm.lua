@@ -237,6 +237,8 @@ wezterm.on(
     end
 )
 
+local appearance = wezterm.gui.get_appearance()
+
 return {
     font = wezterm.font("Greybeard 18px", {weight="Medium", stretch="Normal", style="Normal"}),
     font_size = 13,
@@ -264,7 +266,7 @@ return {
     -- custom_block_glyphs = false,
 
     color_schemes = colorschemes,
-    color_scheme = 'BlackScheme',
+    color_scheme = appearance == 'Dark' and 'BlackScheme' or 'WhiteScheme',
 
     colors = {
         -- When the IME, a dead key or a leader key are being processed and are effectively
