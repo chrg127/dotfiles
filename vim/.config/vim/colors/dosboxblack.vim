@@ -166,7 +166,7 @@ elseif &background ==# 'dark'
     hi VertSplit ctermfg=235 ctermbg=255
     hi Visual cterm=none ctermfg=none ctermbg=239
     hi VisualNOS term=bold,underline cterm=bold,underline
-    hi WarningMsg ctermbg=88
+    hi WarningMsg ctermbg=88 ctermfg=255
     hi WildMenu ctermbg=239 ctermfg=255
     hi Identifier cterm=NONE ctermfg=117
     hi SpecialChar cterm=NONE ctermfg=117
@@ -227,7 +227,7 @@ else
     hi StatusLine cterm=reverse ctermfg=253 ctermbg=16
     hi StatusLineNC ctermfg=247 ctermbg=235
     hi StorageClass cterm=bold ctermfg=16
-    hi String ctermfg=124 ctermbg=255
+    hi String ctermfg=124
     hi TabLine term=NONE cterm=NONE ctermfg=16 ctermbg=250
     hi TabLineFill ctermfg=253 ctermbg=247
     hi TabLineSel ctermfg=255 ctermbg=105

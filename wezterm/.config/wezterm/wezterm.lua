@@ -150,24 +150,24 @@ table.insert(shortcuts, { key = 'K', mods = "CTRL",       action = act.ActivateP
 table.insert(shortcuts, { key = 'J', mods = "CTRL|SHIFT", action = act.ActivatePaneDirection 'Down' })
 table.insert(shortcuts, { key = 'J', mods = "CTRL",       action = act.ActivatePaneDirection 'Down' })
 
-table.insert(shortcuts, {
-    key = 'g',
-    mods = "CTRL|SHIFT",
-    action = act.InputSelector({
-        action = wezterm.action_callback(function (window, pane, id, label)
-            local overrides = window:get_config_overrides() or {}
-            overrides.color_scheme = id
-            window:set_config_overrides(overrides)
-        end),
-        title = 'colorscheme',
-        choices = {
-            { id = 'BlackScheme', label = 'Black colorscheme' },
-            { id = 'WhiteScheme', label = 'White colorscheme' },
-        },
-        alphabet = '123456789',
-        description = 'Choose a colorscheme:',
-    })
-})
+-- table.insert(shortcuts, {
+--     key = 'g',
+--     mods = "CTRL|SHIFT",
+--     action = act.InputSelector({
+--         action = wezterm.action_callback(function (window, pane, id, label)
+--             local overrides = window:get_config_overrides() or {}
+--             overrides.color_scheme = id
+--             window:set_config_overrides(overrides)
+--         end),
+--         title = 'colorscheme',
+--         choices = {
+--             { id = 'BlackScheme', label = 'Black colorscheme' },
+--             { id = 'WhiteScheme', label = 'White colorscheme' },
+--         },
+--         alphabet = '123456789',
+--         description = 'Choose a colorscheme:',
+--     })
+-- })
 
 local font_choices = table_map(function (name, props)
     return { id = name, label = props.label }
