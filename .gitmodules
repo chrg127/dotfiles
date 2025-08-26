@@ -22,9 +22,6 @@
 [submodule "vim/.config/vim/bundle/vim-rsi"]
 	path = vim/.config/vim/plugins/vim-rsi
 	url = https://github.com/tpope/vim-rsi
-[submodule "vim/.config/vim/bundle/vimtex"]
-	path = vim/.config/vim/plugins/vimtex
-	url = https://github.com/lervag/vimtex
 [submodule "vim/.config/vim/bundle/vim-python-pep8-indent"]
 	path = vim/.config/vim/plugins/vim-python-pep8-indent
 	url = https://github.com/Vimjas/vim-python-pep8-indent

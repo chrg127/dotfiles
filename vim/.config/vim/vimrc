@@ -177,9 +177,11 @@ hi lspReference ctermfg=red guifg=red ctermbg=green guibg=green
 if executable('clangd')
     autocmd User lsp_setup call lsp#register_server({
                 \ 'name'      : 'clangd',
-                \ 'cmd'       : {server_info->['clangd', '-background-index']},
+                \ 'cmd'       : {server_info->['clangd', '--background-index']},
                 \ 'allowlist' : ['c', 'cpp', 'C', 'cc', 'hh', 'h', 'objc', 'objcpp', 'hpp'],
                 \ })
+
+                " \ 'cmd'       : {server_info->['clangd', '--background-index', '--log=verbose']},
 endif
 
 function! s:on_lsp_buffer_enabled() abort

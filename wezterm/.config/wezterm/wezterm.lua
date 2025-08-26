@@ -237,6 +237,49 @@ wezterm.on(
     end
 )
 
+local function is_shell(foreground_process_name)
+    if foreground_process_name == nil then
+        return false
+    end
+    local shell_names = { 'bash', 'zsh', 'fish', 'sh', 'ksh', 'dash' }
+    local process = string.match(foreground_process_name, '[^/\\]+$')
+        or foreground_process_name
+    for _, shell in ipairs(shell_names) do
+        if process == shell then
+            return true
+        end
+    end
+    return false
+end
+
+wezterm.on('open-uri', function(window, pane, uri)
+    local url = wezterm.url.parse(uri)
+    local success, stdout, _ = wezterm.run_child_process {
+        'file',
+        '--brief',
+        '--mime-type',
+        url.file_path,
+    }
+    if success then
+        if stdout:find('text') or stdout:find('x-empty') then
+            if url.fragment then
+                pane:send_text(wezterm.shell_join_args {
+                    'mdcat',
+                    '+' .. url.fragment,
+                    url.file_path,
+                } .. '\r')
+            else
+                wezterm.log_info('opening url with vim')
+                pane:send_text('q')
+                pane:send_text(wezterm.shell_join_args({
+                    'mdcat', url.file_path
+                }) .. ' | less\r')
+            end
+            return false
+        end
+    end
+end)
+
 local appearance = wezterm.gui.get_appearance()
 
 return {
